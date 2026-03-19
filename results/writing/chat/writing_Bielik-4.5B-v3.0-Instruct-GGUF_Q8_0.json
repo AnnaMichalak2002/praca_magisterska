@@ -1,0 +1,35 @@
+{
+  "attempt": null,
+  "model": "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0",
+  "time": 30.616,
+  "success": true,
+  "response": {
+    "exercis_typ": "Writing",
+    "learan_natl_lang": "Polish",
+    "tas_con:t": "Write a letter to a friend from England.\nYou must include the followin information:\n- how old your cousn is,\n- what you did at the birtday party,\n- what the cake tasted like.",
+    "ori_text": "Last weekend I was on my counsin birtday pty.\nSh has 18 years old.\nWe dancing and play games all night.\nThe cak is very sweet and taste chocolate.",
+    "corr_text": "Last weekend I attended my cousin's birthday party. She was 18 years old. We danced and played games all night. The cake was very sweet and had a rich chocolate flavor.",
+    "learan_errs": [
+      {
+        "err": "I was on my cousn birthday party",
+        "exp": "Use 'attended' instead of 'was on'."
+      },
+      {
+        "err": "Sh have 18 years old",
+        "exp": "Use 'has' for the present simple tense of 'to be.'"
+      },
+      {
+        "err": "We dancing and play games all night",
+        "exp": "Use a comma to separate the two actions in a list: 'danced' (past) or simply remove the past tense."
+      },
+      {
+        "err": "The cak is very sweet and taste chocolate",
+        "exp": "Use 'tasted' instead of 'taste.' Also correct the pronoun."
+      }
+    ],
+    "con_compl": "partial",
+    "con_feedback": "Your letter is missing some details and has grammatical errors. Try to be more descriptive about the party activities."
+  },
+  "raw_output": "{\n  \"exercis_typ\": \"Writing\",\n  \"learan_natl_lang\": \"Polish\",\n  \"tas_con:t\": \"Write a letter to a friend from England.\\nYou must include the followin information:\\n- how old your cousn is,\\n- what you did at the birtday party,\\n- what the cake tasted like.\",\n  \"ori_text\": \"Last weekend I was on my counsin birtday pty.\\nSh has 18 years old.\\nWe dancing and play games all night.\\nThe cak is very sweet and taste chocolate.\",\n  \"corr_text\": \"Last weekend I attended my cousin's birthday party. She was 18 years old. We danced and played games all night. The cake was very sweet and had a rich chocolate flavor.\",\n  \"learan_errs\": [\n    {\n      \"err\": \"I was on my cousn birthday party\",\n      \"exp\": \"Use 'attended' instead of 'was on'.\"\n    },\n    {\n      \"err\": \"Sh have 18 years old\",\n      \"exp\": \"Use 'has' for the present simple tense of 'to be.'\"\n    },\n    {\n      \"err\": \"We dancing and play games all night\",\n      \"exp\": \"Use a comma to separate the two actions in a list: 'danced' (past) or simply remove the past tense.\"\n    },\n    {\n      \"err\": \"The cak is very sweet and taste chocolate\",\n      \"exp\": \"Use 'tasted' instead of 'taste.' Also correct the pronoun.\"\n    }\n  ],\n  \"con_compl\": \"partial\",\n  \"con_feedback\": \"Your letter is missing some details and has grammatical errors. Try to be more descriptive about the party activities.\"\n}",
+  "error": null
+}
