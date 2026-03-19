@@ -7,7 +7,7 @@ import sys
 OLLAMA_URL_prompt = "http://localhost:11434/api/generate"
 OLLAMA_URL_message = "http://localhost:11434/api/chat"
 
-MODELS = ["llama3.1:8b", "qwen3:14b"]
+MODELS = ["llama3.1:8b", "qwen3:14b", "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0","deepseek-r1:8b", "deepseek-r1:14b" ]
 
 def safe_filename(name: str) -> str:
     return name.replace(":", "_").replace("/", "_")
@@ -30,7 +30,21 @@ def build_prompt(system: str, user: str) -> str:
     ]
     return "\n".join(parts)
 
-def query_model_2(model: str, system_prompt: str, user_prompt: str):
+
+def clean_json_response(raw_output: str) -> str:
+    cleaned = raw_output.strip()
+
+    if cleaned.startswith("```json"):
+        cleaned = cleaned[len("```json"):].strip()
+    elif cleaned.startswith("```"):
+        cleaned = cleaned[len("```"):].strip()
+
+    if cleaned.endswith("```"):
+        cleaned = cleaned[:-3].strip()
+
+    return cleaned
+
+def query_model_generate(model: str, system_prompt: str, user_prompt: str, attempt: int | None = None):
     prompt = build_prompt(system_prompt, user_prompt)
 
     payload = {
@@ -40,27 +54,84 @@ def query_model_2(model: str, system_prompt: str, user_prompt: str):
     }
 
     start = time.perf_counter()
-    response = requests.post(OLLAMA_URL_prompt, json=payload)
-    duration = round(time.perf_counter() - start, 3)
-
-    response.raise_for_status()
-
-    data = response.json()
-    raw_output = data.get("response", "")
 
     try:
-        parsed = json.loads(raw_output)
-    except json.JSONDecodeError:
-        raise ValueError("Model did not return valid JSON")
+        response = requests.post(OLLAMA_URL_prompt, json=payload, timeout=600)
+        response.raise_for_status()
 
-    return {
-        "model": model,
-        "time": duration,
-        "response": parsed
-    }
+        data = response.json()
+        raw_output = data.get("response", "")
 
+        if not raw_output or not raw_output.strip():
+            return {
+                "attempt": attempt,
+                "model": model,
+                "time": round(time.perf_counter() - start, 3),
+                "success": False,
+                "response": None,
+                "raw_output": raw_output,
+                "error": "Model returned empty response"
+            }
 
-def query_model(model: str, system_prompt: str, user_prompt: str):
+        cleaned_output = clean_json_response(raw_output)
+        parsed = json.loads(cleaned_output)
+
+        return {
+            "attempt": attempt,
+            "model": model,
+            "time": round(time.perf_counter() - start, 3),
+            "success": True,
+            "response": parsed,
+            "raw_output": raw_output,
+            "error": None
+        }
+
+    except requests.exceptions.Timeout:
+        return {
+            "attempt": attempt,
+            "model": model,
+            "time": round(time.perf_counter() - start, 3),
+            "success": False,
+            "response": None,
+            "raw_output": None,
+            "error": "Request timeout"
+        }
+
+    except requests.exceptions.RequestException as e:
+        return {
+            "attempt": attempt,
+            "model": model,
+            "time": round(time.perf_counter() - start, 3),
+            "success": False,
+            "response": None,
+            "raw_output": None,
+            "error": f"Request error: {e}"
+        }
+
+    except json.JSONDecodeError as e:
+        return {
+            "attempt": attempt,
+            "model": model,
+            "time": round(time.perf_counter() - start, 3),
+            "success": False,
+            "response": None,
+            "raw_output": raw_output if 'raw_output' in locals() else None,
+            "error": f"Invalid JSON from model: {e}"
+        }
+
+    except Exception as e:
+        return {
+            "attempt": attempt,
+            "model": model,
+            "time": round(time.perf_counter() - start, 3),
+            "success": False,
+            "response": None,
+            "raw_output": raw_output if 'raw_output' in locals() else None,
+            "error": f"Unexpected error: {e}"
+        }
+    
+def query_model_chat(model: str, system_prompt: str, user_prompt: str, attempt: int | None = None):
+
     payload = {
         "model": model,
         "messages": [
@@ -71,233 +142,105 @@ def query_model(model: str, system_prompt: str, user_prompt: str):
     }
 
     start = time.perf_counter()
-    response = requests.post(OLLAMA_URL_message, json=payload)
-    duration = round(time.perf_counter() - start, 3)
-
-    response.raise_for_status()
-
-    data = response.json()
-
-    raw_output = data.get("message", {}).get("content", "")
 
     try:
-        parsed = json.loads(raw_output)
-    except json.JSONDecodeError:
-        print("RAW OUTPUT:")
-        print(raw_output)
-        raise ValueError("Model did not return valid JSON")
+        response = requests.post(OLLAMA_URL_message, json=payload, timeout=600)
+        response.raise_for_status()
 
-    return {
-        "model": model,
-        "time": duration,
-        "response": parsed
-    }
+        data = response.json()
+        raw_output = data.get("message", {}).get("content", "")
+
+        if not raw_output or not raw_output.strip():
+            return {
+                "attempt": attempt,
+                "model": model,
+                "time": round(time.perf_counter() - start, 3),
+                "success": False,
+                "response": None,
+                "raw_output": raw_output,
+                "error": "Model returned empty response"
+            }
+
+        cleaned_output = clean_json_response(raw_output)
+        parsed = json.loads(cleaned_output)
+
+        return {
+            "attempt": attempt,
+            "model": model,
+            "time": round(time.perf_counter() - start, 3),
+            "success": True,
+            "response": parsed,
+            "raw_output": raw_output,
+            "error": None
+        }
+
+    except requests.exceptions.Timeout:
+        return {
+            "attempt": attempt,
+            "model": model,
+            "time": round(time.perf_counter() - start, 3),
+            "success": False,
+            "response": None,
+            "raw_output": None,
+            "error": "Request timeout"
+        }
+
+    except requests.exceptions.RequestException as e:
+        return {
+            "attempt": attempt,
+            "model": model,
+            "time": round(time.perf_counter() - start, 3),
+            "success": False,
+            "response": None,
+            "raw_output": None,
+            "error": f"Request error: {e}"
+        }
+
+    except json.JSONDecodeError as e:
+        return {
+            "attempt": attempt,
+            "model": model,
+            "time": round(time.perf_counter() - start, 3),
+            "success": False,
+            "response": None,
+            "raw_output": raw_output if 'raw_output' in locals() else None,
+            "error": f"Invalid JSON from model: {e}"
+        }
+
+    except Exception as e:
+        return {
+            "attempt": attempt,
+            "model": model,
+            "time": round(time.perf_counter() - start, 3),
+            "success": False,
+            "response": None,
+            "raw_output": raw_output if 'raw_output' in locals() else None,
+            "error": f"Unexpected error: {e}"
+        }
+
 
 if __name__ == "__main__":
 
-
+    #model = "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0"
     model = "llama3.1:8b"
-    #model = "qwen3:14b"
-    system_prompt = load_prompt("prompts/vocabulary/system_vocabulary.txt")
-    user_prompt1 = load_prompt("prompts/vocabulary/user_vocabulary_match.txt")
-    user_prompt = user_prompt1.replace("{topic}", "IT")
 
-    safe_model = safe_filename(model)
+    system_prompt = load_prompt("prompts/writing/system_writing.txt")
+    user_prompt = load_prompt("prompts/writing/user_writing.txt")
 
-    result2 = query_model_2(model, system_prompt, user_prompt)
-    print("Czas:", result2["time"], "s")
-    print(result2["response"])
-    save_result(result2, f"results/vocabulary/generate/vocabulary_match_{safe_model}.json")
+    result = query_model_chat(model, system_prompt, user_prompt)
 
-    result = query_model(model, system_prompt, user_prompt)
     print("Czas:", result["time"], "s")
     print(result["response"])
 
-    
-    save_result(result, f"results/vocabulary/chat/vocabulary_match_{safe_model}.json")
+    safe_model = safe_filename(model)
+    save_result(result, f"results/writing/chat/writing_{safe_model}.json")
+
+    result2 = query_model_generate(model, system_prompt, user_prompt)
+
+    print("Czas:", result2["time"], "s")
+    print(result2["response"])
+
+    safe_model = safe_filename(model)
+    save_result(result2, f"results/writing/generate/writing_{safe_model}.json")
+
     sys.exit()
-    # #model = "llama3.1:8b"-
-    # model = "qwen3:14b"
-
-    # system_prompt = load_prompt("prompts/writing/system_writing2.txt")
-    # user_prompt = load_prompt("prompts/writing/user_writing.txt")
-
-    # result = query_model(model, system_prompt, user_prompt)
-
-    # print("Czas:", result["time"], "s")
-    # print(result["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result, f"results/writing/chat/writing_{safe_model}.json")
-
-    # result2 = query_model_2(model, system_prompt, user_prompt)
-
-    # print("Czas:", result2["time"], "s")
-    # print(result2["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result2, f"results/writing/generate/writing_{safe_model}.json")
-
-    # sys.exit()
-    # #model = "llama3.1:8b"
-    # model = "qwen3:14b"
-
-    # system_prompt = load_prompt("prompts/grammar/system_grammar.txt")
-    # user_prompt = load_prompt("prompts/grammar/user_grammar_simple_vs_continuous.txt")
-
-    # result = query_model(model, system_prompt, user_prompt)
-
-    # print("Czas:", result["time"], "s")
-    # print(result["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result, f"results/grammar/chat/grammar_simple_vs_continuous_{safe_model}.json")
-
-    # result2 = query_model_2(model, system_prompt, user_prompt)
-
-    # print("Czas:", result2["time"], "s")
-    # print(result2["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result2, f"results/grammar/generate/grammar_simple_vs_continuous_{safe_model}.json")
-
-    # sys.exit()
-
-    # #model = "llama3.1:8b"
-    # model = "qwen3:14b"
-
-    # system_prompt = load_prompt("prompts/grammar/system_grammar.txt")
-    # user_prompt = load_prompt("prompts/grammar/user_grammar_gerund_vs_infinitive.txt")
-
-    # result = query_model(model, system_prompt, user_prompt)
-
-    # print("Czas:", result["time"], "s")
-    # print(result["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result, f"results/grammar/chat/grammar_gerund_vs_infinitive_{safe_model}.json")
-
-    # result2 = query_model_2(model, system_prompt, user_prompt)
-
-    # print("Czas:", result2["time"], "s")
-    # print(result2["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result2, f"results/grammar/generate/grammar_gerund_vs_infinitive_{safe_model}.json")
-
-    # sys.exit()
-    # #model = "llama3.1:8b"
-    # model = "qwen3:14b"
-
-    # system_prompt = load_prompt("prompts/grammar/system_grammar.txt")
-    # user_prompt = load_prompt("prompts/grammar/user_grammar_conditionals_1_2_3.txt")
-
-    # result = query_model(model, system_prompt, user_prompt)
-
-    # print("Czas:", result["time"], "s")
-    # print(result["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result, f"results/grammar/chat/grammar_conditionals_1_2_3_{safe_model}.json")
-
-    # result2 = query_model_2(model, system_prompt, user_prompt)
-
-    # print("Czas:", result2["time"], "s")
-    # print(result2["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result2, f"results/grammar/generate/grammar_conditionals_1_2_3_{safe_model}.json")
-
-    # sys.exit()
-    # #model = "llama3.1:8b"
-    # model = "qwen3:14b"
-
-    # system_prompt = load_prompt("prompts/grammar/system_grammar.txt")
-    # user_prompt = load_prompt("prompts/grammar/user_grammar_past_vs_present_perfect.txt")
-
-    # result = query_model(model, system_prompt, user_prompt)
-
-    # print("Czas:", result["time"], "s")
-    # print(result["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result, f"results/grammar/chat/grammar_past_vs_present_perfect_{safe_model}.json")
-
-    # result2 = query_model_2(model, system_prompt, user_prompt)
-
-    # print("Czas:", result2["time"], "s")
-    # print(result2["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result2, f"results/grammar/generate/grammar_past_vs_present_perfect_{safe_model}.json")
-
-    # sys.exit()
-    # #model = "llama3.1:8b"
-    # model = "qwen3:14b"
-
-    # system_prompt = load_prompt("prompts/vocabulary/system_vocabulary.txt")
-    # user_prompt = load_prompt("prompts/vocabulary/user_vocabulary_definition.txt")
-
-    # result = query_model(model, system_prompt, user_prompt)
-
-    # print("Czas:", result["time"], "s")
-    # print(result["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result, f"results/vocabulary/chat/vocabulary_definition_{safe_model}.json")
-
-    # result2 = query_model_2(model, system_prompt, user_prompt)
-
-    # print("Czas:", result2["time"], "s")
-    # print(result2["response"])
-
-    # safe_model = safe_filename(model)
-    # save_result(result2, f"results/vocabulary/generate/vocabulary_definition_{safe_model}.json")
-
-
-    # sys.exit()
-    # #model = "llama3.1:8b"
-    # model = "qwen3:14b"
-    
-    # #relation = "synonym"
-    # relation = "antonym"
-    # system_prompt = load_prompt("prompts/vocabulary/system_vocabulary.txt")
-    # template = load_prompt("prompts/vocabulary/user_vocabulary_synonym_antonym.txt")
-    # user_prompt = template.replace("{relation}", relation)
-    
-    # safe_model = safe_filename(model)
-
-    # result2 = query_model_2(model, system_prompt, user_prompt)
-    # print("Czas:", result2["time"], "s")
-    # print(result2["response"])
-    # save_result(result2, f"results/vocabulary/generate/vocabulary_{relation}_{safe_model}.json")
-
-    # result = query_model(model, system_prompt, user_prompt)
-    # print("Czas:", result["time"], "s")
-    # print(result["response"])
-
-    
-    # save_result(result, f"results/vocabulary/chat/vocabulary_{relation}_{safe_model}.json")
-
-
-
-    # sys.exit()
-
-    # model = "llama3.1:8b"
-    # model = "qwen3:14b"
-    # system_prompt = load_prompt("prompts/vocabulary/system_vocabulary.txt")
-    # user_prompt = load_prompt("prompts/vocabulary/user_vocabulary_match.txt")
-    
-    # safe_model = safe_filename(model)
-
-    # result2 = query_model_2(model, system_prompt, user_prompt)
-    # print("Czas:", result2["time"], "s")
-    # print(result2["response"])
-    # save_result(result2, f"results/vocabulary/generate/vocabulary_match_{safe_model}.json")
-
-    # result = query_model(model, system_prompt, user_prompt)
-    # print("Czas:", result["time"], "s")
-    # print(result["response"])
-
-    
-    # save_result(result, f"results/vocabulary/chat/vocabulary_match_{safe_model}.json")
