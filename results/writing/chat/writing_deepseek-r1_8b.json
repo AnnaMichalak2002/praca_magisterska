@@ -1,39 +1,38 @@
 {
   "attempt": null,
   "model": "deepseek-r1:8b",
-  "time": 57.575,
+  "time": 56.087,
   "success": true,
   "response": {
     "exercise_type": "Writing",
     "learner_native_language": "Polish",
     "task_content": "Write a letter to a friend from England.\nYou must include the following information:\n- how old your cousin is,\n- what you did at the birthday party,\n- what the cake tasted like.",
     "original_text": "Last weekend I was on my cousin birthday party.\nShe have 18 years old.\nWe dancing and play games all night.\nThe cake is very sweet and taste chocolate.",
-    "corrected_text": "Last weekend I was at my cousin's birthday party.\nShe is 18 years old.\nWe were dancing and played games all night.\nThe cake was very sweet and tasted chocolate.",
+    "corrected_text": "Last weekend I went to my cousin's birthday party.\nShe is 18 years old.\nWe danced and played games all night.\nThe cake was very sweet and tasted like chocolate.",
     "learner_errors": [
       {
-        "error": "Użyto preposition 'on' zamiast 'at' w odniesieniu do przyjęcia urodzinowego.",
-        "explanation": "W języku angielskim przyjęcia urodzinowe opisujemy 'at' (np. at my sister's birthday party)."
+        "error": "Niespójność liczby podmiotu zczasem zdaniowym. 'She have 18 years old' – 'she' jest osobą singularną, więc powinno być 'has'.",
+        "explanation": "Gdy podmiot jest singularny, czasownik w liczbie pojedynczej: 'she has'."
       },
       {
-        "error": "Błąd zgody wyrażenia czasowego ('She have 18 years old').",
-        "explanation": "Singular nouns (tutaj 'she') używają formy 'has' (ma) w teraźniejszym czasie."
+        "error": "Brak czasownika głównego w czasie przeszłym. 'We dancing' – należy użyć 'danced'.",
+        "explanation": "'We' jest podmiotem, więc wymaga czasownika głównego w czasie przeszłym, np. 'danced'."
       },
       {
-        "error": "Błąd w strukturze zdań ('We dancing' i 'play games').",
-        "explanation": "W czasie przeszłym (past tense) opisu aktów ciągłych (continuous) używamy czasu continuous, czyli 'were dancing', a akty skończone (finished actions) 'played'."
+        "error": "Brak czasownika głównego w czasie przeszłym. 'play games' – należy użyć 'played games'.",
+        "explanation": "'We' jest podmiightsu, więc czasownik główny powinien być w czasie przeszłym, np. 'played'."
       },
       {
-        "error": "Błąd formy czasownika ('taste') zamiast 'tasted' w czasie przeszłym.",
-        "explanation": "Czasowniki zakończone w formie przeszłej (past simple) używamy po 'was/were' w czasie przyszłym lub ogólnym, tutaj jednak opisujemy coś, co miało miejsce w przeszłości, więc należy użyć formy 'tasted'."
-      },
-      {
-        "error": "Brak apostrofy w wyrażeniu 'cousin birthday party'.",
-        "explanation": "W wyrażeniach posessywnych (tutaj 'my cousin's') należy dodać apostrof (''') przed końcówką."
+        "error": "Niespójność czasu i osoby czasownika. 'The cake is very sweet and taste chocolate' – 'is' (terecie) i 'taste' (present) są niezgodne ze stresem czasowym. Powinno być 'was' lub 'tasted'.",
+        "explanation": "Czasowniki w zdaniu powinny być spójne ze stresem czasowym. W czasie przeszłym używamy 'was/were' lub 'past tense'."
       }
     ],
     "content_compliance": "complete",
-    "content_feedback": "W tekście zawarte są wszystkie wymienione informacje: wiek kuzynki, aktywności na uroczdzeniu i opis smaku tortu."
+    "content_feedback": "W twojej wiadomości uwzględniono wszystkie wymienione punkty: wiek kuzyna, co robiłeś na urodzinach i jak smakowała ciastka."
   },
-  "raw_output": "```json\n{\n  \"exercise_type\": \"Writing\",\n  \"learner_native_language\": \"Polish\",\n  \"task_content\": \"Write a letter to a friend from England.\\nYou must include the following information:\\n- how old your cousin is,\\n- what you did at the birthday party,\\n- what the cake tasted like.\",\n  \"original_text\": \"Last weekend I was on my cousin birthday party.\\nShe have 18 years old.\\nWe dancing and play games all night.\\nThe cake is very sweet and taste chocolate.\",\n  \"corrected_text\": \"Last weekend I was at my cousin's birthday party.\\nShe is 18 years old.\\nWe were dancing and played games all night.\\nThe cake was very sweet and tasted chocolate.\",\n  \"learner_errors\": [\n    {\n      \"error\": \"Użyto preposition 'on' zamiast 'at' w odniesieniu do przyjęcia urodzinowego.\",\n      \"explanation\": \"W języku angielskim przyjęcia urodzinowe opisujemy 'at' (np. at my sister's birthday party).\"\n    },\n    {\n      \"error\": \"Błąd zgody wyrażenia czasowego ('She have 18 years old').\",\n      \"explanation\": \"Singular nouns (tutaj 'she') używają formy 'has' (ma) w teraźniejszym czasie.\"\n    },\n    {\n      \"error\": \"Błąd w strukturze zdań ('We dancing' i 'play games').\",\n      \"explanation\": \"W czasie przeszłym (past tense) opisu aktów ciągłych (continuous) używamy czasu continuous, czyli 'were dancing', a akty skończone (finished actions) 'played'.\"\n    },\n    {\n      \"error\": \"Błąd formy czasownika ('taste') zamiast 'tasted' w czasie przeszłym.\",\n      \"explanation\": \"Czasowniki zakończone w formie przeszłej (past simple) używamy po 'was/were' w czasie przyszłym lub ogólnym, tutaj jednak opisujemy coś, co miało miejsce w przeszłości, więc należy użyć formy 'tasted'.\"\n    },\n    {\n      \"error\": \"Brak apostrofy w wyrażeniu 'cousin birthday party'.\",\n      \"explanation\": \"W wyrażeniach posessywnych (tutaj 'my cousin's') należy dodać apostrof (''') przed końcówką.\"\n    }\n  ],\n  \"content_compliance\": \"complete\",\n  \"content_feedback\": \"W tekście zawarte są wszystkie wymienione informacje: wiek kuzynki, aktywności na uroczdzeniu i opis smaku tortu.\"\n}\n```",
+  "raw_output": "```json\n{\n  \"exercise_type\": \"Writing\",\n  \"learner_native_language\": \"Polish\",\n  \"task_content\": \"Write a letter to a friend from England.\\nYou must include the following information:\\n- how old your cousin is,\\n- what you did at the birthday party,\\n- what the cake tasted like.\",\n  \"original_text\": \"Last weekend I was on my cousin birthday party.\\nShe have 18 years old.\\nWe dancing and play games all night.\\nThe cake is very sweet and taste chocolate.\",\n  \"corrected_text\": \"Last weekend I went to my cousin's birthday party.\\nShe is 18 years old.\\nWe danced and played games all night.\\nThe cake was very sweet and tasted like chocolate.\",\n  \"learner_errors\": [\n    {\n      \"error\": \"Niespójność liczby podmiotu zczasem zdaniowym. 'She have 18 years old' – 'she' jest osobą singularną, więc powinno być 'has'.\",\n      \"explanation\": \"Gdy podmiot jest singularny, czasownik w liczbie pojedynczej: 'she has'.\"\n    },\n    {\n      \"error\": \"Brak czasownika głównego w czasie przeszłym. 'We dancing' – należy użyć 'danced'.\",\n      \"explanation\": \"'We' jest podmiotem, więc wymaga czasownika głównego w czasie przeszłym, np. 'danced'.\"\n    },\n    {\n      \"error\": \"Brak czasownika głównego w czasie przeszłym. 'play games' – należy użyć 'played games'.\",\n      \"explanation\": \"'We' jest podmiightsu, więc czasownik główny powinien być w czasie przeszłym, np. 'played'.\"\n    },\n    {\n      \"error\": \"Niespójność czasu i osoby czasownika. 'The cake is very sweet and taste chocolate' – 'is' (terecie) i 'taste' (present) są niezgodne ze stresem czasowym. Powinno być 'was' lub 'tasted'.\",\n      \"explanation\": \"Czasowniki w zdaniu powinny być spójne ze stresem czasowym. W czasie przeszłym używamy 'was/were' lub 'past tense'.\"\n    }\n  ],\n  \"content_compliance\": \"complete\",\n  \"content_feedback\": \"W twojej wiadomości uwzględniono wszystkie wymienione punkty: wiek kuzyna, co robiłeś na urodzinach i jak smakowała ciastka.\"\n}\n```",
+  "postprocessing_steps": [
+    "removed_markdown_code_fences"
+  ],
   "error": null
 }

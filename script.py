@@ -12,6 +12,7 @@ MODELS = ["llama3.1:8b", "qwen3:14b", "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0","dee
 def safe_filename(name: str) -> str:
     """Replaces characters that are invalid in file names."""
     return name.replace(":", "_").replace("/", "_")
+    #re.sub(r'[<>:"/\\|?*]', "_", name)
 
 def load_prompt(path: str) -> str:
     """Loads prompt text from a UTF-8 encoded file."""
@@ -34,20 +35,75 @@ def build_prompt(system: str, user: str) -> str:
     ]
     return "\n".join(parts)
 
+def extract_first_json_object(text: str) -> str:
+    """Extracts the first complete JSON object from text, handling nesting, strings, and escaped characters."""
+    start = text.find("{")
+    if start == -1:
+        raise ValueError("No JSON object start found")
 
-def clean_json_response(raw_output: str) -> str:
-    """Removes Markdown code fences from JSON-like model output."""
+    depth = 0
+    in_string = False
+    escape = False
+
+    for i in range(start, len(text)):
+        char = text[i]
+
+        if escape:
+            escape = False
+            continue
+
+        if char == "\\":
+            escape = True
+            continue
+
+        if char == '"':
+            in_string = not in_string
+            continue
+
+        if not in_string:
+            if char == "{":
+                depth += 1
+            elif char == "}":
+                depth -= 1
+
+                if depth == 0:
+                    return text[start:i + 1]
+
+    raise ValueError("No complete JSON object found")
+
+
+def clean_json_response(raw_output: str) -> tuple[str, list[str]]:
+    """Cleans raw model output by removing Markdown wrappers, extracting JSON, and recording cleanup steps."""
+    steps = []
     cleaned = raw_output.strip()
 
     if cleaned.startswith("```json"):
         cleaned = cleaned[len("```json"):].strip()
+        steps.append("removed_markdown_code_fences")
     elif cleaned.startswith("```"):
         cleaned = cleaned[len("```"):].strip()
+        steps.append("removed_markdown_code_fences")
 
     if cleaned.endswith("```"):
         cleaned = cleaned[:-3].strip()
+        if "removed_markdown_code_fences" not in steps:
+            steps.append("removed_markdown_code_fences")
 
-    return cleaned
+    extracted = extract_first_json_object(cleaned)
+
+    start_idx = cleaned.find(extracted)
+    end_idx = start_idx + len(extracted)
+
+    if start_idx > 0 and cleaned[:start_idx].strip():
+        steps.append("trimmed_leading_text_before_json")
+
+    if end_idx < len(cleaned) and cleaned[end_idx:].strip():
+        steps.append("trimmed_trailing_text_after_json")
+
+    if not steps:
+        steps.append("json_parsed_without_cleanup")
+
+    return extracted, steps
 
 def query_model_generate(model: str, system_prompt: str, user_prompt: str, attempt: int | None = None):
     """
@@ -93,10 +149,11 @@ def query_model_generate(model: str, system_prompt: str, user_prompt: str, attem
                 "success": False,
                 "response": None,
                 "raw_output": raw_output,
+                "postprocessing_steps": [],
                 "error": "Model returned empty response"
             }
 
-        cleaned_output = clean_json_response(raw_output)
+        cleaned_output, postprocessing_steps = clean_json_response(raw_output)
         parsed = json.loads(cleaned_output)
 
         return {
@@ -106,6 +163,7 @@ def query_model_generate(model: str, system_prompt: str, user_prompt: str, attem
             "success": True,
             "response": parsed,
             "raw_output": raw_output,
+            "postprocessing_steps": postprocessing_steps,
             "error": None
         }
 
@@ -117,6 +175,7 @@ def query_model_generate(model: str, system_prompt: str, user_prompt: str, attem
             "success": False,
             "response": None,
             "raw_output": None,
+            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
             "error": "Request timeout"
         }
 
@@ -128,6 +187,7 @@ def query_model_generate(model: str, system_prompt: str, user_prompt: str, attem
             "success": False,
             "response": None,
             "raw_output": None,
+            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
             "error": f"Request error: {e}"
         }
 
@@ -139,6 +199,7 @@ def query_model_generate(model: str, system_prompt: str, user_prompt: str, attem
             "success": False,
             "response": None,
             "raw_output": raw_output if 'raw_output' in locals() else None,
+            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
             "error": f"Invalid JSON from model: {e}"
         }
 
@@ -150,6 +211,7 @@ def query_model_generate(model: str, system_prompt: str, user_prompt: str, attem
             "success": False,
             "response": None,
             "raw_output": raw_output if 'raw_output' in locals() else None,
+            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
             "error": f"Unexpected error: {e}"
         }
     
@@ -198,10 +260,11 @@ def query_model_chat(model: str, system_prompt: str, user_prompt: str, attempt: 
                 "success": False,
                 "response": None,
                 "raw_output": raw_output,
+                "postprocessing_steps": [],
                 "error": "Model returned empty response"
             }
 
-        cleaned_output = clean_json_response(raw_output)
+        cleaned_output, postprocessing_steps = clean_json_response(raw_output)
         parsed = json.loads(cleaned_output)
 
         return {
@@ -211,6 +274,7 @@ def query_model_chat(model: str, system_prompt: str, user_prompt: str, attempt: 
             "success": True,
             "response": parsed,
             "raw_output": raw_output,
+            "postprocessing_steps": postprocessing_steps,
             "error": None
         }
 
@@ -222,6 +286,7 @@ def query_model_chat(model: str, system_prompt: str, user_prompt: str, attempt: 
             "success": False,
             "response": None,
             "raw_output": None,
+            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
             "error": "Request timeout"
         }
 
@@ -233,6 +298,7 @@ def query_model_chat(model: str, system_prompt: str, user_prompt: str, attempt: 
             "success": False,
             "response": None,
             "raw_output": None,
+            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
             "error": f"Request error: {e}"
         }
 
@@ -244,6 +310,7 @@ def query_model_chat(model: str, system_prompt: str, user_prompt: str, attempt: 
             "success": False,
             "response": None,
             "raw_output": raw_output if 'raw_output' in locals() else None,
+            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
             "error": f"Invalid JSON from model: {e}"
         }
 
@@ -255,13 +322,13 @@ def query_model_chat(model: str, system_prompt: str, user_prompt: str, attempt: 
             "success": False,
             "response": None,
             "raw_output": raw_output if 'raw_output' in locals() else None,
+            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
             "error": f"Unexpected error: {e}"
         }
 
 
 if __name__ == "__main__":
 
-    #model = "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0"
     model = "llama3.1:8b"
 
     system_prompt = load_prompt("prompts/writing/system_writing.txt")
