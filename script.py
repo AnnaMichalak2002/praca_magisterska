@@ -328,26 +328,42 @@ def query_model_chat(model: str, system_prompt: str, user_prompt: str, attempt: 
 
 
 if __name__ == "__main__":
+    model = "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0"
+    #model = "deepseek-r1:8b"
 
-    model = "llama3.1:8b"
+    system_prompt = load_prompt("prompts/test/system_test.txt")
+    num_sections = 7
 
-    system_prompt = load_prompt("prompts/writing/system_writing.txt")
-    user_prompt = load_prompt("prompts/writing/user_writing.txt")
+    for section_num in range(1, num_sections + 1):
+        user_prompt_path = f"prompts/test/user_test_section_{section_num}.txt"
+        user_prompt = load_prompt(user_prompt_path)
 
-    result = query_model_chat(model, system_prompt, user_prompt)
+        print(f"\n--- SECTION {section_num} / CHAT ---")
+        result_chat = query_model_chat(model, system_prompt, user_prompt)
 
-    print("Czas:", result["time"], "s")
-    print(result["response"])
+        print("Czas:", result_chat["time"], "s")
+        print(result_chat["response"])
 
-    safe_model = safe_filename(model)
-    save_result(result, f"results/writing/chat/writing_{safe_model}.json")
+        safe_model = safe_filename(model)
+        save_result(
+            result_chat,
+            f"results/test/chat/section_{section_num}_test_{safe_model}.json"
+        )
 
-    result2 = query_model_generate(model, system_prompt, user_prompt)
+    for section_num in range(1, num_sections + 1):
+        user_prompt_path = f"prompts/test/user_test_section_{section_num}.txt"
+        user_prompt = load_prompt(user_prompt_path)
 
-    print("Czas:", result2["time"], "s")
-    print(result2["response"])
+        print(f"\n--- SECTION {section_num} / GENERATE ---")
+        result_generate = query_model_generate(model, system_prompt, user_prompt)
 
-    safe_model = safe_filename(model)
-    save_result(result2, f"results/writing/generate/writing_{safe_model}.json")
-
+        print("Czas:", result_generate["time"], "s")
+        print(result_generate["response"])
+        
+        safe_model = safe_filename(model)
+        save_result(
+            result_generate,
+            f"results/test/generate/section_{section_num}_test_{safe_model}.json"
+    )
+    
     sys.exit()
