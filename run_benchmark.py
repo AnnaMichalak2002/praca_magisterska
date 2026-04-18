@@ -9,10 +9,10 @@ from llm_utils import load_prompt, query_model_chat, query_model_generate, safe_
 
 MODELS = [
     #"llama3.1:8b",
-    "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0",
+    #"Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0",
     #"qwen3:14b",
     #"Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0",
-    #"deepseek-r1:8b",
+    "deepseek-r1:8b",
     #"deepseek-r1:14b"
 ]
 
