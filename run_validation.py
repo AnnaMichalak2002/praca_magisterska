@@ -4,9 +4,9 @@ from collections import Counter
 from datetime import datetime
 
 from llm_utils import save_result
-from validators.specs import is_test_mode
-from validators.strict_validators import validate_test_strict
-from validators.tolerant_validators import validate_test_tolerant
+from validators.specs import is_test_mode, is_grammar_mode
+from validators.strict_validators import validate_test_strict, validate_grammar_strict
+from validators.tolerant_validators import validate_test_tolerant, validate_grammar_tolerant
 
 
 LOG_FILE = Path("logs/run_validation.log")
@@ -39,7 +39,6 @@ def normalize_validation_error(error: str) -> str:
         "ambiguous_options_field",
         "ambiguous_answer_field",
         "answer_not_assessable_without_options",
-        "options_not_length_4",
         "answer_not_in_options",
         "is_not_dict",
         "empty_question",
@@ -53,6 +52,13 @@ def normalize_validation_error(error: str) -> str:
     for pattern in question_patterns:
         if pattern in error:
             return pattern
+
+    if "options_not_length_" in error:
+        suffix = error.split("options_not_length_", 1)[1]
+        digits = "".join(ch for ch in suffix if ch.isdigit())
+        if digits:
+            return f"options_not_length_{digits}"
+        return "options_not_length"
 
     if error.startswith("wrong_field_name_for_"):
         return error.split(":", 1)[0]
@@ -172,6 +178,8 @@ def validate_endpoint_dir_strict(endpoint_dir: Path) -> None:
 
             if is_test_mode(mode_id):
                 validation = validate_test_strict(attempt_data)
+            elif is_grammar_mode(mode_id):
+                validation = validate_grammar_strict(attempt_data)
             else:
                 validation = {
                     "attempt": attempt_data.get("attempt"),
@@ -216,6 +224,8 @@ def validate_endpoint_dir_tolerant(endpoint_dir: Path) -> None:
 
             if is_test_mode(mode_id):
                 validation = validate_test_tolerant(attempt_data)
+            elif is_grammar_mode(mode_id):
+                validation = validate_grammar_tolerant(attempt_data)
             else:
                 validation = {
                     "attempt": attempt_data.get("attempt"),
@@ -263,7 +273,7 @@ def main():
     for path in root.rglob("*"):
         if path.is_dir() and path.name in {"chat", "generate"}:
             mode_dir_name = path.parent.parent.name
-            if is_test_mode(mode_dir_name):
+            if is_test_mode(mode_dir_name) or is_grammar_mode(mode_dir_name):
                 endpoint_dirs.append(path)
 
     log_message("=== VALIDATION STARTED ===")

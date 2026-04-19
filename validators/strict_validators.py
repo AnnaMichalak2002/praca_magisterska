@@ -1,5 +1,5 @@
 from typing import Any
-from validators.specs import TEST_SECTION_SPECS
+from validators.specs import TEST_SECTION_SPECS, GRAMMAR_MODE_SPECS
 
 
 def _is_non_empty_string(value: Any) -> bool:
@@ -244,25 +244,211 @@ def validate_test_strict(attempt_data: dict) -> dict:
     if len(normalized_question_texts) != len(set(normalized_question_texts)):
         result["validation_errors"].append("duplicate_question_text")
         result["checks"]["all_questions_strict_valid"] = False
-        
+
     if spec["requires_reading_text"]:
         result["checks"]["reading_text_presence_valid"] = "reading_text" in response
-        if "reading_text" not in response:
-            result["validation_errors"].append("missing_reading_text")
-        elif _is_non_empty_string(response.get("reading_text")):
-            result["checks"]["reading_text_non_empty"] = True
+        if "reading_text" in response:
+            if _is_non_empty_string(response.get("reading_text")):
+                result["checks"]["reading_text_non_empty"] = True
+            else:
+                result["checks"]["reading_text_non_empty"] = False
+                result["validation_errors"].append("empty_reading_text")
         else:
             result["checks"]["reading_text_non_empty"] = False
-            result["validation_errors"].append("empty_reading_text")
     else:
         if "reading_text" in response:
             result["checks"]["reading_text_presence_valid"] = False
-            result["validation_errors"].append("unexpected_reading_text")
+            result["checks"]["reading_text_non_empty"] = _is_non_empty_string(response.get("reading_text"))
         else:
             result["checks"]["reading_text_presence_valid"] = True
             result["checks"]["reading_text_non_empty"] = True
 
     result["checks"]["all_questions_strict_valid"] = all_questions_strict_valid
 
+    result["strict_valid"] = len(result["validation_errors"]) == 0
+    return result
+
+
+def validate_grammar_strict(attempt_data: dict) -> dict:
+    mode_id = attempt_data.get("mode_id")
+    spec = GRAMMAR_MODE_SPECS.get(mode_id)
+
+    result = {
+        "attempt": attempt_data.get("attempt"),
+        "mode_id": mode_id,
+        "model": attempt_data.get("model"),
+        "endpoint": attempt_data.get("endpoint"),
+        "success": attempt_data.get("success"),
+        "strict_valid": False,
+        "validation_errors": [],
+        "checks": {
+            "response_is_dict": False,
+            "top_level_exact_fields": False,
+            "exercise_type_valid": False,
+            "grammar_topic_valid": False,
+            "level_valid": False,
+            "questions_is_list": False,
+            "question_count_valid": False,
+            "all_questions_strict_valid": False,
+        },
+        "question_checks": []
+    }
+
+    if spec is None:
+        result["validation_errors"].append("unknown_mode_id")
+        return result
+
+    if not attempt_data.get("success"):
+        result["validation_errors"].append("original_attempt_not_successful")
+        return result
+
+    response = attempt_data.get("response")
+    if not isinstance(response, dict):
+        result["validation_errors"].append("response_is_not_dict")
+        return result
+
+    result["checks"]["response_is_dict"] = True
+
+    expected_top_level = {
+        "exercise_type",
+        "grammar_topic",
+        "level",
+        "questions",
+    }
+
+    actual_top_level = set(response.keys())
+    unexpected_top = actual_top_level - expected_top_level
+    missing_top = expected_top_level - actual_top_level
+
+    if not missing_top and not unexpected_top:
+        result["checks"]["top_level_exact_fields"] = True
+    else:
+        for field in sorted(missing_top):
+            result["validation_errors"].append(f"missing_{field}")
+        for field in sorted(unexpected_top):
+            result["validation_errors"].append(f"unexpected_field:{field}")
+
+    if response.get("exercise_type") == spec["exercise_type"]:
+        result["checks"]["exercise_type_valid"] = True
+    else:
+        result["validation_errors"].append("invalid_exercise_type")
+
+    if response.get("grammar_topic") == spec["grammar_topic"]:
+        result["checks"]["grammar_topic_valid"] = True
+    else:
+        result["validation_errors"].append("invalid_grammar_topic")
+
+    if response.get("level") == spec["level"]:
+        result["checks"]["level_valid"] = True
+    else:
+        result["validation_errors"].append("invalid_level")
+
+    questions = response.get("questions")
+    if not isinstance(questions, list):
+        result["validation_errors"].append("questions_is_not_list")
+        return result
+
+    result["checks"]["questions_is_list"] = True
+
+    if len(questions) == spec["question_count"]:
+        result["checks"]["question_count_valid"] = True
+    else:
+        result["validation_errors"].append("invalid_question_count")
+
+    normalized_question_texts = []
+    all_questions_strict_valid = True
+
+    for idx, q in enumerate(questions, start=1):
+        q_result = {
+            "question_index": idx,
+            "checks": {
+                "is_dict": False,
+                "has_exact_fields": False,
+                "question_non_empty": False,
+                "options_is_list": False,
+                "options_length_valid": False,
+                "options_non_empty": False,
+                "options_unique": False,
+                "answer_non_empty": False,
+                "answer_in_options": False,
+            },
+            "valid": False
+        }
+
+        if not isinstance(q, dict):
+            result["validation_errors"].append(f"question_{idx}_is_not_dict")
+            result["question_checks"].append(q_result)
+            all_questions_strict_valid = False
+            continue
+
+        q_result["checks"]["is_dict"] = True
+
+        expected_q_fields = {"question", "options", "answer"}
+        actual_q_fields = set(q.keys())
+
+        missing_q_fields = expected_q_fields - actual_q_fields
+        unexpected_q_fields = actual_q_fields - expected_q_fields
+
+        if not missing_q_fields and not unexpected_q_fields:
+            q_result["checks"]["has_exact_fields"] = True
+        else:
+            for field in sorted(missing_q_fields):
+                result["validation_errors"].append(f"question_{idx}_missing_{field}")
+            for field in sorted(unexpected_q_fields):
+                result["validation_errors"].append(f"question_{idx}_unexpected_field:{field}")
+
+        question_text = q.get("question")
+        if _is_non_empty_string(question_text):
+            q_result["checks"]["question_non_empty"] = True
+            normalized_question_texts.append(question_text.strip().lower())
+        else:
+            result["validation_errors"].append(f"question_{idx}_empty_question")
+
+        options = q.get("options")
+        if isinstance(options, list):
+            q_result["checks"]["options_is_list"] = True
+
+            if len(options) == spec["options_count"]:
+                q_result["checks"]["options_length_valid"] = True
+            else:
+                result["validation_errors"].append(f"question_{idx}_options_not_length_{spec['options_count']}")
+
+            if all(_is_non_empty_string(opt) for opt in options):
+                q_result["checks"]["options_non_empty"] = True
+            else:
+                result["validation_errors"].append(f"question_{idx}_empty_option")
+
+            normalized_options = [opt.strip() for opt in options if isinstance(opt, str)]
+            if len(normalized_options) == len(set(normalized_options)) and len(normalized_options) == len(options):
+                q_result["checks"]["options_unique"] = True
+            else:
+                result["validation_errors"].append(f"question_{idx}_duplicate_options")
+        else:
+            result["validation_errors"].append(f"question_{idx}_options_is_not_list")
+            options = None
+
+        answer = q.get("answer")
+        if _is_non_empty_string(answer):
+            q_result["checks"]["answer_non_empty"] = True
+
+            if isinstance(options, list):
+                if answer in options:
+                    q_result["checks"]["answer_in_options"] = True
+                else:
+                    result["validation_errors"].append(f"question_{idx}_answer_not_in_options")
+        else:
+            result["validation_errors"].append(f"question_{idx}_empty_answer")
+
+        q_result["valid"] = all(q_result["checks"].values())
+        if not q_result["valid"]:
+            all_questions_strict_valid = False
+
+        result["question_checks"].append(q_result)
+
+    if len(normalized_question_texts) != len(set(normalized_question_texts)):
+        result["validation_errors"].append("duplicate_question_text")
+        all_questions_strict_valid = False
+
+    result["checks"]["all_questions_strict_valid"] = all_questions_strict_valid
     result["strict_valid"] = len(result["validation_errors"]) == 0
     return result
