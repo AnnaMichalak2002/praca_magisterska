@@ -8,15 +8,15 @@ from datetime import datetime
 from llm_utils import load_prompt, query_model_chat, query_model_generate, safe_filename, save_result
 
 MODELS = [
-    #"llama3.1:8b",
+    "llama3.1:8b",
     #"Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0",
     #"qwen3:14b",
     #"Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0",
-    "deepseek-r1:8b",
+    #"deepseek-r1:8b",
     #"deepseek-r1:14b"
 ]
 
-ATTEMPTS = 2
+ATTEMPTS = 20
 RESUME = True
 LOG_FILE = Path("logs/benchmark.log")
 
@@ -144,7 +144,7 @@ def save_runtime_summary(endpoint_dir: Path) -> None:
     save_result(summary, str(endpoint_dir / "summary_runtime.json"))
 
 
-def main():
+def run_test_cerf():
     log_message("=== BENCHMARK STARTED ===")
 
     system_prompt = load_prompt("prompts/test/system_test.txt")
@@ -221,6 +221,189 @@ def main():
 
     log_message("=== BENCHMARK FINISHED ===")
 
+def run_grammar():
+    log_message("=== BENCHMARK STARTED ===")
+
+    grammar_modes = [
+        {
+            "mode_id": "grammar_conditionals_1_2_3",
+            "system_prompt_path": "prompts/grammar/system_grammar.txt",
+            "user_prompt_path": "prompts/grammar/user_grammar_conditionals_1_2_3.txt",
+        },
+        {
+            "mode_id": "grammar_gerund_vs_infinitive",
+            "system_prompt_path": "prompts/grammar/system_grammar.txt",
+            "user_prompt_path": "prompts/grammar/user_grammar_gerund_vs_infinitive.txt",
+        },
+        {
+            "mode_id": "grammar_past_simple_vs_present_perfect",
+            "system_prompt_path": "prompts/grammar/system_grammar.txt",
+            "user_prompt_path": "prompts/grammar/user_grammar_past_vs_present_perfect.txt",
+        },
+        {
+            "mode_id": "grammar_simple_vs_continuous",
+            "system_prompt_path": "prompts/grammar/system_grammar.txt",
+            "user_prompt_path": "prompts/grammar/user_grammar_simple_vs_continuous.txt",
+        },
+    ]
+
+    for model in MODELS:
+        safe_model = safe_filename(model)
+        log_message(f"MODEL STARTED | {model}")
+
+        for mode in grammar_modes:
+            mode_id = mode["mode_id"]
+            system_prompt_path = mode["system_prompt_path"]
+            user_prompt_path = mode["user_prompt_path"]
+
+            system_prompt = load_prompt(system_prompt_path)
+            user_prompt = load_prompt(user_prompt_path)
+
+            for endpoint in ["chat", "generate"]:
+                endpoint_dir = Path(f"results/{mode_id}/{safe_model}/{endpoint}")
+                endpoint_dir.mkdir(parents=True, exist_ok=True)
+
+                log_message(
+                    f"MODE STARTED | model={model} | mode={mode_id} | endpoint={endpoint}"
+                )
+
+                for attempt in range(1, ATTEMPTS + 1):
+                    output_path = endpoint_dir / f"attempt_{attempt:03d}.json"
+
+                    if RESUME and output_path.exists():
+                        log_message(f"SKIP existing file | {output_path}")
+                        continue
+
+                    log_message(
+                        f"RUN | model={model} | mode={mode_id} | endpoint={endpoint} | attempt={attempt}"
+                    )
+
+                    try:
+                        result = run_single_attempt(
+                            endpoint=endpoint,
+                            model=model,
+                            system_prompt=system_prompt,
+                            user_prompt=user_prompt,
+                            attempt=attempt
+                        )
+
+                        result["mode_id"] = mode_id
+                        result["endpoint"] = endpoint
+                        result["system_prompt_path"] = system_prompt_path
+                        result["user_prompt_path"] = user_prompt_path
+                        result["timestamp"] = datetime.now().isoformat(timespec="seconds")
+
+                        save_result(result, str(output_path))
+
+                    except Exception as e:
+                        error_result = {
+                            "attempt": attempt,
+                            "model": model,
+                            "time": None,
+                            "success": False,
+                            "response": None,
+                            "raw_output": None,
+                            "postprocessing_steps": [],
+                            "error": f"Runner exception: {e}",
+                            "mode_id": mode_id,
+                            "endpoint": endpoint,
+                            "system_prompt_path": system_prompt_path,
+                            "user_prompt_path": user_prompt_path,
+                            "timestamp": datetime.now().isoformat(timespec="seconds")
+                        }
+                        save_result(error_result, str(output_path))
+
+                    time.sleep(0.2)
+
+                save_runtime_summary(endpoint_dir)
+                log_message(
+                    f"SUMMARY SAVED | model={model} | mode={mode_id} | endpoint={endpoint}"
+                )
+
+    log_message("=== BENCHMARK FINISHED ===")
+
+
+def run_writing():
+    log_message("=== BENCHMARK STARTED ===")
+
+    mode_id = "writing"
+    system_prompt_path = "prompts/writing/system_writing.txt"
+    user_prompt_path = "prompts/writing/user_writing.txt"
+
+    system_prompt = load_prompt(system_prompt_path)
+    user_prompt = load_prompt(user_prompt_path)
+
+    for model in MODELS:
+        safe_model = safe_filename(model)
+        log_message(f"MODEL STARTED | {model}")
+
+        for endpoint in ["chat", "generate"]:
+            endpoint_dir = Path(f"results/{mode_id}/{safe_model}/{endpoint}")
+            endpoint_dir.mkdir(parents=True, exist_ok=True)
+
+            log_message(
+                f"MODE STARTED | model={model} | mode={mode_id} | endpoint={endpoint}"
+            )
+
+            for attempt in range(1, ATTEMPTS + 1):
+                output_path = endpoint_dir / f"attempt_{attempt:03d}.json"
+
+                if RESUME and output_path.exists():
+                    log_message(f"SKIP existing file | {output_path}")
+                    continue
+
+                log_message(
+                    f"RUN | model={model} | mode={mode_id} | endpoint={endpoint} | attempt={attempt}"
+                )
+
+                try:
+                    result = run_single_attempt(
+                        endpoint=endpoint,
+                        model=model,
+                        system_prompt=system_prompt,
+                        user_prompt=user_prompt,
+                        attempt=attempt
+                    )
+
+                    result["mode_id"] = mode_id
+                    result["endpoint"] = endpoint
+                    result["system_prompt_path"] = system_prompt_path
+                    result["user_prompt_path"] = user_prompt_path
+                    result["timestamp"] = datetime.now().isoformat(timespec="seconds")
+
+                    save_result(result, str(output_path))
+
+                except Exception as e:
+                    error_result = {
+                        "attempt": attempt,
+                        "model": model,
+                        "time": None,
+                        "success": False,
+                        "response": None,
+                        "raw_output": None,
+                        "postprocessing_steps": [],
+                        "error": f"Runner exception: {e}",
+                        "mode_id": mode_id,
+                        "endpoint": endpoint,
+                        "system_prompt_path": system_prompt_path,
+                        "user_prompt_path": user_prompt_path,
+                        "timestamp": datetime.now().isoformat(timespec="seconds")
+                    }
+                    save_result(error_result, str(output_path))
+
+                time.sleep(0.2)
+
+            save_runtime_summary(endpoint_dir)
+            log_message(
+                f"SUMMARY SAVED | model={model} | mode={mode_id} | endpoint={endpoint}"
+            )
+
+    log_message("=== BENCHMARK FINISHED ===")
+
+def main():
+    run_grammar()
+    run_test_cerf()
+    
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,5 @@
 from typing import Any
-from validators.specs import TEST_SECTION_SPECS, GRAMMAR_MODE_SPECS
+from validators.specs import TEST_SECTION_SPECS, GRAMMAR_MODE_SPECS, WRITING_MODE_SPECS
 
 
 def _is_non_empty_string(value: Any) -> bool:
@@ -450,5 +450,177 @@ def validate_grammar_strict(attempt_data: dict) -> dict:
         all_questions_strict_valid = False
 
     result["checks"]["all_questions_strict_valid"] = all_questions_strict_valid
+    result["strict_valid"] = len(result["validation_errors"]) == 0
+    return result
+
+
+def validate_writing_strict(attempt_data: dict) -> dict:
+    mode_id = attempt_data.get("mode_id")
+    spec = WRITING_MODE_SPECS.get(mode_id)
+
+    result = {
+        "attempt": attempt_data.get("attempt"),
+        "mode_id": mode_id,
+        "model": attempt_data.get("model"),
+        "endpoint": attempt_data.get("endpoint"),
+        "success": attempt_data.get("success"),
+        "strict_valid": False,
+        "validation_errors": [],
+        "checks": {
+            "response_is_dict": False,
+            "top_level_exact_fields": False,
+            "exercise_type_valid": False,
+            "learner_native_language_valid": False,
+            "task_content_valid": False,
+            "original_text_valid": False,
+            "corrected_text_non_empty": False,
+            "learner_errors_is_list": False,
+            "content_compliance_valid": False,
+            "content_feedback_non_empty": False,
+            "all_learner_errors_strict_valid": True,
+        },
+        "learner_error_checks": []
+    }
+
+    if spec is None:
+        result["validation_errors"].append("unknown_mode_id")
+        return result
+
+    if not attempt_data.get("success"):
+        result["validation_errors"].append("original_attempt_not_successful")
+        return result
+
+    response = attempt_data.get("response")
+    if not isinstance(response, dict):
+        result["validation_errors"].append("response_is_not_dict")
+        return result
+
+    result["checks"]["response_is_dict"] = True
+
+    expected_top_level = {
+        "exercise_type",
+        "learner_native_language",
+        "task_content",
+        "original_text",
+        "corrected_text",
+        "learner_errors",
+        "content_compliance",
+        "content_feedback",
+    }
+
+    actual_top_level = set(response.keys())
+    missing_top = expected_top_level - actual_top_level
+    unexpected_top = actual_top_level - expected_top_level
+
+    if missing_top:
+        for field in sorted(missing_top):
+            result["validation_errors"].append(f"missing_{field}")
+
+    if unexpected_top:
+        for field in sorted(unexpected_top):
+            result["validation_errors"].append(f"unexpected_field:{field}")
+
+    if not missing_top and not unexpected_top:
+        result["checks"]["top_level_exact_fields"] = True
+
+    if response.get("exercise_type") == spec["exercise_type"]:
+        result["checks"]["exercise_type_valid"] = True
+    else:
+        result["validation_errors"].append("invalid_exercise_type")
+
+    if response.get("learner_native_language") == spec["learner_native_language"]:
+        result["checks"]["learner_native_language_valid"] = True
+    else:
+        result["validation_errors"].append("invalid_learner_native_language")
+
+    if response.get("task_content") == spec["task_content"]:
+        result["checks"]["task_content_valid"] = True
+    else:
+        result["validation_errors"].append("invalid_task_content")
+
+    if response.get("original_text") == spec["original_text"]:
+        result["checks"]["original_text_valid"] = True
+    else:
+        result["validation_errors"].append("invalid_original_text")
+
+    if _is_non_empty_string(response.get("corrected_text")):
+        result["checks"]["corrected_text_non_empty"] = True
+    else:
+        result["validation_errors"].append("empty_corrected_text")
+
+    learner_errors = response.get("learner_errors")
+    if isinstance(learner_errors, list):
+        result["checks"]["learner_errors_is_list"] = True
+    else:
+        result["validation_errors"].append("learner_errors_is_not_list")
+        learner_errors = None
+
+    if response.get("content_compliance") in spec["allowed_content_compliance"]:
+        result["checks"]["content_compliance_valid"] = True
+    else:
+        result["validation_errors"].append("invalid_content_compliance")
+
+    if _is_non_empty_string(response.get("content_feedback")):
+        result["checks"]["content_feedback_non_empty"] = True
+    else:
+        result["validation_errors"].append("empty_content_feedback")
+
+    all_learner_errors_strict_valid = True
+
+    if isinstance(learner_errors, list):
+        for idx, item in enumerate(learner_errors, start=1):
+            item_result = {
+                "learner_error_index": idx,
+                "checks": {
+                    "is_dict": False,
+                    "has_exact_fields": False,
+                    "error_non_empty": False,
+                    "explanation_non_empty": False,
+                },
+                "valid": False
+            }
+
+            if not isinstance(item, dict):
+                result["validation_errors"].append(f"learner_error_{idx}_is_not_dict")
+                result["learner_error_checks"].append(item_result)
+                all_learner_errors_strict_valid = False
+                continue
+
+            item_result["checks"]["is_dict"] = True
+
+            expected_item_fields = {"error", "explanation"}
+            actual_item_fields = set(item.keys())
+
+            missing_item_fields = expected_item_fields - actual_item_fields
+            unexpected_item_fields = actual_item_fields - expected_item_fields
+
+            if missing_item_fields:
+                for field in sorted(missing_item_fields):
+                    result["validation_errors"].append(f"learner_error_{idx}_missing_{field}")
+
+            if unexpected_item_fields:
+                for field in sorted(unexpected_item_fields):
+                    result["validation_errors"].append(f"learner_error_{idx}_unexpected_field:{field}")
+
+            if not missing_item_fields and not unexpected_item_fields:
+                item_result["checks"]["has_exact_fields"] = True
+
+            if _is_non_empty_string(item.get("error")):
+                item_result["checks"]["error_non_empty"] = True
+            else:
+                result["validation_errors"].append(f"learner_error_{idx}_empty_error")
+
+            if _is_non_empty_string(item.get("explanation")):
+                item_result["checks"]["explanation_non_empty"] = True
+            else:
+                result["validation_errors"].append(f"learner_error_{idx}_empty_explanation")
+
+            item_result["valid"] = all(item_result["checks"].values())
+            if not item_result["valid"]:
+                all_learner_errors_strict_valid = False
+
+            result["learner_error_checks"].append(item_result)
+
+    result["checks"]["all_learner_errors_strict_valid"] = all_learner_errors_strict_valid
     result["strict_valid"] = len(result["validation_errors"]) == 0
     return result

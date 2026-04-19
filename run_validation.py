@@ -4,9 +4,9 @@ from collections import Counter
 from datetime import datetime
 
 from llm_utils import save_result
-from validators.specs import is_test_mode, is_grammar_mode
-from validators.strict_validators import validate_test_strict, validate_grammar_strict
-from validators.tolerant_validators import validate_test_tolerant, validate_grammar_tolerant
+from validators.specs import is_test_mode, is_grammar_mode, is_writing_mode
+from validators.strict_validators import validate_test_strict, validate_grammar_strict, validate_writing_strict
+from validators.tolerant_validators import validate_test_tolerant, validate_grammar_tolerant, validate_writing_tolerant
 
 
 LOG_FILE = Path("logs/run_validation.log")
@@ -59,6 +59,24 @@ def normalize_validation_error(error: str) -> str:
         if digits:
             return f"options_not_length_{digits}"
         return "options_not_length"
+
+    if "learner_error_" in error:
+        if "wrong_field_name_for_error" in error:
+            return "wrong_field_name_for_error"
+        if "wrong_field_name_for_explanation" in error:
+            return "wrong_field_name_for_explanation"
+        if "missing_error" in error:
+            return "missing_error"
+        if "missing_explanation" in error:
+            return "missing_explanation"
+        if "empty_error" in error:
+            return "empty_error"
+        if "empty_explanation" in error:
+            return "empty_explanation"
+        if "ambiguous_explanation_field" in error:
+            return "ambiguous_explanation_field"
+        if "is_not_dict" in error:
+            return "learner_error_is_not_dict"
 
     if error.startswith("wrong_field_name_for_"):
         return error.split(":", 1)[0]
@@ -180,6 +198,8 @@ def validate_endpoint_dir_strict(endpoint_dir: Path) -> None:
                 validation = validate_test_strict(attempt_data)
             elif is_grammar_mode(mode_id):
                 validation = validate_grammar_strict(attempt_data)
+            elif is_writing_mode(mode_id):
+                validation = validate_writing_strict(attempt_data)
             else:
                 validation = {
                     "attempt": attempt_data.get("attempt"),
@@ -226,6 +246,8 @@ def validate_endpoint_dir_tolerant(endpoint_dir: Path) -> None:
                 validation = validate_test_tolerant(attempt_data)
             elif is_grammar_mode(mode_id):
                 validation = validate_grammar_tolerant(attempt_data)
+            elif is_writing_mode(mode_id):
+                validation = validate_writing_tolerant(attempt_data)
             else:
                 validation = {
                     "attempt": attempt_data.get("attempt"),
@@ -273,7 +295,7 @@ def main():
     for path in root.rglob("*"):
         if path.is_dir() and path.name in {"chat", "generate"}:
             mode_dir_name = path.parent.parent.name
-            if is_test_mode(mode_dir_name) or is_grammar_mode(mode_dir_name):
+            if is_test_mode(mode_dir_name) or is_grammar_mode(mode_dir_name) or is_writing_mode(mode_dir_name):
                 endpoint_dirs.append(path)
 
     log_message("=== VALIDATION STARTED ===")

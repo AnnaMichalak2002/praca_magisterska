@@ -1,7 +1,7 @@
 from typing import Any
 from difflib import SequenceMatcher
 
-from validators.specs import TEST_SECTION_SPECS, GRAMMAR_MODE_SPECS 
+from validators.specs import TEST_SECTION_SPECS, GRAMMAR_MODE_SPECS, WRITING_MODE_SPECS
 
 
 def _is_non_empty_string(value: Any) -> bool:
@@ -775,6 +775,268 @@ def validate_grammar_tolerant(attempt_data: dict) -> dict:
     result["checks"]["all_options_unique"] = all_options_unique
     result["checks"]["all_answers_non_empty"] = all_answers_non_empty
     result["checks"]["all_answers_in_options"] = all_answers_in_options
+
+    result["validation_errors"] = (
+        result["fatal_validation_errors"] + result["non_fatal_validation_errors"]
+    )
+
+    result["tolerant_valid"] = len(result["fatal_validation_errors"]) == 0
+    result["recoverable"] = result["tolerant_valid"] and len(result["non_fatal_validation_errors"]) > 0
+
+    return result
+
+
+def _infer_field_by_position(
+    obj: dict,
+    expected_order: list[str],
+    canonical_name: str,
+):
+    """
+    Returns:
+    - value
+    - status: exact / inferred_by_position:<actual_key> / missing
+    """
+    if canonical_name in obj:
+        return obj[canonical_name], "exact"
+
+    items = list(obj.items())
+
+    try:
+        idx = expected_order.index(canonical_name)
+    except ValueError:
+        return None, "missing"
+
+    if idx < len(items):
+        actual_key, actual_value = items[idx]
+        return actual_value, f"inferred_by_position:{actual_key}"
+
+    return None, "missing"
+
+
+def validate_writing_tolerant(attempt_data: dict) -> dict:
+    mode_id = attempt_data.get("mode_id")
+    spec = WRITING_MODE_SPECS.get(mode_id)
+
+    result = {
+        "attempt": attempt_data.get("attempt"),
+        "mode_id": mode_id,
+        "model": attempt_data.get("model"),
+        "endpoint": attempt_data.get("endpoint"),
+        "success": attempt_data.get("success"),
+        "tolerant_valid": False,
+        "recoverable": False,
+        "validation_errors": [],
+        "fatal_validation_errors": [],
+        "non_fatal_validation_errors": [],
+        "checks": {
+            "response_is_dict": False,
+            "exercise_type_valid": False,
+            "learner_native_language_valid": False,
+            "task_content_valid": False,
+            "original_text_valid": False,
+            "corrected_text_non_empty": False,
+            "learner_errors_is_list": False,
+            "content_compliance_valid": False,
+            "content_feedback_non_empty": False,
+            "all_learner_errors_tolerant_valid": True,
+        },
+        "learner_error_checks": []
+    }
+
+    if spec is None:
+        result["fatal_validation_errors"].append("unknown_mode_id")
+        result["validation_errors"] = result["fatal_validation_errors"] + result["non_fatal_validation_errors"]
+        return result
+
+    if not attempt_data.get("success"):
+        result["fatal_validation_errors"].append("original_attempt_not_successful")
+        result["validation_errors"] = result["fatal_validation_errors"] + result["non_fatal_validation_errors"]
+        return result
+
+    response = attempt_data.get("response")
+    if not isinstance(response, dict):
+        result["fatal_validation_errors"].append("response_is_not_dict")
+        result["validation_errors"] = result["fatal_validation_errors"] + result["non_fatal_validation_errors"]
+        return result
+
+    result["checks"]["response_is_dict"] = True
+
+    expected_top_order = [
+        "exercise_type",
+        "learner_native_language",
+        "task_content",
+        "original_text",
+        "corrected_text",
+        "learner_errors",
+        "content_compliance",
+        "content_feedback",
+    ]
+
+    exercise_type, ex_status = _infer_field_by_position(response, expected_top_order, "exercise_type")
+    if ex_status == "missing":
+        result["fatal_validation_errors"].append("missing_exercise_type")
+    else:
+        if ex_status.startswith("inferred_by_position:"):
+            result["non_fatal_validation_errors"].append(
+                f"wrong_field_name_for_exercise_type:{ex_status.split(':', 1)[1]}"
+            )
+        if exercise_type == spec["exercise_type"]:
+            result["checks"]["exercise_type_valid"] = True
+        else:
+            result["fatal_validation_errors"].append("invalid_exercise_type")
+
+    learner_native_language, ln_status = _infer_field_by_position(
+        response, expected_top_order, "learner_native_language"
+    )
+    if ln_status == "missing":
+        result["fatal_validation_errors"].append("missing_learner_native_language")
+    else:
+        if ln_status.startswith("inferred_by_position:"):
+            result["non_fatal_validation_errors"].append(
+                f"wrong_field_name_for_learner_native_language:{ln_status.split(':', 1)[1]}"
+            )
+        if learner_native_language == spec["learner_native_language"]:
+            result["checks"]["learner_native_language_valid"] = True
+        else:
+            result["fatal_validation_errors"].append("invalid_learner_native_language")
+
+    task_content, tc_status = _infer_field_by_position(response, expected_top_order, "task_content")
+    if tc_status == "missing":
+        result["fatal_validation_errors"].append("missing_task_content")
+    else:
+        if tc_status.startswith("inferred_by_position:"):
+            result["non_fatal_validation_errors"].append(
+                f"wrong_field_name_for_task_content:{tc_status.split(':', 1)[1]}"
+            )
+        if task_content == spec["task_content"]:
+            result["checks"]["task_content_valid"] = True
+        else:
+            result["fatal_validation_errors"].append("invalid_task_content")
+
+    original_text, ot_status = _infer_field_by_position(response, expected_top_order, "original_text")
+    if ot_status == "missing":
+        result["fatal_validation_errors"].append("missing_original_text")
+    else:
+        if ot_status.startswith("inferred_by_position:"):
+            result["non_fatal_validation_errors"].append(
+                f"wrong_field_name_for_original_text:{ot_status.split(':', 1)[1]}"
+            )
+        if original_text == spec["original_text"]:
+            result["checks"]["original_text_valid"] = True
+        else:
+            result["fatal_validation_errors"].append("invalid_original_text")
+
+    corrected_text, ct_status = _infer_field_by_position(response, expected_top_order, "corrected_text")
+    if ct_status == "missing":
+        result["fatal_validation_errors"].append("missing_corrected_text")
+    else:
+        if ct_status.startswith("inferred_by_position:"):
+            result["non_fatal_validation_errors"].append(
+                f"wrong_field_name_for_corrected_text:{ct_status.split(':', 1)[1]}"
+            )
+        if _is_non_empty_string(corrected_text):
+            result["checks"]["corrected_text_non_empty"] = True
+        else:
+            result["fatal_validation_errors"].append("empty_corrected_text")
+
+    learner_errors, le_status = _infer_field_by_position(response, expected_top_order, "learner_errors")
+    if le_status == "missing":
+        result["fatal_validation_errors"].append("missing_learner_errors")
+        learner_errors = None
+    else:
+        if le_status.startswith("inferred_by_position:"):
+            result["non_fatal_validation_errors"].append(
+                f"wrong_field_name_for_learner_errors:{le_status.split(':', 1)[1]}"
+            )
+        if isinstance(learner_errors, list):
+            result["checks"]["learner_errors_is_list"] = True
+        else:
+            result["fatal_validation_errors"].append("learner_errors_is_not_list")
+            learner_errors = None
+
+    content_compliance, cc_status = _infer_field_by_position(response, expected_top_order, "content_compliance")
+    if cc_status == "missing":
+        result["fatal_validation_errors"].append("missing_content_compliance")
+    else:
+        if cc_status.startswith("inferred_by_position:"):
+            result["non_fatal_validation_errors"].append(
+                f"wrong_field_name_for_content_compliance:{cc_status.split(':', 1)[1]}"
+            )
+        if content_compliance in spec["allowed_content_compliance"]:
+            result["checks"]["content_compliance_valid"] = True
+        else:
+            result["fatal_validation_errors"].append("invalid_content_compliance")
+
+    content_feedback, cf_status = _infer_field_by_position(response, expected_top_order, "content_feedback")
+    if cf_status == "missing":
+        result["fatal_validation_errors"].append("missing_content_feedback")
+    else:
+        if cf_status.startswith("inferred_by_position:"):
+            result["non_fatal_validation_errors"].append(
+                f"wrong_field_name_for_content_feedback:{cf_status.split(':', 1)[1]}"
+            )
+        if _is_non_empty_string(content_feedback):
+            result["checks"]["content_feedback_non_empty"] = True
+        else:
+            result["fatal_validation_errors"].append("empty_content_feedback")
+
+    all_learner_errors_tolerant_valid = True
+
+    if isinstance(learner_errors, list):
+        expected_error_order = ["error", "explanation"]
+
+        for idx, item in enumerate(learner_errors, start=1):
+            item_result = {
+                "learner_error_index": idx,
+                "checks": {
+                    "is_dict": False,
+                    "error_non_empty": False,
+                    "explanation_non_empty": False,
+                },
+                "valid": False
+            }
+
+            if not isinstance(item, dict):
+                result["fatal_validation_errors"].append(f"learner_error_{idx}_is_not_dict")
+                result["learner_error_checks"].append(item_result)
+                all_learner_errors_tolerant_valid = False
+                continue
+
+            item_result["checks"]["is_dict"] = True
+
+            error_text, err_status = _infer_field_by_position(item, expected_error_order, "error")
+            if err_status == "missing":
+                result["fatal_validation_errors"].append(f"learner_error_{idx}_missing_error")
+            else:
+                if err_status.startswith("inferred_by_position:"):
+                    result["non_fatal_validation_errors"].append(
+                        f"learner_error_{idx}_wrong_field_name_for_error:{err_status.split(':', 1)[1]}"
+                    )
+                if _is_non_empty_string(error_text):
+                    item_result["checks"]["error_non_empty"] = True
+                else:
+                    result["fatal_validation_errors"].append(f"learner_error_{idx}_empty_error")
+
+            explanation, exp_status = _infer_field_by_position(item, expected_error_order, "explanation")
+            if exp_status == "missing":
+                result["fatal_validation_errors"].append(f"learner_error_{idx}_missing_explanation")
+            else:
+                if exp_status.startswith("inferred_by_position:"):
+                    result["non_fatal_validation_errors"].append(
+                        f"learner_error_{idx}_wrong_field_name_for_explanation:{exp_status.split(':', 1)[1]}"
+                    )
+                if _is_non_empty_string(explanation):
+                    item_result["checks"]["explanation_non_empty"] = True
+                else:
+                    result["fatal_validation_errors"].append(f"learner_error_{idx}_empty_explanation")
+
+            item_result["valid"] = all(item_result["checks"].values())
+            if not item_result["valid"]:
+                all_learner_errors_tolerant_valid = False
+
+            result["learner_error_checks"].append(item_result)
+
+    result["checks"]["all_learner_errors_tolerant_valid"] = all_learner_errors_tolerant_valid
 
     result["validation_errors"] = (
         result["fatal_validation_errors"] + result["non_fatal_validation_errors"]
