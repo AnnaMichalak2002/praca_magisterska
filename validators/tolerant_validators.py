@@ -683,11 +683,14 @@ def validate_grammar_tolerant(attempt_data: dict) -> dict:
 
         q_result["checks"]["is_dict"] = True
 
-        extracted = _infer_grammar_question_fields_tolerant(
-            q,
-            idx,
-            result["non_fatal_validation_errors"]
-        )
+        infer_errors: list[str] = []
+        extracted = _infer_grammar_question_fields_tolerant(q, idx, infer_errors)
+
+        for err in infer_errors:
+            if _is_non_fatal_tolerant_error(err):
+                result["non_fatal_validation_errors"].append(err)
+            else:
+                result["fatal_validation_errors"].append(err)
 
         question_text = extracted.get("question")
         options = extracted.get("options")
@@ -696,14 +699,22 @@ def validate_grammar_tolerant(attempt_data: dict) -> dict:
         if question_text is None or options is None or answer is None:
             all_required_fields = False
 
-        if _is_non_empty_string(question_text):
+        # question
+        if question_text is None:
+            all_questions_non_empty = False
+        elif _is_non_empty_string(question_text):
             q_result["checks"]["question_non_empty"] = True
             normalized_question_texts.append(question_text.strip().lower())
         else:
             result["fatal_validation_errors"].append(f"question_{idx}_empty_question")
             all_questions_non_empty = False
 
-        if isinstance(options, list):
+        # options
+        if options is None:
+            all_questions_have_3_options = False
+            all_options_non_empty = False
+            all_options_unique = False
+        elif isinstance(options, list):
             q_result["checks"]["options_is_list"] = True
 
             if len(options) == spec["options_count"]:
@@ -733,22 +744,24 @@ def validate_grammar_tolerant(attempt_data: dict) -> dict:
             all_options_unique = False
             options = None
 
-        if _is_non_empty_string(answer):
+        # answer
+        if answer is None:
+            all_answers_non_empty = False
+            all_answers_in_options = False
+        elif _is_non_empty_string(answer):
             q_result["checks"]["answer_non_empty"] = True
+
+            if isinstance(options, list):
+                if answer in options:
+                    q_result["checks"]["answer_in_options"] = True
+                else:
+                    result["fatal_validation_errors"].append(f"question_{idx}_answer_not_in_options")
+                    all_answers_in_options = False
+            else:
+                all_answers_in_options = False
         else:
             result["fatal_validation_errors"].append(f"question_{idx}_empty_answer")
             all_answers_non_empty = False
-
-        if isinstance(options, list) and _is_non_empty_string(answer):
-            if answer in options:
-                q_result["checks"]["answer_in_options"] = True
-            else:
-                result["fatal_validation_errors"].append(f"question_{idx}_answer_not_in_options")
-                all_answers_in_options = False
-        elif isinstance(options, list):
-            # answer empty already counted above
-            all_answers_in_options = False
-        else:
             all_answers_in_options = False
 
         q_result["valid"] = (
