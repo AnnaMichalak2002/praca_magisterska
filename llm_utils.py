@@ -7,8 +7,6 @@ import sys
 OLLAMA_URL_prompt = "http://localhost:11434/api/generate"
 OLLAMA_URL_message = "http://localhost:11434/api/chat"
 
-MODELS = ["llama3.1:8b", "qwen3:14b", "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0","deepseek-r1:8b", "deepseek-r1:14b" ]
-
 def safe_filename(name: str) -> str:
     """Replaces characters that are invalid in file names."""
     return name.replace(":", "_").replace("/", "_")
