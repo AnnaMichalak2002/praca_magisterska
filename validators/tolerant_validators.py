@@ -183,12 +183,18 @@ def _validate_question_tolerant(
     if isinstance(question_number, int):
         checks["question_number_present"] = True
 
-    if _is_non_empty_string(question_text):
+        # question
+    if question_text is None:
+        pass
+    elif _is_non_empty_string(question_text):
         checks["question_non_empty"] = True
     else:
         errors.append(f"question_{idx}_empty_question")
 
-    if isinstance(options, list):
+    # options
+    if options is None:
+        pass
+    elif isinstance(options, list):
         checks["options_is_list"] = True
 
         if len(options) == 4:
@@ -208,13 +214,16 @@ def _validate_question_tolerant(
     else:
         errors.append(f"question_{idx}_options_is_not_list")
 
+    # answer
     if answer is not None:
         checks["answer_present"] = True
 
-    if _is_non_empty_string(answer):
-        checks["answer_non_empty"] = True
+        if _is_non_empty_string(answer):
+            checks["answer_non_empty"] = True
+        else:
+            errors.append(f"question_{idx}_empty_answer")
     else:
-        errors.append(f"question_{idx}_empty_answer")
+        pass
 
     if isinstance(options, list) and _is_non_empty_string(answer):
         if answer in options:
@@ -627,8 +636,19 @@ def validate_grammar_tolerant(attempt_data: dict) -> dict:
         else:
             result["fatal_validation_errors"].append("invalid_level")
 
-    # questions should still be under exact name "questions"
-    questions = response.get("questions")
+    questions, q_status = _infer_top_level_field(response, "questions")
+    if q_status == "missing":
+        result["fatal_validation_errors"].append("missing_questions")
+        result["validation_errors"] = (
+            result["fatal_validation_errors"] + result["non_fatal_validation_errors"]
+        )
+        return result
+    else:
+        if q_status.startswith("inferred:"):
+            result["non_fatal_validation_errors"].append(
+                f"wrong_field_name_for_questions:{q_status.split(':', 1)[1]}"
+            )
+
     if not isinstance(questions, list):
         result["fatal_validation_errors"].append("questions_is_not_list")
         result["validation_errors"] = (
