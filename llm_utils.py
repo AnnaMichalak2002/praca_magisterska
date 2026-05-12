@@ -1,26 +1,43 @@
-import requests
 import json
+import re
 import time
 from pathlib import Path
-import sys
+from typing import Any
 
-OLLAMA_URL_prompt = "http://localhost:11434/api/generate"
-OLLAMA_URL_message = "http://localhost:11434/api/chat"
+import requests
+
+
+OLLAMA_URL_PROMPT = "http://localhost:11434/api/generate"
+OLLAMA_URL_CHAT = "http://localhost:11434/api/chat"
+
+DEFAULT_TIMEOUT = 240
+
+DEFAULT_OPTIONS = {
+    "num_ctx": 2048,
+    "num_predict": 1200,
+    "temperature": 0.0,
+    "top_p": 0.9,
+}
+
+DEFAULT_THINK = False
+
 
 def safe_filename(name: str) -> str:
     """Replaces characters that are invalid in file names."""
-    return name.replace(":", "_").replace("/", "_")
-    #re.sub(r'[<>:"/\\|?*]', "_", name)
+    return re.sub(r'[<>:"/\\|?*]', "_", name)
+
 
 def load_prompt(path: str) -> str:
     """Loads prompt text from a UTF-8 encoded file."""
     return Path(path).read_text(encoding="utf-8")
 
-def save_result(data, filename) -> None:
+
+def save_result(data: dict, filename: str) -> None:
     """Saves result data as formatted JSON, creating parent directories if needed."""
     path = Path(filename)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+
 
 def build_prompt(system: str, user: str) -> str:
     """Builds a prompt in SYSTEM/USER text format."""
@@ -33,8 +50,12 @@ def build_prompt(system: str, user: str) -> str:
     ]
     return "\n".join(parts)
 
+
 def extract_first_json_object(text: str) -> str:
-    """Extracts the first complete JSON object from text, handling nesting, strings, and escaped characters."""
+    """
+    Extracts the first complete JSON object from text,
+    handling nesting, strings, and escaped characters.
+    """
     start = text.find("{")
     if start == -1:
         raise ValueError("No JSON object start found")
@@ -63,7 +84,6 @@ def extract_first_json_object(text: str) -> str:
                 depth += 1
             elif char == "}":
                 depth -= 1
-
                 if depth == 0:
                     return text[start:i + 1]
 
@@ -71,8 +91,11 @@ def extract_first_json_object(text: str) -> str:
 
 
 def clean_json_response(raw_output: str) -> tuple[str, list[str]]:
-    """Cleans raw model output by removing Markdown wrappers, extracting JSON, and recording cleanup steps."""
-    steps = []
+    """
+    Cleans raw model output by removing Markdown wrappers,
+    extracting JSON, and recording cleanup steps.
+    """
+    steps: list[str] = []
     cleaned = raw_output.strip()
 
     if cleaned.startswith("```json"):
@@ -103,134 +126,173 @@ def clean_json_response(raw_output: str) -> tuple[str, list[str]]:
 
     return extracted, steps
 
-def query_model_generate(model: str, system_prompt: str, user_prompt: str, attempt: int | None = None):
+
+def _extract_ollama_metrics(data: dict) -> dict:
+    """
+    Extracts performance and generation metadata returned by Ollama.
+    Values are included as-is when present.
+    """
+    prompt_eval_count = data.get("prompt_eval_count")
+    prompt_eval_duration = data.get("prompt_eval_duration")
+    eval_count = data.get("eval_count")
+    eval_duration = data.get("eval_duration")
+
+    tokens_per_second = None
+    if isinstance(eval_count, int) and isinstance(eval_duration, int) and eval_duration > 0:
+        tokens_per_second = round(eval_count / (eval_duration / 1_000_000_000), 3)
+
+    return {
+        "created_at": data.get("created_at"),
+        "done": data.get("done"),
+        "done_reason": data.get("done_reason"),
+        "total_duration_ns": data.get("total_duration"),
+        "load_duration_ns": data.get("load_duration"),
+        "prompt_eval_count": prompt_eval_count,
+        "prompt_eval_duration_ns": prompt_eval_duration,
+        "eval_count": eval_count,
+        "eval_duration_ns": eval_duration,
+        "tokens_per_second": tokens_per_second,
+    }
+
+
+def _build_base_result(
+    *,
+    attempt: int | None,
+    model: str,
+    endpoint: str,
+    elapsed_seconds: float,
+    options: dict,
+    timeout: int,
+) -> dict:
+    return {
+        "attempt": attempt,
+        "model": model,
+        "endpoint": endpoint,
+        "time": round(elapsed_seconds, 3),
+        "success": False,
+        "response": None,
+        "raw_output": None,
+        "postprocessing_steps": [],
+        "error": None,
+        "request_options": options,
+        "request_timeout_seconds": timeout,
+        "http_status_code": None,
+        "ollama_metrics": {},
+    }
+
+
+def _make_http_error_message(response: requests.Response) -> str:
+    """
+    Returns a readable HTTP error message with response body preview.
+    """
+    try:
+        body_preview = response.text.strip()
+    except Exception:
+        body_preview = ""
+
+    if len(body_preview) > 500:
+        body_preview = body_preview[:500] + "... [truncated]"
+
+    if body_preview:
+        return f"HTTP {response.status_code}: {body_preview}"
+    return f"HTTP {response.status_code}"
+
+
+def query_model_generate(
+    model: str,
+    system_prompt: str,
+    user_prompt: str,
+    attempt: int | None = None,
+    options: dict | None = None,
+    timeout: int = DEFAULT_TIMEOUT,
+):
     """
     Sends a prompt to the Ollama /generate endpoint and attempts to parse the model output as JSON.
-
-    The function builds a combined prompt from the system and user messages, sends it to the model,
-    measures response time, cleans the returned content from Markdown code fences if needed,
-    and validates whether the output is a valid JSON object.
-
-    Returns:
-        dict: A dictionary containing:
-            - attempt: test iteration number,
-            - model: model name,
-            - time: response time in seconds,
-            - success: whether the request and JSON parsing succeeded,
-            - response: parsed JSON response or None,
-            - raw_output: raw model output,
-            - error: error message or None.
     """
-
+    request_options = options.copy() if options is not None else DEFAULT_OPTIONS.copy()
     prompt = build_prompt(system_prompt, user_prompt)
 
     payload = {
         "model": model,
         "prompt": prompt,
-        "stream": False
+        "stream": False,
+        "think": DEFAULT_THINK,
+        "options": request_options,
     }
 
     start = time.perf_counter()
+    result = _build_base_result(
+        attempt=attempt,
+        model=model,
+        endpoint="generate",
+        elapsed_seconds=0.0,
+        options=request_options,
+        timeout=timeout,
+    )
 
     try:
-        response = requests.post(OLLAMA_URL_prompt, json=payload, timeout=600)
-        response.raise_for_status()
+        response = requests.post(OLLAMA_URL_PROMPT, json=payload, timeout=timeout)
+        elapsed = time.perf_counter() - start
+
+        result["time"] = round(elapsed, 3)
+        result["http_status_code"] = response.status_code
+
+        if not response.ok:
+            result["error"] = _make_http_error_message(response)
+            return result
 
         data = response.json()
+        result["ollama_metrics"] = _extract_ollama_metrics(data)
+
         raw_output = data.get("response", "")
+        result["raw_output"] = raw_output
 
         if not raw_output or not raw_output.strip():
-            return {
-                "attempt": attempt,
-                "model": model,
-                "time": round(time.perf_counter() - start, 3),
-                "success": False,
-                "response": None,
-                "raw_output": raw_output,
-                "postprocessing_steps": [],
-                "error": "Model returned empty response"
-            }
+            result["error"] = "Model returned empty response"
+            return result
 
         cleaned_output, postprocessing_steps = clean_json_response(raw_output)
         parsed = json.loads(cleaned_output)
 
-        return {
-            "attempt": attempt,
-            "model": model,
-            "time": round(time.perf_counter() - start, 3),
-            "success": True,
-            "response": parsed,
-            "raw_output": raw_output,
-            "postprocessing_steps": postprocessing_steps,
-            "error": None
-        }
+        result["success"] = True
+        result["response"] = parsed
+        result["postprocessing_steps"] = postprocessing_steps
+        result["error"] = None
+        return result
 
     except requests.exceptions.Timeout:
-        return {
-            "attempt": attempt,
-            "model": model,
-            "time": round(time.perf_counter() - start, 3),
-            "success": False,
-            "response": None,
-            "raw_output": None,
-            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
-            "error": "Request timeout"
-        }
+        result["time"] = round(time.perf_counter() - start, 3)
+        result["error"] = "Request timeout"
+        return result
 
     except requests.exceptions.RequestException as e:
-        return {
-            "attempt": attempt,
-            "model": model,
-            "time": round(time.perf_counter() - start, 3),
-            "success": False,
-            "response": None,
-            "raw_output": None,
-            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
-            "error": f"Request error: {e}"
-        }
+        result["time"] = round(time.perf_counter() - start, 3)
+        result["error"] = f"Request error: {e}"
+        return result
 
     except json.JSONDecodeError as e:
-        return {
-            "attempt": attempt,
-            "model": model,
-            "time": round(time.perf_counter() - start, 3),
-            "success": False,
-            "response": None,
-            "raw_output": raw_output if 'raw_output' in locals() else None,
-            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
-            "error": f"Invalid JSON from model: {e}"
-        }
+        result["time"] = round(time.perf_counter() - start, 3)
+        result["error"] = f"Invalid JSON from model: {e}"
+        return result
 
     except Exception as e:
-        return {
-            "attempt": attempt,
-            "model": model,
-            "time": round(time.perf_counter() - start, 3),
-            "success": False,
-            "response": None,
-            "raw_output": raw_output if 'raw_output' in locals() else None,
-            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
-            "error": f"Unexpected error: {e}"
-        }
-    
-def query_model_chat(model: str, system_prompt: str, user_prompt: str, attempt: int | None = None):
+        result["time"] = round(time.perf_counter() - start, 3)
+        result["error"] = f"Unexpected error: {e}"
+        return result
+
+
+def query_model_chat(
+    model: str,
+    system_prompt: str,
+    user_prompt: str,
+    attempt: int | None = None,
+    options: dict | None = None,
+    timeout: int = DEFAULT_TIMEOUT,
+):
     """
     Sends messages to the Ollama /chat endpoint and attempts to parse the model output as JSON.
-
-    The function sends the system and user prompts in chat format, measures response time,
-    extracts the assistant's message content, removes Markdown code fences if present,
-    and checks whether the returned content can be parsed as valid JSON.
-
-    Returns:
-        dict: A dictionary containing:
-            - attempt: test iteration number,
-            - model: model name,
-            - time: response time in seconds,
-            - success: whether the request and JSON parsing succeeded,
-            - response: parsed JSON response or None,
-            - raw_output: raw model output,
-            - error: error message or None.
     """
+    request_options = options.copy() if options is not None else DEFAULT_OPTIONS.copy()
 
     payload = {
         "model": model,
@@ -238,88 +300,67 @@ def query_model_chat(model: str, system_prompt: str, user_prompt: str, attempt: 
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
-        "stream": False
+        "stream": False,
+        "think": DEFAULT_THINK,
+        "options": request_options,
     }
 
     start = time.perf_counter()
+    result = _build_base_result(
+        attempt=attempt,
+        model=model,
+        endpoint="chat",
+        elapsed_seconds=0.0,
+        options=request_options,
+        timeout=timeout,
+    )
 
     try:
-        response = requests.post(OLLAMA_URL_message, json=payload, timeout=600)
-        response.raise_for_status()
+        response = requests.post(OLLAMA_URL_CHAT, json=payload, timeout=timeout)
+        elapsed = time.perf_counter() - start
+
+        result["time"] = round(elapsed, 3)
+        result["http_status_code"] = response.status_code
+
+        if not response.ok:
+            result["error"] = _make_http_error_message(response)
+            return result
 
         data = response.json()
+        result["ollama_metrics"] = _extract_ollama_metrics(data)
+
         raw_output = data.get("message", {}).get("content", "")
+        result["raw_output"] = raw_output
 
         if not raw_output or not raw_output.strip():
-            return {
-                "attempt": attempt,
-                "model": model,
-                "time": round(time.perf_counter() - start, 3),
-                "success": False,
-                "response": None,
-                "raw_output": raw_output,
-                "postprocessing_steps": [],
-                "error": "Model returned empty response"
-            }
+            result["error"] = "Model returned empty response"
+            return result
 
         cleaned_output, postprocessing_steps = clean_json_response(raw_output)
         parsed = json.loads(cleaned_output)
 
-        return {
-            "attempt": attempt,
-            "model": model,
-            "time": round(time.perf_counter() - start, 3),
-            "success": True,
-            "response": parsed,
-            "raw_output": raw_output,
-            "postprocessing_steps": postprocessing_steps,
-            "error": None
-        }
+        result["success"] = True
+        result["response"] = parsed
+        result["postprocessing_steps"] = postprocessing_steps
+        result["error"] = None
+        return result
 
     except requests.exceptions.Timeout:
-        return {
-            "attempt": attempt,
-            "model": model,
-            "time": round(time.perf_counter() - start, 3),
-            "success": False,
-            "response": None,
-            "raw_output": None,
-            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
-            "error": "Request timeout"
-        }
+        result["time"] = round(time.perf_counter() - start, 3)
+        result["error"] = "Request timeout"
+        return result
 
     except requests.exceptions.RequestException as e:
-        return {
-            "attempt": attempt,
-            "model": model,
-            "time": round(time.perf_counter() - start, 3),
-            "success": False,
-            "response": None,
-            "raw_output": None,
-            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
-            "error": f"Request error: {e}"
-        }
+        result["time"] = round(time.perf_counter() - start, 3)
+        result["error"] = f"Request error: {e}"
+        return result
 
     except json.JSONDecodeError as e:
-        return {
-            "attempt": attempt,
-            "model": model,
-            "time": round(time.perf_counter() - start, 3),
-            "success": False,
-            "response": None,
-            "raw_output": raw_output if 'raw_output' in locals() else None,
-            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
-            "error": f"Invalid JSON from model: {e}"
-        }
+        result["time"] = round(time.perf_counter() - start, 3)
+        result["error"] = f"Invalid JSON from model: {e}"
+        return result
 
     except Exception as e:
-        return {
-            "attempt": attempt,
-            "model": model,
-            "time": round(time.perf_counter() - start, 3),
-            "success": False,
-            "response": None,
-            "raw_output": raw_output if 'raw_output' in locals() else None,
-            "postprocessing_steps": postprocessing_steps if 'postprocessing_steps' in locals() else [],
-            "error": f"Unexpected error: {e}"
-        }
+        result["time"] = round(time.perf_counter() - start, 3)
+        result["error"] = f"Unexpected error: {e}"
+        return result
