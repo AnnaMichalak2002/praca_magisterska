@@ -8,7 +8,6 @@ import threading
 from collections import Counter
 from statistics import mean
 from datetime import datetime
-
 from llm_utils import load_prompt, query_model_chat, query_model_generate, safe_filename, save_result
 
 MODELS = [
@@ -19,7 +18,7 @@ MODELS = [
     "deepseek-r1:8b",
 ]
 
-ATTEMPTS = 2
+ATTEMPTS = 6
 RESUME = True
 LOG_FILE = Path("logs/benchmark.log")
 
@@ -27,7 +26,7 @@ GPU_SAMPLING_ENABLED = True
 GPU_SAMPLE_INTERVAL_SECONDS = 1.0
 
 SLEEP_BETWEEN_ATTEMPTS_SECONDS = 5.0
-SLEEP_BETWEEN_ENDPOINTS_SECONDS = 8.0
+SLEEP_BETWEEN_ENDPOINTS_SECONDS = 0.0
 SLEEP_BETWEEN_MODELS_SECONDS = 12.0
 
 SAVE_GPU_SAMPLES_MODE = "all"
@@ -61,11 +60,30 @@ def log_message(message: str) -> None:
         f.write(full_message + "\n")
 
 
-def run_single_attempt(endpoint: str, model: str, system_prompt: str, user_prompt: str, attempt: int):
+def run_single_attempt(
+    endpoint: str,
+    model: str,
+    system_prompt: str,
+    user_prompt: str,
+    attempt: int,
+    mode_id: str,
+):
     if endpoint == "chat":
-        return query_model_chat(model, system_prompt, user_prompt, attempt=attempt)
+        return query_model_chat(
+            model,
+            system_prompt,
+            user_prompt,
+            attempt=attempt,
+            mode_id=mode_id,
+        )
     elif endpoint == "generate":
-        return query_model_generate(model, system_prompt, user_prompt, attempt=attempt)
+        return query_model_generate(
+            model,
+            system_prompt,
+            user_prompt,
+            attempt=attempt,
+            mode_id=mode_id,
+        )
     else:
         raise ValueError(f"Unknown endpoint: {endpoint}")
 
@@ -155,8 +173,6 @@ def get_ollama_ps_snapshot(model_name: str) -> dict:
         if len(columns) < 6:
             return {
                 "available": False,
-                "raw_line": target_line,
-                "parsed_columns": columns,
                 "error": "unexpected ollama ps format",
             }
 
@@ -175,8 +191,6 @@ def get_ollama_ps_snapshot(model_name: str) -> dict:
             "processor": processor,
             "context": context,
             "until": until,
-            "raw_line": target_line,
-            "parsed_columns": columns,
         }
 
     except Exception as e:
@@ -260,10 +274,17 @@ def collect_gpu_samples_during_run(stop_event: threading.Event, samples: list[di
 def build_gpu_summary(samples: list[dict]) -> dict:
     valid_samples = [s for s in samples if s.get("available")]
 
-    if not valid_samples:
+    active_samples = [
+        s for s in valid_samples
+        if isinstance(s.get("gpu_utilization_percent"), (int, float))
+        and s["gpu_utilization_percent"] > 0
+    ]
+
+    if not active_samples:
         return {
             "sample_count": len(samples),
-            "valid_sample_count": 0,
+            "valid_sample_count": len(valid_samples),
+            "active_sample_count": 0,
             "avg_gpu_utilization_percent": None,
             "max_gpu_utilization_percent": None,
             "avg_memory_used_mib": None,
@@ -275,10 +296,26 @@ def build_gpu_summary(samples: list[dict]) -> dict:
             "estimated_gpu_energy_wh": None,
         }
 
-    gpu_utils = [s["gpu_utilization_percent"] for s in valid_samples if s.get("gpu_utilization_percent") is not None]
-    mem_used = [s["memory_used_mib"] for s in valid_samples if s.get("memory_used_mib") is not None]
-    temps = [s["temperature_c"] for s in valid_samples if s.get("temperature_c") is not None]
-    powers = [s["power_draw_w"] for s in valid_samples if s.get("power_draw_w") is not None]
+    gpu_utils = [
+        s["gpu_utilization_percent"]
+        for s in active_samples
+        if s.get("gpu_utilization_percent") is not None
+    ]
+    mem_used = [
+        s["memory_used_mib"]
+        for s in active_samples
+        if s.get("memory_used_mib") is not None
+    ]
+    temps = [
+        s["temperature_c"]
+        for s in active_samples
+        if s.get("temperature_c") is not None
+    ]
+    powers = [
+        s["power_draw_w"]
+        for s in active_samples
+        if s.get("power_draw_w") is not None
+    ]
 
     estimated_gpu_energy_wh = None
     if powers:
@@ -289,6 +326,7 @@ def build_gpu_summary(samples: list[dict]) -> dict:
     return {
         "sample_count": len(samples),
         "valid_sample_count": len(valid_samples),
+        "active_sample_count": len(active_samples),
         "avg_gpu_utilization_percent": round(mean(gpu_utils), 3) if gpu_utils else None,
         "max_gpu_utilization_percent": max(gpu_utils) if gpu_utils else None,
         "avg_memory_used_mib": round(mean(mem_used), 3) if mem_used else None,
@@ -310,9 +348,9 @@ def build_runtime_summary(endpoint_dir: Path) -> dict:
             "successful_attempts": 0,
             "failed_attempts": 0,
             "success_rate": 0.0,
-            "average_time_seconds": 0.0,
-            "min_time_seconds": None,
-            "max_time_seconds": None,
+            "average_time_seconds_success_only": None,
+            "min_time_seconds_success_only": None,
+            "max_time_seconds_success_only": None,
             "empty_raw_output_count": 0,
             "valid_json_count": 0,
             "invalid_json_count": 0,
@@ -321,16 +359,23 @@ def build_runtime_summary(endpoint_dir: Path) -> dict:
             "postprocessing_steps_counts_success_only": {},
             "avg_tokens_per_second_success_only": None,
             "avg_total_duration_ns_success_only": None,
-            "avg_eval_count_success_only": None,
+            "avg_load_duration_ns_success_only": None,
             "avg_prompt_eval_count_success_only": None,
-            "avg_gpu_utilization_percent": None,
-            "avg_gpu_memory_used_mib": None,
-            "avg_gpu_power_draw_w": None,
-            "avg_gpu_energy_wh": None,
-            "processor_distribution": {},
+            "avg_prompt_eval_duration_ns_success_only": None,
+            "avg_eval_count_success_only": None,
+            "avg_eval_duration_ns_success_only": None,
+            "avg_gpu_utilization_percent_success_only": None,
+            "avg_max_gpu_utilization_percent_success_only": None,
+            "avg_gpu_memory_used_mib_success_only": None,
+            "avg_max_memory_used_mib_success_only": None,
+            "avg_gpu_temperature_c_success_only": None,
+            "avg_max_temperature_c_success_only": None,
+            "avg_gpu_power_draw_w_success_only": None,
+            "avg_max_power_draw_w_success_only": None,
+            "avg_gpu_energy_wh_success_only": None,
         }
 
-    times = []
+    success_times = []
     success_count = 0
     failure_count = 0
     empty_raw_output_count = 0
@@ -342,26 +387,39 @@ def build_runtime_summary(endpoint_dir: Path) -> dict:
 
     tokens_per_second_values = []
     total_duration_values = []
-    eval_count_values = []
+    load_duration_values = []
     prompt_eval_count_values = []
+    prompt_eval_duration_values = []
+    eval_count_values = []
+    eval_duration_values = []
 
     avg_gpu_util_values = []
+    max_gpu_util_values = []
+
     avg_gpu_mem_values = []
+    max_gpu_mem_values = []
+
+    avg_gpu_temp_values = []
+    max_gpu_temp_values = []
+
     avg_gpu_power_values = []
+    max_gpu_power_values = []
+
     gpu_energy_values = []
 
     for file_path in attempt_files:
         with file_path.open("r", encoding="utf-8") as f:
             data = json.load(f)
 
-        time_value = data.get("time")
-        if isinstance(time_value, (int, float)):
-            times.append(time_value)
-
         success = bool(data.get("success"))
+
         if success:
             success_count += 1
             valid_json_count += 1
+
+            time_value = data.get("time")
+            if isinstance(time_value, (int, float)):
+                success_times.append(time_value)
         else:
             failure_count += 1
             invalid_json_count += 1
@@ -380,60 +438,100 @@ def build_runtime_summary(endpoint_dir: Path) -> dict:
                 postprocessing_counter_success_only[step] += 1
 
         ollama_metrics = data.get("ollama_metrics", {}) or {}
+        gpu_summary = data.get("gpu_summary", {}) or {}
+
         if success:
             if isinstance(ollama_metrics.get("tokens_per_second"), (int, float)):
                 tokens_per_second_values.append(ollama_metrics["tokens_per_second"])
+
             if isinstance(ollama_metrics.get("total_duration_ns"), int):
                 total_duration_values.append(ollama_metrics["total_duration_ns"])
-            if isinstance(ollama_metrics.get("eval_count"), int):
-                eval_count_values.append(ollama_metrics["eval_count"])
+
+            if isinstance(ollama_metrics.get("load_duration_ns"), int):
+                load_duration_values.append(ollama_metrics["load_duration_ns"])
+
             if isinstance(ollama_metrics.get("prompt_eval_count"), int):
                 prompt_eval_count_values.append(ollama_metrics["prompt_eval_count"])
 
-        gpu_summary = data.get("gpu_summary", {}) or {}
-        if isinstance(gpu_summary.get("avg_gpu_utilization_percent"), (int, float)):
-            avg_gpu_util_values.append(gpu_summary["avg_gpu_utilization_percent"])
-        if isinstance(gpu_summary.get("avg_memory_used_mib"), (int, float)):
-            avg_gpu_mem_values.append(gpu_summary["avg_memory_used_mib"])
-        if isinstance(gpu_summary.get("avg_power_draw_w"), (int, float)):
-            avg_gpu_power_values.append(gpu_summary["avg_power_draw_w"])
-        if isinstance(gpu_summary.get("estimated_gpu_energy_wh"), (int, float)):
-            gpu_energy_values.append(gpu_summary["estimated_gpu_energy_wh"])
+            if isinstance(ollama_metrics.get("prompt_eval_duration_ns"), int):
+                prompt_eval_duration_values.append(ollama_metrics["prompt_eval_duration_ns"])
+
+            if isinstance(ollama_metrics.get("eval_count"), int):
+                eval_count_values.append(ollama_metrics["eval_count"])
+
+            if isinstance(ollama_metrics.get("eval_duration_ns"), int):
+                eval_duration_values.append(ollama_metrics["eval_duration_ns"])
+
+            if isinstance(gpu_summary.get("avg_gpu_utilization_percent"), (int, float)):
+                avg_gpu_util_values.append(gpu_summary["avg_gpu_utilization_percent"])
+            if isinstance(gpu_summary.get("max_gpu_utilization_percent"), (int, float)):
+                max_gpu_util_values.append(gpu_summary["max_gpu_utilization_percent"])
+
+            if isinstance(gpu_summary.get("avg_memory_used_mib"), (int, float)):
+                avg_gpu_mem_values.append(gpu_summary["avg_memory_used_mib"])
+            if isinstance(gpu_summary.get("max_memory_used_mib"), (int, float)):
+                max_gpu_mem_values.append(gpu_summary["max_memory_used_mib"])
+
+            if isinstance(gpu_summary.get("avg_temperature_c"), (int, float)):
+                avg_gpu_temp_values.append(gpu_summary["avg_temperature_c"])
+            if isinstance(gpu_summary.get("max_temperature_c"), (int, float)):
+                max_gpu_temp_values.append(gpu_summary["max_temperature_c"])
+
+            if isinstance(gpu_summary.get("avg_power_draw_w"), (int, float)):
+                avg_gpu_power_values.append(gpu_summary["avg_power_draw_w"])
+            if isinstance(gpu_summary.get("max_power_draw_w"), (int, float)):
+                max_gpu_power_values.append(gpu_summary["max_power_draw_w"])
+
+            if isinstance(gpu_summary.get("estimated_gpu_energy_wh"), (int, float)):
+                gpu_energy_values.append(gpu_summary["estimated_gpu_energy_wh"])
 
     return {
         "total_attempts": len(attempt_files),
         "successful_attempts": success_count,
         "failed_attempts": failure_count,
         "success_rate": round(success_count / len(attempt_files), 4),
-        "average_time_seconds": round(mean(times), 4) if times else 0.0,
-        "min_time_seconds": min(times) if times else None,
-        "max_time_seconds": max(times) if times else None,
+        "average_time_seconds_success_only": round(mean(success_times), 4) if success_times else None,
+        "min_time_seconds_success_only": min(success_times) if success_times else None,
+        "max_time_seconds_success_only": max(success_times) if success_times else None,
         "empty_raw_output_count": empty_raw_output_count,
         "valid_json_count": valid_json_count,
         "invalid_json_count": invalid_json_count,
         "error_types": dict(error_counter),
         "postprocessing_steps_counts_all": dict(postprocessing_counter_all),
         "postprocessing_steps_counts_success_only": dict(postprocessing_counter_success_only),
+
         "avg_tokens_per_second_success_only": round(mean(tokens_per_second_values), 4) if tokens_per_second_values else None,
         "avg_total_duration_ns_success_only": round(mean(total_duration_values), 2) if total_duration_values else None,
-        "avg_eval_count_success_only": round(mean(eval_count_values), 4) if eval_count_values else None,
+        "avg_load_duration_ns_success_only": round(mean(load_duration_values), 2) if load_duration_values else None,
         "avg_prompt_eval_count_success_only": round(mean(prompt_eval_count_values), 4) if prompt_eval_count_values else None,
-        "avg_gpu_utilization_percent": round(mean(avg_gpu_util_values), 4) if avg_gpu_util_values else None,
-        "avg_gpu_memory_used_mib": round(mean(avg_gpu_mem_values), 4) if avg_gpu_mem_values else None,
-        "avg_gpu_power_draw_w": round(mean(avg_gpu_power_values), 4) if avg_gpu_power_values else None,
-        "avg_gpu_energy_wh": round(mean(gpu_energy_values), 6) if gpu_energy_values else None,
+        "avg_prompt_eval_duration_ns_success_only": round(mean(prompt_eval_duration_values), 2) if prompt_eval_duration_values else None,
+        "avg_eval_count_success_only": round(mean(eval_count_values), 4) if eval_count_values else None,
+        "avg_eval_duration_ns_success_only": round(mean(eval_duration_values), 2) if eval_duration_values else None,
+
+        "avg_gpu_utilization_percent_success_only": round(mean(avg_gpu_util_values), 4) if avg_gpu_util_values else None,
+        "avg_max_gpu_utilization_percent_success_only": round(mean(max_gpu_util_values), 4) if max_gpu_util_values else None,
+
+        "avg_gpu_memory_used_mib_success_only": round(mean(avg_gpu_mem_values), 4) if avg_gpu_mem_values else None,
+        "avg_max_memory_used_mib_success_only": round(mean(max_gpu_mem_values), 4) if max_gpu_mem_values else None,
+
+        "avg_gpu_temperature_c_success_only": round(mean(avg_gpu_temp_values), 4) if avg_gpu_temp_values else None,
+        "avg_max_temperature_c_success_only": round(mean(max_gpu_temp_values), 4) if max_gpu_temp_values else None,
+
+        "avg_gpu_power_draw_w_success_only": round(mean(avg_gpu_power_values), 4) if avg_gpu_power_values else None,
+        "avg_max_power_draw_w_success_only": round(mean(max_gpu_power_values), 4) if max_gpu_power_values else None,
+
+        "avg_gpu_energy_wh_success_only": round(mean(gpu_energy_values), 6) if gpu_energy_values else None,
     }
 
-
-def save_runtime_summary(endpoint_dir: Path, model: str) -> None:
+def save_runtime_summary(endpoint_dir: Path, ollama_ps_snapshot: dict | None = None) -> None:
     summary = build_runtime_summary(endpoint_dir)
 
-    try:
-        summary["ollama_ps_snapshot"] = get_ollama_ps_snapshot(model)
-    except Exception as e:
+    if ollama_ps_snapshot is not None:
+        summary["ollama_ps_snapshot"] = ollama_ps_snapshot
+    else:
         summary["ollama_ps_snapshot"] = {
             "available": False,
-            "error": f"summary snapshot exception: {e}",
+            "error": "snapshot_not_collected_during_attempts",
         }
 
     save_result(summary, str(endpoint_dir / "summary_runtime.json"))
@@ -446,6 +544,7 @@ def execute_attempt_with_monitoring(
     system_prompt: str,
     user_prompt: str,
     attempt: int,
+    mode_id: str,
 ) -> dict:
     gpu_samples = []
     stop_event = threading.Event()
@@ -466,6 +565,7 @@ def execute_attempt_with_monitoring(
             system_prompt=system_prompt,
             user_prompt=user_prompt,
             attempt=attempt,
+            mode_id=mode_id,
         )
     finally:
         if GPU_SAMPLING_ENABLED:
@@ -488,7 +588,9 @@ def run_test_cerf():
 
     system_prompt = load_prompt("prompts/test/system_test.txt")
     num_sections = 7
-    endpoints = ["chat", "generate"]
+    #endpoints = ["chat", "generate"]
+
+    endpoints = ["chat"]
 
     for model_idx, model in enumerate(MODELS):
         safe_model = safe_filename(model)
@@ -508,6 +610,7 @@ def run_test_cerf():
                 )
 
                 endpoint_had_executed_attempt = False
+                endpoint_ollama_ps_snapshot = None
 
                 for attempt in range(1, ATTEMPTS + 1):
                     output_path = endpoint_dir / f"attempt_{attempt:03d}.json"
@@ -530,8 +633,12 @@ def run_test_cerf():
                                 model=model,
                                 system_prompt=system_prompt,
                                 user_prompt=user_prompt,
-                                attempt=attempt
+                                attempt=attempt,
+                                mode_id=f"test_section_{section_num}",
                             )
+
+                            if endpoint_ollama_ps_snapshot is None and result.get("success") is True:
+                                endpoint_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
 
                             result["mode_id"] = f"test_section_{section_num}"
                             result["endpoint"] = endpoint
@@ -564,7 +671,7 @@ def run_test_cerf():
                     if attempt_executed and attempt < ATTEMPTS:
                         sleep_between_attempts()
 
-                save_runtime_summary(endpoint_dir, model)
+                save_runtime_summary(endpoint_dir, endpoint_ollama_ps_snapshot)
                 log_message(
                     f"SUMMARY SAVED | model={model} | section={section_num} | endpoint={endpoint}"
                 )
@@ -604,7 +711,8 @@ def run_grammar():
         },
     ]
 
-    endpoints = ["chat", "generate"]
+    #endpoints = ["chat", "generate"]
+    endpoints = ["chat"]
 
     for model_idx, model in enumerate(MODELS):
         safe_model = safe_filename(model)
@@ -628,6 +736,7 @@ def run_grammar():
                 )
 
                 endpoint_had_executed_attempt = False
+                endpoint_ollama_ps_snapshot = None
 
                 for attempt in range(1, ATTEMPTS + 1):
                     output_path = endpoint_dir / f"attempt_{attempt:03d}.json"
@@ -650,8 +759,12 @@ def run_grammar():
                                 model=model,
                                 system_prompt=system_prompt,
                                 user_prompt=user_prompt,
-                                attempt=attempt
+                                attempt=attempt,
+                                mode_id=mode_id,
                             )
+
+                            if endpoint_ollama_ps_snapshot is None and result.get("success") is True:
+                                endpoint_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
 
                             result["mode_id"] = mode_id
                             result["endpoint"] = endpoint
@@ -684,7 +797,7 @@ def run_grammar():
                     if attempt_executed and attempt < ATTEMPTS:
                         sleep_between_attempts()
 
-                save_runtime_summary(endpoint_dir, model)
+                save_runtime_summary(endpoint_dir, endpoint_ollama_ps_snapshot)
                 log_message(
                     f"SUMMARY SAVED | model={model} | mode={mode_id} | endpoint={endpoint}"
                 )
@@ -707,8 +820,10 @@ def run_writing():
 
     system_prompt = load_prompt(system_prompt_path)
     user_prompt = load_prompt(user_prompt_path)
-    endpoints = ["chat", "generate"]
+    
+    #endpoints = ["chat", "generate"]
 
+    endpoints = ["chat"]
     for model_idx, model in enumerate(MODELS):
         safe_model = safe_filename(model)
         log_message(f"MODEL STARTED | {model}")
@@ -722,6 +837,7 @@ def run_writing():
                 f"MODE STARTED | model={model} | mode={mode_id} | endpoint={endpoint}"
             )
             endpoint_had_executed_attempt = False
+            endpoint_ollama_ps_snapshot = None
 
             for attempt in range(1, ATTEMPTS + 1):
                 output_path = endpoint_dir / f"attempt_{attempt:03d}.json"
@@ -733,6 +849,7 @@ def run_writing():
                     attempt_executed = True
                     endpoint_had_executed_attempt = True
                     model_had_executed_attempt = True
+
                     log_message(
                         f"RUN | model={model} | mode={mode_id} | endpoint={endpoint} | attempt={attempt}"
                     )
@@ -743,9 +860,13 @@ def run_writing():
                             model=model,
                             system_prompt=system_prompt,
                             user_prompt=user_prompt,
-                            attempt=attempt
+                            attempt=attempt,
+                            mode_id=mode_id,
                         )
 
+                        if endpoint_ollama_ps_snapshot is None and result.get("success") is True:
+                            endpoint_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
+                        
                         result["mode_id"] = mode_id
                         result["endpoint"] = endpoint
                         result["system_prompt_path"] = system_prompt_path
@@ -777,7 +898,7 @@ def run_writing():
                 if attempt_executed and attempt < ATTEMPTS:
                     sleep_between_attempts()
 
-            save_runtime_summary(endpoint_dir, model)
+            save_runtime_summary(endpoint_dir, endpoint_ollama_ps_snapshot)
             log_message(
                 f"SUMMARY SAVED | model={model} | mode={mode_id} | endpoint={endpoint}"
             )
@@ -817,7 +938,9 @@ def run_vocabulary():
         },
     ]
 
-    endpoints = ["chat", "generate"]
+    #endpoints = ["chat", "generate"]
+
+    endpoints = ["chat"]
 
     for model_idx, model in enumerate(MODELS):
         safe_model = safe_filename(model)
@@ -841,6 +964,7 @@ def run_vocabulary():
                 )
 
                 endpoint_had_executed_attempt = False
+                endpoint_ollama_ps_snapshot = None
                 
                 for attempt in range(1, ATTEMPTS + 1):
                     output_path = endpoint_dir / f"attempt_{attempt:03d}.json"
@@ -863,8 +987,12 @@ def run_vocabulary():
                                 model=model,
                                 system_prompt=system_prompt,
                                 user_prompt=user_prompt,
-                                attempt=attempt
+                                attempt=attempt,
+                                mode_id=mode_id,
                             )
+
+                            if endpoint_ollama_ps_snapshot is None and result.get("success") is True:
+                                endpoint_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
 
                             result["mode_id"] = mode_id
                             result["endpoint"] = endpoint
@@ -897,7 +1025,7 @@ def run_vocabulary():
                     if attempt_executed and attempt < ATTEMPTS:
                         sleep_between_attempts()
 
-                save_runtime_summary(endpoint_dir, model)
+                save_runtime_summary(endpoint_dir, endpoint_ollama_ps_snapshot)
                 log_message(
                     f"SUMMARY SAVED | model={model} | mode={mode_id} | endpoint={endpoint}"
                 )
@@ -914,10 +1042,10 @@ def run_vocabulary():
 def main():
     #run_vocabulary()
     #run_grammar()
-    #run_test_cerf()
     run_writing()
+    #run_test_cerf()
     #run_grammar()
-    run_vocabulary()
+    #run_vocabulary()
 
 
 if __name__ == "__main__":

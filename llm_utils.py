@@ -3,24 +3,63 @@ import re
 import time
 from pathlib import Path
 from typing import Any
-
 import requests
 
 
 OLLAMA_URL_PROMPT = "http://localhost:11434/api/generate"
 OLLAMA_URL_CHAT = "http://localhost:11434/api/chat"
 
-DEFAULT_TIMEOUT = 240
+DEFAULT_TIMEOUT = 120
 
-DEFAULT_OPTIONS = {
+TEST_CEFR_OPTIONS = {
+    "num_ctx": 2048,
+    "num_predict": 2000,
+    "temperature": 0.4,
+    "top_p": 0.9,
+}
+
+WRITING_OPTIONS = {
     "num_ctx": 2048,
     "num_predict": 1200,
     "temperature": 0.0,
     "top_p": 0.9,
 }
 
+GRAMMAR_OPTIONS = {
+    "num_ctx": 2048,
+    "num_predict": 1500,
+    "temperature": 0.3,
+    "top_p": 0.9,
+}
+
+VOCABULARY_OPTIONS = {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9,
+}
+
+DEFAULT_OPTIONS = TEST_CEFR_OPTIONS.copy()
+
 DEFAULT_THINK = False
 
+def get_options_for_mode(mode_id: str | None) -> dict:
+    if not mode_id:
+        return DEFAULT_OPTIONS.copy()
+
+    if mode_id.startswith("test_section_"):
+        return TEST_CEFR_OPTIONS.copy()
+
+    if mode_id == "writing":
+        return WRITING_OPTIONS.copy()
+
+    if mode_id.startswith("grammar_"):
+        return GRAMMAR_OPTIONS.copy()
+
+    if mode_id.startswith("vocabulary_"):
+        return VOCABULARY_OPTIONS.copy()
+
+    return DEFAULT_OPTIONS.copy()
 
 def safe_filename(name: str) -> str:
     """Replaces characters that are invalid in file names."""
@@ -203,13 +242,14 @@ def query_model_generate(
     system_prompt: str,
     user_prompt: str,
     attempt: int | None = None,
+    mode_id: str | None = None,
     options: dict | None = None,
     timeout: int = DEFAULT_TIMEOUT,
 ):
     """
     Sends a prompt to the Ollama /generate endpoint and attempts to parse the model output as JSON.
     """
-    request_options = options.copy() if options is not None else DEFAULT_OPTIONS.copy()
+    request_options = options.copy() if options is not None else get_options_for_mode(mode_id)
     prompt = build_prompt(system_prompt, user_prompt)
 
     payload = {
@@ -286,13 +326,14 @@ def query_model_chat(
     system_prompt: str,
     user_prompt: str,
     attempt: int | None = None,
+    mode_id: str | None = None,
     options: dict | None = None,
     timeout: int = DEFAULT_TIMEOUT,
 ):
     """
     Sends messages to the Ollama /chat endpoint and attempts to parse the model output as JSON.
     """
-    request_options = options.copy() if options is not None else DEFAULT_OPTIONS.copy()
+    request_options = options.copy() if options is not None else get_options_for_mode(mode_id)
 
     payload = {
         "model": model,
