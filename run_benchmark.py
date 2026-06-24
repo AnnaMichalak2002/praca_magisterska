@@ -18,7 +18,7 @@ MODELS = [
     "deepseek-r1:8b",
 ]
 
-ATTEMPTS = 6
+ATTEMPTS = 7
 RESUME = True
 LOG_FILE = Path("logs/benchmark.log")
 
@@ -357,6 +357,7 @@ def build_runtime_summary(endpoint_dir: Path) -> dict:
             "error_types": {},
             "postprocessing_steps_counts_all": {},
             "postprocessing_steps_counts_success_only": {},
+            "done_reason_counts_success_only": {},
             "avg_tokens_per_second_success_only": None,
             "avg_total_duration_ns_success_only": None,
             "avg_load_duration_ns_success_only": None,
@@ -384,6 +385,7 @@ def build_runtime_summary(endpoint_dir: Path) -> dict:
     error_counter = Counter()
     postprocessing_counter_all = Counter()
     postprocessing_counter_success_only = Counter()
+    done_reason_counter_success_only = Counter()
 
     tokens_per_second_values = []
     total_duration_values = []
@@ -441,6 +443,10 @@ def build_runtime_summary(endpoint_dir: Path) -> dict:
         gpu_summary = data.get("gpu_summary", {}) or {}
 
         if success:
+            done_reason = ollama_metrics.get("done_reason")
+            if isinstance(done_reason, str) and done_reason.strip():
+                done_reason_counter_success_only[done_reason.strip()] += 1
+
             if isinstance(ollama_metrics.get("tokens_per_second"), (int, float)):
                 tokens_per_second_values.append(ollama_metrics["tokens_per_second"])
 
@@ -499,6 +505,7 @@ def build_runtime_summary(endpoint_dir: Path) -> dict:
         "error_types": dict(error_counter),
         "postprocessing_steps_counts_all": dict(postprocessing_counter_all),
         "postprocessing_steps_counts_success_only": dict(postprocessing_counter_success_only),
+        "done_reason_counts_success_only": dict(done_reason_counter_success_only),
 
         "avg_tokens_per_second_success_only": round(mean(tokens_per_second_values), 4) if tokens_per_second_values else None,
         "avg_total_duration_ns_success_only": round(mean(total_duration_values), 2) if total_duration_values else None,
