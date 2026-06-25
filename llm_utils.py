@@ -5,9 +5,7 @@ from pathlib import Path
 from typing import Any
 import requests
 
-
-OLLAMA_URL_PROMPT = "http://localhost:11434/api/generate"
-OLLAMA_URL_CHAT = "http://localhost:11434/api/chat"
+OLLAMA_URL = "http://localhost:11434/api/chat"
 
 DEFAULT_TIMEOUT = 120
 
@@ -65,29 +63,15 @@ def safe_filename(name: str) -> str:
     """Replaces characters that are invalid in file names."""
     return re.sub(r'[<>:"/\\|?*]', "_", name)
 
-
 def load_prompt(path: str) -> str:
     """Loads prompt text from a UTF-8 encoded file."""
     return Path(path).read_text(encoding="utf-8")
-
 
 def save_result(data: dict, filename: str) -> None:
     """Saves result data as formatted JSON, creating parent directories if needed."""
     path = Path(filename)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
-
-
-def build_prompt(system: str, user: str) -> str:
-    """Builds a prompt in SYSTEM/USER text format."""
-    parts = [
-        "SYSTEM:",
-        system.strip(),
-        "",
-        "USER:",
-        user.strip(),
-    ]
-    return "\n".join(parts)
 
 
 def extract_first_json_object(text: str) -> str:
@@ -128,7 +112,6 @@ def extract_first_json_object(text: str) -> str:
 
     raise ValueError("No complete JSON object found")
 
-
 def clean_json_response(raw_output: str) -> tuple[str, list[str]]:
     """
     Cleans raw model output by removing Markdown wrappers,
@@ -165,7 +148,6 @@ def clean_json_response(raw_output: str) -> tuple[str, list[str]]:
 
     return extracted, steps
 
-
 def _extract_ollama_metrics(data: dict) -> dict:
     """
     Extracts performance and generation metadata returned by Ollama.
@@ -193,12 +175,10 @@ def _extract_ollama_metrics(data: dict) -> dict:
         "tokens_per_second": tokens_per_second,
     }
 
-
 def _build_base_result(
     *,
     attempt: int | None,
     model: str,
-    endpoint: str,
     elapsed_seconds: float,
     options: dict,
     timeout: int,
@@ -206,7 +186,7 @@ def _build_base_result(
     return {
         "attempt": attempt,
         "model": model,
-        "endpoint": endpoint,
+        "endpoint": "chat",
         "time": round(elapsed_seconds, 3),
         "success": False,
         "response": None,
@@ -218,7 +198,6 @@ def _build_base_result(
         "http_status_code": None,
         "ollama_metrics": {},
     }
-
 
 def _make_http_error_message(response: requests.Response) -> str:
     """
@@ -235,91 +214,6 @@ def _make_http_error_message(response: requests.Response) -> str:
     if body_preview:
         return f"HTTP {response.status_code}: {body_preview}"
     return f"HTTP {response.status_code}"
-
-
-def query_model_generate(
-    model: str,
-    system_prompt: str,
-    user_prompt: str,
-    attempt: int | None = None,
-    mode_id: str | None = None,
-    options: dict | None = None,
-    timeout: int = DEFAULT_TIMEOUT,
-):
-    """
-    Sends a prompt to the Ollama /generate endpoint and attempts to parse the model output as JSON.
-    """
-    request_options = options.copy() if options is not None else get_options_for_mode(mode_id)
-    prompt = build_prompt(system_prompt, user_prompt)
-
-    payload = {
-        "model": model,
-        "prompt": prompt,
-        "stream": False,
-        "think": DEFAULT_THINK,
-        "options": request_options,
-    }
-
-    start = time.perf_counter()
-    result = _build_base_result(
-        attempt=attempt,
-        model=model,
-        endpoint="generate",
-        elapsed_seconds=0.0,
-        options=request_options,
-        timeout=timeout,
-    )
-
-    try:
-        response = requests.post(OLLAMA_URL_PROMPT, json=payload, timeout=timeout)
-        elapsed = time.perf_counter() - start
-
-        result["time"] = round(elapsed, 3)
-        result["http_status_code"] = response.status_code
-
-        if not response.ok:
-            result["error"] = _make_http_error_message(response)
-            return result
-
-        data = response.json()
-        result["ollama_metrics"] = _extract_ollama_metrics(data)
-
-        raw_output = data.get("response", "")
-        result["raw_output"] = raw_output
-
-        if not raw_output or not raw_output.strip():
-            result["error"] = "Model returned empty response"
-            return result
-
-        cleaned_output, postprocessing_steps = clean_json_response(raw_output)
-        parsed = json.loads(cleaned_output)
-
-        result["success"] = True
-        result["response"] = parsed
-        result["postprocessing_steps"] = postprocessing_steps
-        result["error"] = None
-        return result
-
-    except requests.exceptions.Timeout:
-        result["time"] = round(time.perf_counter() - start, 3)
-        result["error"] = "Request timeout"
-        return result
-
-    except requests.exceptions.RequestException as e:
-        result["time"] = round(time.perf_counter() - start, 3)
-        result["error"] = f"Request error: {e}"
-        return result
-
-    except json.JSONDecodeError as e:
-        result["time"] = round(time.perf_counter() - start, 3)
-        result["error"] = f"Invalid JSON from model: {e}"
-        return result
-
-    except Exception as e:
-        result["time"] = round(time.perf_counter() - start, 3)
-        result["error"] = f"Unexpected error: {e}"
-        return result
-
 
 def query_model_chat(
     model: str,
@@ -350,14 +244,13 @@ def query_model_chat(
     result = _build_base_result(
         attempt=attempt,
         model=model,
-        endpoint="chat",
         elapsed_seconds=0.0,
         options=request_options,
         timeout=timeout,
     )
 
     try:
-        response = requests.post(OLLAMA_URL_CHAT, json=payload, timeout=timeout)
+        response = requests.post(OLLAMA_URL, json=payload, timeout=timeout)
         elapsed = time.perf_counter() - start
 
         result["time"] = round(elapsed, 3)

@@ -63,6 +63,12 @@ def normalize_validation_error(error: str) -> str:
 
         "invalid_question_number",
         "word_present_in_options",
+
+        "wrong_field_name_for_definition",
+        "missing_definition",
+        "empty_definition",
+        "duplicate_definition",
+        "definition_present_in_options",
     ]
 
     for pattern in question_patterns:
@@ -125,7 +131,7 @@ def compact_validation_result(item: dict) -> dict:
         "attempt_file": item.get("attempt_file"),
         "tolerant_valid": item.get("tolerant_valid"),
         "recoverable": item.get("recoverable"),
-        "validation_errors": item.get("validation_errors", []),
+        #"validation_errors": item.get("validation_errors", []),
         "fatal_validation_errors": item.get("fatal_validation_errors", []),
         "non_fatal_validation_errors": item.get("non_fatal_validation_errors", []),
     }
@@ -214,17 +220,17 @@ def build_tolerant_summary(validation_results: list[dict]) -> dict:
         
         "fatal_error_counts_normalized": dict(fatal_normalized_error_counter),
         "non_fatal_error_counts_normalized": dict(non_fatal_normalized_error_counter),
-        "validation_error_counts_normalized": dict(normalized_error_counter),
+        #"validation_error_counts_normalized": dict(normalized_error_counter),
         #"fatal_error_counts_raw": dict(fatal_raw_error_counter),
         #"non_fatal_error_counts_raw": dict(non_fatal_raw_error_counter),
         #"validation_error_counts_raw": dict(raw_error_counter),
     }
 
 
-def validate_endpoint_dir_tolerant(endpoint_dir: Path) -> None:
+def validate_result_dir_tolerant(result_dir: Path) -> None:
     validation_results = []
 
-    for attempt_file in sorted(endpoint_dir.glob("attempt_*.json")):
+    for attempt_file in sorted(result_dir.glob("attempt_*.json")):
         try:
             attempt_data = load_json(attempt_file)
             mode_id = attempt_data.get("mode_id")
@@ -259,9 +265,9 @@ def validate_endpoint_dir_tolerant(endpoint_dir: Path) -> None:
             validation_results.append({
                 "attempt_file": attempt_file.name,
                 "attempt": None,
-                "mode_id": endpoint_dir.parent.parent.name,
-                "model": endpoint_dir.parent.name,
-                "endpoint": endpoint_dir.name,
+                "mode_id": result_dir.parent.name,
+                "model": result_dir.name,
+                "endpoint": "chat",
                 "success": False,
                 "tolerant_valid": False,
                 "recoverable": False,
@@ -272,33 +278,33 @@ def validate_endpoint_dir_tolerant(endpoint_dir: Path) -> None:
             })
 
     compact_results = [compact_validation_result(x) for x in validation_results]
-    save_result(compact_results, str(endpoint_dir / "validation_tolerant.json"))
+    save_result(compact_results, str(result_dir / "validation_tolerant.json"))
 
     summary = build_tolerant_summary(validation_results)
-    save_result(summary, str(endpoint_dir / "summary_tolerant.json"))
+    save_result(summary, str(result_dir / "summary_tolerant.json"))
 
 
 def main():
     root = Path("results")
 
-    endpoint_dirs = []
+    result_dirs = []
     for path in root.rglob("*"):
-        if path.is_dir() and path.name in {"chat", "generate"}:
-            mode_dir_name = path.parent.parent.name
+        if path.is_dir() and any(path.glob("attempt_*.json")):
+            mode_dir_name = path.parent.name
             if (
                 is_test_mode(mode_dir_name)
                 or is_grammar_mode(mode_dir_name)
                 or is_writing_mode(mode_dir_name)
                 or is_vocabulary_mode(mode_dir_name)
             ):
-                endpoint_dirs.append(path)
+                result_dirs.append(path)
 
     log_message("=== TOLERANT VALIDATION STARTED ===")
 
-    for endpoint_dir in sorted(endpoint_dirs):
-        log_message(f"VALIDATING TOLERANT | {endpoint_dir}")
-        validate_endpoint_dir_tolerant(endpoint_dir)
-        log_message(f"TOLERANT SUMMARY SAVED | {endpoint_dir}")
+    for result_dir in sorted(result_dirs):
+        log_message(f"VALIDATING TOLERANT | {result_dir}")
+        validate_result_dir_tolerant(result_dir)
+        log_message(f"TOLERANT SUMMARY SAVED | {result_dir}")
 
     log_message("=== TOLERANT VALIDATION FINISHED ===")
 

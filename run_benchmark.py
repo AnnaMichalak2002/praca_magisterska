@@ -8,7 +8,7 @@ import threading
 from collections import Counter
 from statistics import mean
 from datetime import datetime
-from llm_utils import load_prompt, query_model_chat, query_model_generate, safe_filename, save_result
+from llm_utils import load_prompt, query_model_chat, safe_filename, save_result
 
 MODELS = [
     "ministral-3:3b",
@@ -18,7 +18,7 @@ MODELS = [
     "deepseek-r1:8b",
 ]
 
-ATTEMPTS = 7
+ATTEMPTS = 2
 RESUME = True
 LOG_FILE = Path("logs/benchmark.log")
 
@@ -26,7 +26,6 @@ GPU_SAMPLING_ENABLED = True
 GPU_SAMPLE_INTERVAL_SECONDS = 1.0
 
 SLEEP_BETWEEN_ATTEMPTS_SECONDS = 5.0
-SLEEP_BETWEEN_ENDPOINTS_SECONDS = 0.0
 SLEEP_BETWEEN_MODELS_SECONDS = 12.0
 
 SAVE_GPU_SAMPLES_MODE = "all"
@@ -43,11 +42,6 @@ def should_save_gpu_samples(attempt: int) -> bool:
 def sleep_between_attempts():
     time.sleep(SLEEP_BETWEEN_ATTEMPTS_SECONDS)
 
-
-def sleep_between_endpoints():
-    time.sleep(SLEEP_BETWEEN_ENDPOINTS_SECONDS)
-
-
 def sleep_between_models():
     time.sleep(SLEEP_BETWEEN_MODELS_SECONDS)
 
@@ -61,31 +55,19 @@ def log_message(message: str) -> None:
 
 
 def run_single_attempt(
-    endpoint: str,
     model: str,
     system_prompt: str,
     user_prompt: str,
     attempt: int,
     mode_id: str,
 ):
-    if endpoint == "chat":
-        return query_model_chat(
-            model,
-            system_prompt,
-            user_prompt,
-            attempt=attempt,
-            mode_id=mode_id,
-        )
-    elif endpoint == "generate":
-        return query_model_generate(
-            model,
-            system_prompt,
-            user_prompt,
-            attempt=attempt,
-            mode_id=mode_id,
-        )
-    else:
-        raise ValueError(f"Unknown endpoint: {endpoint}")
+    return query_model_chat(
+        model,
+        system_prompt,
+        user_prompt,
+        attempt=attempt,
+        mode_id=mode_id,
+    )
 
 
 def normalize_error(error: str | None) -> str:
@@ -339,8 +321,8 @@ def build_gpu_summary(samples: list[dict]) -> dict:
     }
 
 
-def build_runtime_summary(endpoint_dir: Path) -> dict:
-    attempt_files = sorted(endpoint_dir.glob("attempt_*.json"))
+def build_runtime_summary(result_dir: Path) -> dict:
+    attempt_files = sorted(result_dir.glob("attempt_*.json"))
 
     if not attempt_files:
         return {
@@ -530,8 +512,8 @@ def build_runtime_summary(endpoint_dir: Path) -> dict:
         "avg_gpu_energy_wh_success_only": round(mean(gpu_energy_values), 6) if gpu_energy_values else None,
     }
 
-def save_runtime_summary(endpoint_dir: Path, ollama_ps_snapshot: dict | None = None) -> None:
-    summary = build_runtime_summary(endpoint_dir)
+def save_runtime_summary(result_dir: Path, ollama_ps_snapshot: dict | None = None) -> None:
+    summary = build_runtime_summary(result_dir)
 
     if ollama_ps_snapshot is not None:
         summary["ollama_ps_snapshot"] = ollama_ps_snapshot
@@ -541,12 +523,11 @@ def save_runtime_summary(endpoint_dir: Path, ollama_ps_snapshot: dict | None = N
             "error": "snapshot_not_collected_during_attempts",
         }
 
-    save_result(summary, str(endpoint_dir / "summary_runtime.json"))
+    save_result(summary, str(result_dir / "summary_runtime.json"))
 
 
 def execute_attempt_with_monitoring(
     *,
-    endpoint: str,
     model: str,
     system_prompt: str,
     user_prompt: str,
@@ -567,7 +548,6 @@ def execute_attempt_with_monitoring(
 
     try:
         result = run_single_attempt(
-            endpoint=endpoint,
             model=model,
             system_prompt=system_prompt,
             user_prompt=user_prompt,
@@ -590,14 +570,11 @@ def execute_attempt_with_monitoring(
     return result
 
 
-def run_test_cerf():
+def run_test_cefr():
     log_message("=== BENCHMARK STARTED ===")
 
     system_prompt = load_prompt("prompts/test/system_test.txt")
     num_sections = 7
-    #endpoints = ["chat", "generate"]
-
-    endpoints = ["chat"]
 
     for model_idx, model in enumerate(MODELS):
         safe_model = safe_filename(model)
@@ -605,86 +582,80 @@ def run_test_cerf():
         model_had_executed_attempt = False
 
         for section_num in range(1, num_sections + 1):
+            mode_id = f"test_section_{section_num}"
             user_prompt_path = f"prompts/test/user_test_section_{section_num}.txt"
             user_prompt = load_prompt(user_prompt_path)
 
-            for endpoint_idx, endpoint in enumerate(endpoints):
-                endpoint_dir = Path(f"results/test_section_{section_num}/{safe_model}/{endpoint}")
-                endpoint_dir.mkdir(parents=True, exist_ok=True)
+            result_dir = Path(f"results/{mode_id}/{safe_model}")
+            result_dir.mkdir(parents=True, exist_ok=True)
 
-                log_message(
-                    f"SECTION STARTED | model={model} | section={section_num} | endpoint={endpoint}"
-                )
+            log_message(
+                f"SECTION STARTED | model={model} | section={section_num}"
+            )
 
-                endpoint_had_executed_attempt = False
-                endpoint_ollama_ps_snapshot = None
+            section_ollama_ps_snapshot = None
 
-                for attempt in range(1, ATTEMPTS + 1):
-                    output_path = endpoint_dir / f"attempt_{attempt:03d}.json"
-                    attempt_executed = False
+            for attempt in range(1, ATTEMPTS + 1):
+                output_path = result_dir / f"attempt_{attempt:03d}.json"
+                attempt_executed = False
 
-                    if RESUME and output_path.exists():
-                        log_message(f"SKIP existing file | {output_path}")
-                    else:
-                        attempt_executed = True
-                        endpoint_had_executed_attempt = True
-                        model_had_executed_attempt = True
-                        
-                        log_message(
-                            f"RUN | model={model} | section={section_num} | endpoint={endpoint} | attempt={attempt}"
+                if RESUME and output_path.exists():
+                    log_message(f"SKIP existing file | {output_path}")
+                else:
+                    attempt_executed = True
+                    model_had_executed_attempt = True
+
+                    log_message(
+                        f"RUN | model={model} | section={section_num} | attempt={attempt}"
+                    )
+
+                    try:
+                        result = execute_attempt_with_monitoring(
+                            model=model,
+                            system_prompt=system_prompt,
+                            user_prompt=user_prompt,
+                            attempt=attempt,
+                            mode_id=mode_id,
                         )
 
-                        try:
-                            result = execute_attempt_with_monitoring(
-                                endpoint=endpoint,
-                                model=model,
-                                system_prompt=system_prompt,
-                                user_prompt=user_prompt,
-                                attempt=attempt,
-                                mode_id=f"test_section_{section_num}",
-                            )
+                        if section_ollama_ps_snapshot is None and result.get("success") is True:
+                            section_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
 
-                            if endpoint_ollama_ps_snapshot is None and result.get("success") is True:
-                                endpoint_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
+                        result["mode_id"] = mode_id
+                        result["endpoint"] = "chat"
+                        result["system_prompt_path"] = "prompts/test/system_test.txt"
+                        result["user_prompt_path"] = user_prompt_path
+                        result["timestamp"] = datetime.now().isoformat(timespec="seconds")
 
-                            result["mode_id"] = f"test_section_{section_num}"
-                            result["endpoint"] = endpoint
-                            result["system_prompt_path"] = "prompts/test/system_test.txt"
-                            result["user_prompt_path"] = user_prompt_path
-                            result["timestamp"] = datetime.now().isoformat(timespec="seconds")
+                        save_result(result, str(output_path))
 
-                            save_result(result, str(output_path))
+                    except Exception as e:
+                        error_result = {
+                            "attempt": attempt,
+                            "model": model,
+                            "time": None,
+                            "success": False,
+                            "response": None,
+                            "raw_output": None,
+                            "postprocessing_steps": [],
+                            "error": f"Runner exception: {e}",
+                            "mode_id": mode_id,
+                            "endpoint": "chat",
+                            "system_prompt_path": "prompts/test/system_test.txt",
+                            "user_prompt_path": user_prompt_path,
+                            "timestamp": datetime.now().isoformat(timespec="seconds"),
+                            "gpu_samples": [],
+                            "gpu_summary": build_gpu_summary([]),
+                        }
+                        save_result(error_result, str(output_path))
 
-                        except Exception as e:
-                            error_result = {
-                                "attempt": attempt,
-                                "model": model,
-                                "time": None,
-                                "success": False,
-                                "response": None,
-                                "raw_output": None,
-                                "postprocessing_steps": [],
-                                "error": f"Runner exception: {e}",
-                                "mode_id": f"test_section_{section_num}",
-                                "endpoint": endpoint,
-                                "system_prompt_path": "prompts/test/system_test.txt",
-                                "user_prompt_path": user_prompt_path,
-                                "timestamp": datetime.now().isoformat(timespec="seconds"),
-                                "gpu_samples": [],
-                                "gpu_summary": build_gpu_summary([]),
-                            }
-                            save_result(error_result, str(output_path))
+                if attempt_executed and attempt < ATTEMPTS:
+                    sleep_between_attempts()
 
-                    if attempt_executed and attempt < ATTEMPTS:
-                        sleep_between_attempts()
-
-                save_runtime_summary(endpoint_dir, endpoint_ollama_ps_snapshot)
-                log_message(
-                    f"SUMMARY SAVED | model={model} | section={section_num} | endpoint={endpoint}"
-                )
-
-                if endpoint_idx < len(endpoints) - 1 and endpoint_had_executed_attempt:
-                    sleep_between_endpoints()
+            save_runtime_summary(result_dir, section_ollama_ps_snapshot)
+            log_message(
+                f"SUMMARY SAVED | model={model} | section={section_num}"
+            )
 
         if model_idx < len(MODELS) - 1 and model_had_executed_attempt:
             sleep_between_models()
@@ -718,9 +689,6 @@ def run_grammar():
         },
     ]
 
-    #endpoints = ["chat", "generate"]
-    endpoints = ["chat"]
-
     for model_idx, model in enumerate(MODELS):
         safe_model = safe_filename(model)
         log_message(f"MODEL STARTED | {model}")
@@ -734,136 +702,31 @@ def run_grammar():
             system_prompt = load_prompt(system_prompt_path)
             user_prompt = load_prompt(user_prompt_path)
 
-            for endpoint_idx, endpoint in enumerate(endpoints):
-                endpoint_dir = Path(f"results/{mode_id}/{safe_model}/{endpoint}")
-                endpoint_dir.mkdir(parents=True, exist_ok=True)
-
-                log_message(
-                    f"MODE STARTED | model={model} | mode={mode_id} | endpoint={endpoint}"
-                )
-
-                endpoint_had_executed_attempt = False
-                endpoint_ollama_ps_snapshot = None
-
-                for attempt in range(1, ATTEMPTS + 1):
-                    output_path = endpoint_dir / f"attempt_{attempt:03d}.json"
-                    attempt_executed = False
-
-                    if RESUME and output_path.exists():
-                        log_message(f"SKIP existing file | {output_path}")
-                    else:
-                        attempt_executed = True
-                        endpoint_had_executed_attempt = True
-                        model_had_executed_attempt = True
-
-                        log_message(
-                            f"RUN | model={model} | mode={mode_id} | endpoint={endpoint} | attempt={attempt}"
-                        )
-
-                        try:
-                            result = execute_attempt_with_monitoring(
-                                endpoint=endpoint,
-                                model=model,
-                                system_prompt=system_prompt,
-                                user_prompt=user_prompt,
-                                attempt=attempt,
-                                mode_id=mode_id,
-                            )
-
-                            if endpoint_ollama_ps_snapshot is None and result.get("success") is True:
-                                endpoint_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
-
-                            result["mode_id"] = mode_id
-                            result["endpoint"] = endpoint
-                            result["system_prompt_path"] = system_prompt_path
-                            result["user_prompt_path"] = user_prompt_path
-                            result["timestamp"] = datetime.now().isoformat(timespec="seconds")
-
-                            save_result(result, str(output_path))
-
-                        except Exception as e:
-                            error_result = {
-                                "attempt": attempt,
-                                "model": model,
-                                "time": None,
-                                "success": False,
-                                "response": None,
-                                "raw_output": None,
-                                "postprocessing_steps": [],
-                                "error": f"Runner exception: {e}",
-                                "mode_id": mode_id,
-                                "endpoint": endpoint,
-                                "system_prompt_path": system_prompt_path,
-                                "user_prompt_path": user_prompt_path,
-                                "timestamp": datetime.now().isoformat(timespec="seconds"),
-                                "gpu_samples": [],
-                                "gpu_summary": build_gpu_summary([]),
-                            }
-                            save_result(error_result, str(output_path))
-
-                    if attempt_executed and attempt < ATTEMPTS:
-                        sleep_between_attempts()
-
-                save_runtime_summary(endpoint_dir, endpoint_ollama_ps_snapshot)
-                log_message(
-                    f"SUMMARY SAVED | model={model} | mode={mode_id} | endpoint={endpoint}"
-                )
-
-                if endpoint_idx < len(endpoints) - 1 and endpoint_had_executed_attempt:
-                    sleep_between_endpoints()
-
-        if model_idx < len(MODELS) - 1 and model_had_executed_attempt:
-            sleep_between_models()
-
-    log_message("=== BENCHMARK FINISHED ===")
-
-
-def run_writing():
-    log_message("=== BENCHMARK STARTED ===")
-
-    mode_id = "writing"
-    system_prompt_path = "prompts/writing/system_writing.txt"
-    user_prompt_path = "prompts/writing/user_writing.txt"
-
-    system_prompt = load_prompt(system_prompt_path)
-    user_prompt = load_prompt(user_prompt_path)
-    
-    #endpoints = ["chat", "generate"]
-
-    endpoints = ["chat"]
-    for model_idx, model in enumerate(MODELS):
-        safe_model = safe_filename(model)
-        log_message(f"MODEL STARTED | {model}")
-        model_had_executed_attempt = False
-
-        for endpoint_idx, endpoint in enumerate(endpoints):
-            endpoint_dir = Path(f"results/{mode_id}/{safe_model}/{endpoint}")
-            endpoint_dir.mkdir(parents=True, exist_ok=True)
+            result_dir = Path(f"results/{mode_id}/{safe_model}")
+            result_dir.mkdir(parents=True, exist_ok=True)
 
             log_message(
-                f"MODE STARTED | model={model} | mode={mode_id} | endpoint={endpoint}"
+                f"MODE STARTED | model={model} | mode={mode_id}"
             )
-            endpoint_had_executed_attempt = False
-            endpoint_ollama_ps_snapshot = None
+
+            mode_ollama_ps_snapshot = None
 
             for attempt in range(1, ATTEMPTS + 1):
-                output_path = endpoint_dir / f"attempt_{attempt:03d}.json"
+                output_path = result_dir / f"attempt_{attempt:03d}.json"
                 attempt_executed = False
 
                 if RESUME and output_path.exists():
                     log_message(f"SKIP existing file | {output_path}")
                 else:
                     attempt_executed = True
-                    endpoint_had_executed_attempt = True
                     model_had_executed_attempt = True
 
                     log_message(
-                        f"RUN | model={model} | mode={mode_id} | endpoint={endpoint} | attempt={attempt}"
+                        f"RUN | model={model} | mode={mode_id} | attempt={attempt}"
                     )
 
                     try:
                         result = execute_attempt_with_monitoring(
-                            endpoint=endpoint,
                             model=model,
                             system_prompt=system_prompt,
                             user_prompt=user_prompt,
@@ -871,11 +734,11 @@ def run_writing():
                             mode_id=mode_id,
                         )
 
-                        if endpoint_ollama_ps_snapshot is None and result.get("success") is True:
-                            endpoint_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
-                        
+                        if mode_ollama_ps_snapshot is None and result.get("success") is True:
+                            mode_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
+
                         result["mode_id"] = mode_id
-                        result["endpoint"] = endpoint
+                        result["endpoint"] = "chat"
                         result["system_prompt_path"] = system_prompt_path
                         result["user_prompt_path"] = user_prompt_path
                         result["timestamp"] = datetime.now().isoformat(timespec="seconds")
@@ -893,7 +756,7 @@ def run_writing():
                             "postprocessing_steps": [],
                             "error": f"Runner exception: {e}",
                             "mode_id": mode_id,
-                            "endpoint": endpoint,
+                            "endpoint": "chat",
                             "system_prompt_path": system_prompt_path,
                             "user_prompt_path": user_prompt_path,
                             "timestamp": datetime.now().isoformat(timespec="seconds"),
@@ -905,13 +768,98 @@ def run_writing():
                 if attempt_executed and attempt < ATTEMPTS:
                     sleep_between_attempts()
 
-            save_runtime_summary(endpoint_dir, endpoint_ollama_ps_snapshot)
+            save_runtime_summary(result_dir, mode_ollama_ps_snapshot)
             log_message(
-                f"SUMMARY SAVED | model={model} | mode={mode_id} | endpoint={endpoint}"
+                f"SUMMARY SAVED | model={model} | mode={mode_id}"
             )
 
-            if endpoint_idx < len(endpoints) - 1 and endpoint_had_executed_attempt:
-                sleep_between_endpoints()
+        if model_idx < len(MODELS) - 1 and model_had_executed_attempt:
+            sleep_between_models()
+
+    log_message("=== BENCHMARK FINISHED ===")
+
+
+def run_writing():
+    log_message("=== BENCHMARK STARTED ===")
+
+    mode_id = "writing"
+    system_prompt_path = "prompts/writing/system_writing.txt"
+    user_prompt_path = "prompts/writing/user_writing.txt"
+
+    system_prompt = load_prompt(system_prompt_path)
+    user_prompt = load_prompt(user_prompt_path)
+
+    for model_idx, model in enumerate(MODELS):
+        safe_model = safe_filename(model)
+        log_message(f"MODEL STARTED | {model}")
+        model_had_executed_attempt = False
+
+        result_dir = Path(f"results/{mode_id}/{safe_model}")
+        result_dir.mkdir(parents=True, exist_ok=True)
+
+        log_message(f"MODE STARTED | model={model} | mode={mode_id}")
+
+        model_ollama_ps_snapshot = None
+
+        for attempt in range(1, ATTEMPTS + 1):
+            output_path = result_dir / f"attempt_{attempt:03d}.json"
+            attempt_executed = False
+
+            if RESUME and output_path.exists():
+                log_message(f"SKIP existing file | {output_path}")
+            else:
+                attempt_executed = True
+                model_had_executed_attempt = True
+
+                log_message(
+                    f"RUN | model={model} | mode={mode_id} | attempt={attempt}"
+                )
+
+                try:
+                    result = execute_attempt_with_monitoring(
+                        model=model,
+                        system_prompt=system_prompt,
+                        user_prompt=user_prompt,
+                        attempt=attempt,
+                        mode_id=mode_id,
+                    )
+
+                    if model_ollama_ps_snapshot is None and result.get("success") is True:
+                        model_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
+
+                    result["mode_id"] = mode_id
+                    result["endpoint"] = "chat"
+                    result["system_prompt_path"] = system_prompt_path
+                    result["user_prompt_path"] = user_prompt_path
+                    result["timestamp"] = datetime.now().isoformat(timespec="seconds")
+
+                    save_result(result, str(output_path))
+
+                except Exception as e:
+                    error_result = {
+                        "attempt": attempt,
+                        "model": model,
+                        "time": None,
+                        "success": False,
+                        "response": None,
+                        "raw_output": None,
+                        "postprocessing_steps": [],
+                        "error": f"Runner exception: {e}",
+                        "mode_id": mode_id,
+                        "endpoint": "chat",
+                        "system_prompt_path": system_prompt_path,
+                        "user_prompt_path": user_prompt_path,
+                        "timestamp": datetime.now().isoformat(timespec="seconds"),
+                        "gpu_samples": [],
+                        "gpu_summary": build_gpu_summary([]),
+                    }
+                    save_result(error_result, str(output_path))
+
+            if attempt_executed and attempt < ATTEMPTS:
+                sleep_between_attempts()
+
+        save_runtime_summary(result_dir, model_ollama_ps_snapshot)
+        log_message(f"SUMMARY SAVED | model={model} | mode={mode_id}")
 
         if model_idx < len(MODELS) - 1 and model_had_executed_attempt:
             sleep_between_models()
@@ -945,10 +893,6 @@ def run_vocabulary():
         },
     ]
 
-    #endpoints = ["chat", "generate"]
-
-    endpoints = ["chat"]
-
     for model_idx, model in enumerate(MODELS):
         safe_model = safe_filename(model)
         log_message(f"MODEL STARTED | {model}")
@@ -962,83 +906,76 @@ def run_vocabulary():
             system_prompt = load_prompt(system_prompt_path)
             user_prompt = load_prompt(user_prompt_path)
 
-            for endpoint_idx, endpoint in enumerate(endpoints):
-                endpoint_dir = Path(f"results/{mode_id}/{safe_model}/{endpoint}")
-                endpoint_dir.mkdir(parents=True, exist_ok=True)
+            result_dir = Path(f"results/{mode_id}/{safe_model}")
+            result_dir.mkdir(parents=True, exist_ok=True)
 
-                log_message(
-                    f"MODE STARTED | model={model} | mode={mode_id} | endpoint={endpoint}"
-                )
+            log_message(
+                f"MODE STARTED | model={model} | mode={mode_id}"
+            )
 
-                endpoint_had_executed_attempt = False
-                endpoint_ollama_ps_snapshot = None
-                
-                for attempt in range(1, ATTEMPTS + 1):
-                    output_path = endpoint_dir / f"attempt_{attempt:03d}.json"
-                    attempt_executed = False
+            mode_ollama_ps_snapshot = None
 
-                    if RESUME and output_path.exists():
-                        log_message(f"SKIP existing file | {output_path}")
-                    else:
-                        attempt_executed = True
-                        endpoint_had_executed_attempt = True
-                        model_had_executed_attempt = True
-                        
-                        log_message(
-                            f"RUN | model={model} | mode={mode_id} | endpoint={endpoint} | attempt={attempt}"
+            for attempt in range(1, ATTEMPTS + 1):
+                output_path = result_dir / f"attempt_{attempt:03d}.json"
+                attempt_executed = False
+
+                if RESUME and output_path.exists():
+                    log_message(f"SKIP existing file | {output_path}")
+                else:
+                    attempt_executed = True
+                    model_had_executed_attempt = True
+
+                    log_message(
+                        f"RUN | model={model} | mode={mode_id} | attempt={attempt}"
+                    )
+
+                    try:
+                        result = execute_attempt_with_monitoring(
+                            model=model,
+                            system_prompt=system_prompt,
+                            user_prompt=user_prompt,
+                            attempt=attempt,
+                            mode_id=mode_id,
                         )
 
-                        try:
-                            result = execute_attempt_with_monitoring(
-                                endpoint=endpoint,
-                                model=model,
-                                system_prompt=system_prompt,
-                                user_prompt=user_prompt,
-                                attempt=attempt,
-                                mode_id=mode_id,
-                            )
+                        if mode_ollama_ps_snapshot is None and result.get("success") is True:
+                            mode_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
 
-                            if endpoint_ollama_ps_snapshot is None and result.get("success") is True:
-                                endpoint_ollama_ps_snapshot = get_ollama_ps_snapshot(model)
+                        result["mode_id"] = mode_id
+                        result["endpoint"] = "chat"
+                        result["system_prompt_path"] = system_prompt_path
+                        result["user_prompt_path"] = user_prompt_path
+                        result["timestamp"] = datetime.now().isoformat(timespec="seconds")
 
-                            result["mode_id"] = mode_id
-                            result["endpoint"] = endpoint
-                            result["system_prompt_path"] = system_prompt_path
-                            result["user_prompt_path"] = user_prompt_path
-                            result["timestamp"] = datetime.now().isoformat(timespec="seconds")
+                        save_result(result, str(output_path))
 
-                            save_result(result, str(output_path))
+                    except Exception as e:
+                        error_result = {
+                            "attempt": attempt,
+                            "model": model,
+                            "time": None,
+                            "success": False,
+                            "response": None,
+                            "raw_output": None,
+                            "postprocessing_steps": [],
+                            "error": f"Runner exception: {e}",
+                            "mode_id": mode_id,
+                            "endpoint": "chat",
+                            "system_prompt_path": system_prompt_path,
+                            "user_prompt_path": user_prompt_path,
+                            "timestamp": datetime.now().isoformat(timespec="seconds"),
+                            "gpu_samples": [],
+                            "gpu_summary": build_gpu_summary([]),
+                        }
+                        save_result(error_result, str(output_path))
 
-                        except Exception as e:
-                            error_result = {
-                                "attempt": attempt,
-                                "model": model,
-                                "time": None,
-                                "success": False,
-                                "response": None,
-                                "raw_output": None,
-                                "postprocessing_steps": [],
-                                "error": f"Runner exception: {e}",
-                                "mode_id": mode_id,
-                                "endpoint": endpoint,
-                                "system_prompt_path": system_prompt_path,
-                                "user_prompt_path": user_prompt_path,
-                                "timestamp": datetime.now().isoformat(timespec="seconds"),
-                                "gpu_samples": [],
-                                "gpu_summary": build_gpu_summary([]),
-                            }
-                            save_result(error_result, str(output_path))
+                if attempt_executed and attempt < ATTEMPTS:
+                    sleep_between_attempts()
 
-                    if attempt_executed and attempt < ATTEMPTS:
-                        sleep_between_attempts()
-
-                save_runtime_summary(endpoint_dir, endpoint_ollama_ps_snapshot)
-                log_message(
-                    f"SUMMARY SAVED | model={model} | mode={mode_id} | endpoint={endpoint}"
-                )
-
-                if endpoint_idx < len(endpoints) - 1 and endpoint_had_executed_attempt:
-                    sleep_between_endpoints()
+            save_runtime_summary(result_dir, mode_ollama_ps_snapshot)
+            log_message(
+                f"SUMMARY SAVED | model={model} | mode={mode_id}"
+            )
 
         if model_idx < len(MODELS) - 1 and model_had_executed_attempt:
             sleep_between_models()
@@ -1047,10 +984,10 @@ def run_vocabulary():
 
 
 def main():
-    #run_vocabulary()
-    #run_grammar()
     run_writing()
-    #run_test_cerf()
+    run_vocabulary()
+    run_grammar()
+    run_test_cefr()
     #run_grammar()
     #run_vocabulary()
 

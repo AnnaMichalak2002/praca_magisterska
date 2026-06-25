@@ -565,6 +565,386 @@ def _validate_vocabulary_choice_question_tolerant(
 
     return errors, checks, extracted
 
+def _infer_match_top_level_fields_tolerant(response: dict) -> tuple[dict, list[str]]:
+    """
+    Tolerant inference for vocabulary matching top-level fields:
+    expected fields:
+    - exercise_type -> string
+    - topic -> string
+    - words -> list[str]
+    - translations -> list[str]
+    - answer_key -> dict[str, str]
+    """
+    errors: list[str] = []
+
+    extracted = {
+        "exercise_type": None,
+        "topic": None,
+        "words": None,
+        "translations": None,
+        "answer_key": None,
+    }
+
+    # exercise_type
+    exercise_type, ex_status = _infer_field_by_position(
+        response,
+        ["exercise_type", "topic", "words", "translations", "answer_key"],
+        "exercise_type",
+    )
+    if ex_status == "missing":
+        errors.append("missing_exercise_type")
+    else:
+        if ex_status.startswith("inferred_by_position:"):
+            errors.append(f"wrong_field_name_for_exercise_type:{ex_status.split(':', 1)[1]}")
+        extracted["exercise_type"] = exercise_type
+
+    # topic
+    topic, topic_status = _infer_field_by_position(
+        response,
+        ["exercise_type", "topic", "words", "translations", "answer_key"],
+        "topic",
+    )
+    if topic_status == "missing":
+        errors.append("missing_topic")
+    else:
+        if topic_status.startswith("inferred_by_position:"):
+            errors.append(f"wrong_field_name_for_topic:{topic_status.split(':', 1)[1]}")
+        extracted["topic"] = topic
+
+    # words
+    if "words" in response:
+        extracted["words"] = response["words"]
+    else:
+        list_candidates = [
+            (k, v) for k, v in response.items()
+            if isinstance(v, list) and all(isinstance(x, str) for x in v)
+        ]
+
+        if len(list_candidates) == 1:
+            key, value = list_candidates[0]
+            extracted["words"] = value
+            errors.append(f"wrong_field_name_for_words:{key}")
+        elif len(list_candidates) == 0:
+            errors.append("missing_words")
+        else:
+            # spróbuj rozpoznać po pozycji
+            words_by_pos, words_status = _infer_field_by_position(
+                response,
+                ["exercise_type", "topic", "words", "translations", "answer_key"],
+                "words",
+            )
+            if words_status == "missing":
+                errors.append("missing_words")
+            elif isinstance(words_by_pos, list):
+                extracted["words"] = words_by_pos
+                if words_status.startswith("inferred_by_position:"):
+                    errors.append(f"wrong_field_name_for_words:{words_status.split(':', 1)[1]}")
+            else:
+                errors.append("ambiguous_words_field")
+
+    # translations
+    if "translations" in response:
+        extracted["translations"] = response["translations"]
+    else:
+        remaining_list_candidates = [
+            (k, v) for k, v in response.items()
+            if isinstance(v, list)
+            and all(isinstance(x, str) for x in v)
+            and v is not extracted["words"]
+        ]
+
+        if len(remaining_list_candidates) == 1:
+            key, value = remaining_list_candidates[0]
+            extracted["translations"] = value
+            errors.append(f"wrong_field_name_for_translations:{key}")
+        elif len(remaining_list_candidates) == 0:
+            errors.append("missing_translations")
+        else:
+            translations_by_pos, translations_status = _infer_field_by_position(
+                response,
+                ["exercise_type", "topic", "words", "translations", "answer_key"],
+                "translations",
+            )
+            if translations_status == "missing":
+                errors.append("missing_translations")
+            elif isinstance(translations_by_pos, list):
+                extracted["translations"] = translations_by_pos
+                if translations_status.startswith("inferred_by_position:"):
+                    errors.append(
+                        f"wrong_field_name_for_translations:{translations_status.split(':', 1)[1]}"
+                    )
+            else:
+                errors.append("ambiguous_translations_field")
+
+    # answer_key
+    if "answer_key" in response:
+        extracted["answer_key"] = response["answer_key"]
+    else:
+        dict_candidates = [
+            (k, v) for k, v in response.items()
+            if isinstance(v, dict)
+        ]
+
+        if len(dict_candidates) == 1:
+            key, value = dict_candidates[0]
+            extracted["answer_key"] = value
+            errors.append(f"wrong_field_name_for_answer_key:{key}")
+        elif len(dict_candidates) == 0:
+            errors.append("missing_answer_key")
+        else:
+            answer_key_by_pos, answer_key_status = _infer_field_by_position(
+                response,
+                ["exercise_type", "topic", "words", "translations", "answer_key"],
+                "answer_key",
+            )
+            if answer_key_status == "missing":
+                errors.append("missing_answer_key")
+            elif isinstance(answer_key_by_pos, dict):
+                extracted["answer_key"] = answer_key_by_pos
+                if answer_key_status.startswith("inferred_by_position:"):
+                    errors.append(
+                        f"wrong_field_name_for_answer_key:{answer_key_status.split(':', 1)[1]}"
+                    )
+            else:
+                errors.append("missing_answer_key")
+
+    return extracted, errors
+
+
+def _normalize_str_list(values: list[str]) -> list[str]:
+    return [_normalize_text_for_comparison(v) for v in values if isinstance(v, str)]
+
+
+def _normalize_dict_str_str(data: dict) -> dict:
+    normalized = {}
+    for k, v in data.items():
+        if isinstance(k, str) and isinstance(v, str):
+            normalized[_normalize_text_for_comparison(k)] = _normalize_text_for_comparison(v)
+    return normalized
+
+
+def _infer_vocabulary_definition_question_fields_tolerant(
+    question_obj: dict,
+    idx: int,
+    validation_errors: list[str],
+) -> dict:
+    """
+    Tolerant inference for vocabulary definition question:
+    expected logical fields:
+    - definition -> non-empty string
+    - options -> list[str]
+    - answer -> string
+    """
+    extracted = {
+        "definition": None,
+        "options": None,
+        "answer": None,
+    }
+
+    used_keys = set()
+
+    # exact canonical fields first
+    if "definition" in question_obj:
+        extracted["definition"] = question_obj["definition"]
+        used_keys.add("definition")
+
+    if "options" in question_obj:
+        extracted["options"] = question_obj["options"]
+        used_keys.add("options")
+
+    if "answer" in question_obj:
+        extracted["answer"] = question_obj["answer"]
+        used_keys.add("answer")
+
+    # infer options
+    if extracted["options"] is None:
+        list_candidates = [
+            (k, v) for k, v in question_obj.items()
+            if isinstance(v, list) and all(isinstance(x, str) for x in v)
+        ]
+        if len(list_candidates) == 1:
+            key, value = list_candidates[0]
+            extracted["options"] = value
+            used_keys.add(key)
+            validation_errors.append(f"question_{idx}_wrong_field_name_for_options:{key}")
+        elif len(list_candidates) == 0:
+            validation_errors.append(f"question_{idx}_missing_options")
+        else:
+            validation_errors.append(f"question_{idx}_ambiguous_options_field")
+
+    # remaining strings
+    remaining_string_candidates = [
+        (k, v) for k, v in question_obj.items()
+        if isinstance(v, str) and k not in used_keys
+    ]
+
+    # infer definition
+    if extracted["definition"] is None:
+        if remaining_string_candidates:
+            definition_key, definition_value = max(
+                remaining_string_candidates,
+                key=lambda item: len(item[1]),
+            )
+            extracted["definition"] = definition_value
+            used_keys.add(definition_key)
+            validation_errors.append(
+                f"question_{idx}_wrong_field_name_for_definition:{definition_key}"
+            )
+        else:
+            validation_errors.append(f"question_{idx}_missing_definition")
+
+    # recompute remaining strings after taking definition
+    remaining_string_candidates = [
+        (k, v) for k, v in question_obj.items()
+        if isinstance(v, str) and k not in used_keys
+    ]
+
+    # infer answer
+    if extracted["answer"] is None:
+        if len(remaining_string_candidates) == 1:
+            answer_key, answer_value = remaining_string_candidates[0]
+            extracted["answer"] = answer_value
+            used_keys.add(answer_key)
+            validation_errors.append(f"question_{idx}_wrong_field_name_for_answer:{answer_key}")
+        elif len(remaining_string_candidates) == 0:
+            validation_errors.append(f"question_{idx}_missing_answer")
+        else:
+            if extracted["options"] is not None:
+                matching_candidates = [
+                    (k, v) for k, v in remaining_string_candidates
+                    if v in extracted["options"]
+                ]
+                if len(matching_candidates) == 1:
+                    answer_key, answer_value = matching_candidates[0]
+                    extracted["answer"] = answer_value
+                    used_keys.add(answer_key)
+                    validation_errors.append(
+                        f"question_{idx}_wrong_field_name_for_answer:{answer_key}"
+                    )
+                elif len(matching_candidates) == 0:
+                    validation_errors.append(f"question_{idx}_missing_answer")
+                else:
+                    validation_errors.append(f"question_{idx}_ambiguous_answer_field")
+            else:
+                validation_errors.append(f"question_{idx}_ambiguous_answer_field")
+
+    return extracted
+
+
+def _validate_vocabulary_definition_question_tolerant(
+    question_obj: Any,
+    idx: int,
+    options_count: int,
+) -> tuple[list[str], dict, dict]:
+    errors: list[str] = []
+
+    checks = {
+        "is_dict": False,
+        "definition_non_empty": False,
+        "options_is_list": False,
+        "options_length_valid": False,
+        "options_non_empty": False,
+        "options_unique": False,
+        "answer_non_empty": False,
+        "answer_in_options": False,
+        "definition_not_in_options": False,
+    }
+
+    if not isinstance(question_obj, dict):
+        errors.append(f"question_{idx}_is_not_dict")
+        return errors, checks, {
+            "definition": None,
+            "options": None,
+            "answer": None,
+        }
+
+    checks["is_dict"] = True
+
+    infer_errors: list[str] = []
+    extracted = _infer_vocabulary_definition_question_fields_tolerant(
+        question_obj,
+        idx,
+        infer_errors,
+    )
+    errors.extend(infer_errors)
+
+    definition = extracted.get("definition")
+    options = extracted.get("options")
+    answer = extracted.get("answer")
+
+    # definition
+    if definition is None:
+        pass
+    elif _is_non_empty_string(definition):
+        checks["definition_non_empty"] = True
+    else:
+        errors.append(f"question_{idx}_empty_definition")
+
+    # options
+    normalized_options = None
+
+    if options is None:
+        pass
+    elif isinstance(options, list):
+        checks["options_is_list"] = True
+
+        if len(options) == options_count:
+            checks["options_length_valid"] = True
+        else:
+            errors.append(f"question_{idx}_options_not_length_{options_count}")
+
+        if all(_is_non_empty_string(opt) for opt in options):
+            checks["options_non_empty"] = True
+            normalized_options = [_normalize_text_for_comparison(opt) for opt in options]
+        else:
+            errors.append(f"question_{idx}_empty_option")
+
+        if normalized_options is not None and len(normalized_options) == len(set(normalized_options)):
+            checks["options_unique"] = True
+        else:
+            errors.append(f"question_{idx}_duplicate_options")
+    else:
+        errors.append(f"question_{idx}_options_is_not_list")
+
+    # answer
+    if answer is None:
+        pass
+    elif _is_non_empty_string(answer):
+        checks["answer_non_empty"] = True
+    else:
+        errors.append(f"question_{idx}_empty_answer")
+
+    if isinstance(options, list) and _is_non_empty_string(answer):
+        normalized_answer = _normalize_text_for_comparison(answer)
+        if normalized_options is None:
+            normalized_options = [
+                _normalize_text_for_comparison(opt)
+                for opt in options
+                if isinstance(opt, str)
+            ]
+
+        if normalized_answer in normalized_options:
+            checks["answer_in_options"] = True
+        else:
+            errors.append(f"question_{idx}_answer_not_in_options")
+
+    # definition should not appear in options
+    if _is_non_empty_string(definition) and isinstance(options, list):
+        normalized_definition = _normalize_text_for_comparison(definition)
+        if normalized_options is None:
+            normalized_options = [
+                _normalize_text_for_comparison(opt)
+                for opt in options
+                if isinstance(opt, str)
+            ]
+
+        if normalized_definition in normalized_options:
+            errors.append(f"question_{idx}_definition_present_in_options")
+        else:
+            checks["definition_not_in_options"] = True
+
+    return errors, checks, extracted
+
 def validate_test_tolerant(attempt_data: dict) -> dict:
     mode_id = attempt_data.get("mode_id")
     spec = TEST_SECTION_SPECS.get(mode_id)
@@ -1285,10 +1665,28 @@ def validate_vocabulary_tolerant(attempt_data: dict) -> dict:
         "checks": {
             "response_is_dict": False,
             "exercise_type_valid": False,
+
+            # synonym / antonym / definition
             "questions_is_list": False,
             "question_count_valid": False,
             "all_words_unique": None,
+            "all_definitions_unique": None,
             "all_questions_tolerant_valid": False,
+
+            # match
+            "topic_valid": False,
+            "words_is_list": False,
+            "word_count_valid": None,
+            "all_words_non_empty": None,
+            "translations_is_list": False,
+            "translation_count_valid": None,
+            "all_translations_non_empty": None,
+            "all_translations_unique": None,
+            "answer_key_is_dict": False,
+            "answer_key_count_valid": None,
+            "answer_key_words_match_words": None,
+            "answer_key_translations_in_translations": None,
+            "answer_key_translations_unique": None,
         },
         "question_checks": []
     }
@@ -1393,5 +1791,266 @@ def validate_vocabulary_tolerant(attempt_data: dict) -> dict:
 
         return _finalize_tolerant_result(result)
 
+    if mode_id == "vocabulary_match":
+        extracted, infer_errors = _infer_match_top_level_fields_tolerant(response)
+
+        for err in infer_errors:
+            if _is_non_fatal_tolerant_error(err):
+                result["non_fatal_validation_errors"].append(err)
+            else:
+                result["fatal_validation_errors"].append(err)
+
+        exercise_type = extracted.get("exercise_type")
+        topic = extracted.get("topic")
+        words = extracted.get("words")
+        translations = extracted.get("translations")
+        answer_key = extracted.get("answer_key")
+
+        # exercise_type
+        if exercise_type == spec["exercise_type"]:
+            result["checks"]["exercise_type_valid"] = True
+        elif exercise_type is not None:
+            result["fatal_validation_errors"].append("invalid_exercise_type")
+
+        # topic
+        result["checks"]["topic_valid"] = False
+        if topic == spec["topic"]:
+            result["checks"]["topic_valid"] = True
+        elif topic is not None:
+            result["fatal_validation_errors"].append("invalid_topic")
+
+        # words
+        result["checks"]["words_is_list"] = False
+        result["checks"]["word_count_valid"] = None
+        result["checks"]["all_words_non_empty"] = None
+        result["checks"]["all_words_unique"] = None
+
+        normalized_words = None
+
+        if words is None:
+            pass
+        elif isinstance(words, list):
+            result["checks"]["words_is_list"] = True
+
+            if len(words) == spec["word_count"]:
+                result["checks"]["word_count_valid"] = True
+            else:
+                result["checks"]["word_count_valid"] = False
+                result["fatal_validation_errors"].append("invalid_word_count")
+
+            if all(_is_non_empty_string(x) for x in words):
+                result["checks"]["all_words_non_empty"] = True
+                normalized_words = _normalize_str_list(words)
+            else:
+                result["checks"]["all_words_non_empty"] = False
+                result["fatal_validation_errors"].append("empty_word")
+
+            if normalized_words is not None and len(normalized_words) == len(set(normalized_words)):
+                result["checks"]["all_words_unique"] = True
+            else:
+                result["checks"]["all_words_unique"] = False
+                result["fatal_validation_errors"].append("duplicate_words")
+        else:
+            result["fatal_validation_errors"].append("words_is_not_list")
+
+        # translations
+        result["checks"]["translations_is_list"] = False
+        result["checks"]["translation_count_valid"] = None
+        result["checks"]["all_translations_non_empty"] = None
+        result["checks"]["all_translations_unique"] = None
+
+        normalized_translations = None
+
+        if translations is None:
+            pass
+        elif isinstance(translations, list):
+            result["checks"]["translations_is_list"] = True
+
+            if len(translations) == spec["translation_count"]:
+                result["checks"]["translation_count_valid"] = True
+            else:
+                result["checks"]["translation_count_valid"] = False
+                result["fatal_validation_errors"].append("invalid_translation_count")
+
+            if all(_is_non_empty_string(x) for x in translations):
+                result["checks"]["all_translations_non_empty"] = True
+                normalized_translations = _normalize_str_list(translations)
+            else:
+                result["checks"]["all_translations_non_empty"] = False
+                result["fatal_validation_errors"].append("empty_translation")
+
+            if normalized_translations is not None and len(normalized_translations) == len(set(normalized_translations)):
+                result["checks"]["all_translations_unique"] = True
+            else:
+                result["checks"]["all_translations_unique"] = False
+                result["fatal_validation_errors"].append("duplicate_translations")
+        else:
+            result["fatal_validation_errors"].append("translations_is_not_list")
+
+        # answer_key
+        result["checks"]["answer_key_is_dict"] = False
+        result["checks"]["answer_key_count_valid"] = None
+        result["checks"]["answer_key_words_match_words"] = None
+        result["checks"]["answer_key_translations_in_translations"] = None
+        result["checks"]["answer_key_translations_unique"] = None
+
+        if answer_key is None:
+            pass
+        elif isinstance(answer_key, dict):
+            result["checks"]["answer_key_is_dict"] = True
+
+            if len(answer_key) == spec["word_count"]:
+                result["checks"]["answer_key_count_valid"] = True
+            else:
+                result["checks"]["answer_key_count_valid"] = False
+                result["fatal_validation_errors"].append("invalid_answer_key_count")
+
+            empty_key_found = False
+            empty_value_found = False
+
+            for k, v in answer_key.items():
+                if not _is_non_empty_string(k):
+                    empty_key_found = True
+                if not _is_non_empty_string(v):
+                    empty_value_found = True
+
+            if empty_key_found:
+                result["fatal_validation_errors"].append("empty_answer_key_word")
+            if empty_value_found:
+                result["fatal_validation_errors"].append("empty_answer_key_translation")
+
+            normalized_answer_key = _normalize_dict_str_str(answer_key)
+
+            # klucze muszą odpowiadać words
+            if normalized_words is not None:
+                words_set = set(normalized_words)
+                answer_key_words_set = set(normalized_answer_key.keys())
+
+                missing_words = words_set - answer_key_words_set
+                unknown_words = answer_key_words_set - words_set
+
+                if not missing_words and not unknown_words:
+                    result["checks"]["answer_key_words_match_words"] = True
+                else:
+                    result["checks"]["answer_key_words_match_words"] = False
+                    for _ in missing_words:
+                        result["fatal_validation_errors"].append("answer_key_missing_word")
+                    for _ in unknown_words:
+                        result["fatal_validation_errors"].append("answer_key_unknown_word")
+
+            # wartości muszą należeć do translations
+            if normalized_translations is not None:
+                translations_set = set(normalized_translations)
+                bad_translation_values = [
+                    value for value in normalized_answer_key.values()
+                    if value not in translations_set
+                ]
+
+                if not bad_translation_values:
+                    result["checks"]["answer_key_translations_in_translations"] = True
+                else:
+                    result["checks"]["answer_key_translations_in_translations"] = False
+                    for _ in bad_translation_values:
+                        result["fatal_validation_errors"].append(
+                            "answer_key_translation_not_in_translations"
+                        )
+
+            # wartości w answer_key powinny być unikalne
+            normalized_answer_values = list(normalized_answer_key.values())
+            if len(normalized_answer_values) == len(set(normalized_answer_values)):
+                result["checks"]["answer_key_translations_unique"] = True
+            else:
+                result["checks"]["answer_key_translations_unique"] = False
+                result["fatal_validation_errors"].append("duplicate_answer_key_translations")
+
+        else:
+            result["fatal_validation_errors"].append("answer_key_is_not_dict")
+
+        return _finalize_tolerant_result(result)
+    
+    if mode_id == "vocabulary_definition":
+        expected_top_order = [
+            "exercise_type",
+            "questions",
+        ]
+
+        exercise_type, ex_status = _infer_field_by_position(response, expected_top_order, "exercise_type")
+        if ex_status == "missing":
+            result["fatal_validation_errors"].append("missing_exercise_type")
+        else:
+            if ex_status.startswith("inferred_by_position:"):
+                result["non_fatal_validation_errors"].append(
+                    f"wrong_field_name_for_exercise_type:{ex_status.split(':', 1)[1]}"
+                )
+            if exercise_type == spec["exercise_type"]:
+                result["checks"]["exercise_type_valid"] = True
+            else:
+                result["fatal_validation_errors"].append("invalid_exercise_type")
+
+        questions, q_status = _infer_list_field_by_role(response, "questions")
+
+        if q_status == "missing":
+            result["fatal_validation_errors"].append("missing_questions")
+            return _finalize_tolerant_result(result)
+        elif q_status == "ambiguous":
+            result["fatal_validation_errors"].append("ambiguous_questions_field")
+            return _finalize_tolerant_result(result)
+        else:
+            if q_status.startswith("inferred:"):
+                result["non_fatal_validation_errors"].append(
+                    f"wrong_field_name_for_questions:{q_status.split(':', 1)[1]}"
+                )
+
+        if not isinstance(questions, list):
+            result["fatal_validation_errors"].append("questions_is_not_list")
+            return _finalize_tolerant_result(result)
+
+        result["checks"]["questions_is_list"] = True
+
+        if len(questions) == spec["question_count"]:
+            result["checks"]["question_count_valid"] = True
+        else:
+            result["fatal_validation_errors"].append("invalid_question_count")
+
+        all_questions_tolerant_valid = True
+        normalized_definitions = []
+
+        for idx, q in enumerate(questions, start=1):
+            q_errors, q_checks, extracted = _validate_vocabulary_definition_question_tolerant(
+                q,
+                idx,
+                options_count=spec["options_count"],
+            )
+
+            for err in q_errors:
+                if _is_non_fatal_tolerant_error(err):
+                    result["non_fatal_validation_errors"].append(err)
+                else:
+                    result["fatal_validation_errors"].append(err)
+
+            definition = extracted.get("definition")
+            if _is_non_empty_string(definition):
+                normalized_definitions.append(_normalize_text_for_comparison(definition))
+
+            result["question_checks"].append({
+                "question_index": idx,
+                "checks": q_checks,
+                "valid": len([e for e in q_errors if not _is_non_fatal_tolerant_error(e)]) == 0,
+                "extracted_fields": extracted,
+            })
+
+            if any(not _is_non_fatal_tolerant_error(err) for err in q_errors):
+                all_questions_tolerant_valid = False
+
+        result["checks"]["all_questions_tolerant_valid"] = all_questions_tolerant_valid
+
+        if len(normalized_definitions) == len(set(normalized_definitions)):
+            result["checks"]["all_definitions_unique"] = True
+        else:
+            result["checks"]["all_definitions_unique"] = False
+            result["fatal_validation_errors"].append("duplicate_definition")
+
+        return _finalize_tolerant_result(result)
+    
     result["fatal_validation_errors"].append("unsupported_vocabulary_mode")
     return _finalize_tolerant_result(result)
