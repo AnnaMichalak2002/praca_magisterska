@@ -18,7 +18,7 @@ MODELS = [
     "deepseek-r1:8b",
 ]
 
-ATTEMPTS = 2
+ATTEMPTS = 100
 RESUME = True
 LOG_FILE = Path("logs/benchmark.log")
 
@@ -984,12 +984,12 @@ def run_vocabulary():
 
 
 def main():
-    run_writing()
-    run_vocabulary()
-    run_grammar()
-    run_test_cefr()
-    #run_grammar()
+    #run_writing()
     #run_vocabulary()
+    #run_grammar()
+    #run_test_cefr()
+    #run_grammar()
+    run_vocabulary()
 
 
 if __name__ == "__main__":
