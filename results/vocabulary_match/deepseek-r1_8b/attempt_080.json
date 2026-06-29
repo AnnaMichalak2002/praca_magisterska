@@ -1,0 +1,170 @@
+{
+  "attempt": 80,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 7.192,
+  "success": true,
+  "response": {
+    "exercise_type": "matching",
+    "topic": "IT",
+    "words": [
+      "algorithm",
+      "cloud",
+      "data",
+      "firewall",
+      "interface",
+      "network",
+      "server",
+      "storage"
+    ],
+    "translations": [
+      "serwer",
+      "interfejs",
+      "algorytm",
+      "przestrzeń",
+      "sieć",
+      "pojedynczy",
+      "zapor",
+      "przechowywanie"
+    ],
+    "answer_key": {
+      "algorithm": "algorytm",
+      "cloud": "przestrzeń",
+      "data": "dane",
+      "firewall": "zapor",
+      "interface": "interfejs",
+      "network": "sieć",
+      "server": "serwer",
+      "storage": "przechowywanie"
+    }
+  },
+  "raw_output": "{\n  \"exercise_type\": \"matching\",\n  \"topic\": \"IT\",\n  \"words\": [\"algorithm\", \"cloud\", \"data\", \"firewall\", \"interface\", \"network\", \"server\", \"storage\"],\n  \"translations\": [\"serwer\", \"interfejs\", \"algorytm\", \"przestrzeń\", \"sieć\", \"pojedynczy\", \"zapor\", \"przechowywanie\"],\n  \"answer_key\": {\n    \"algorithm\": \"algorytm\",\n    \"cloud\": \"przestrzeń\",\n    \"data\": \"dane\",\n    \"firewall\": \"zapor\",\n    \"interface\": \"interfejs\",\n    \"network\": \"sieć\",\n    \"server\": \"serwer\",\n    \"storage\": \"przechowywanie\"\n  }\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:56:16.8585937Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 5142097000,
+    "load_duration_ns": 103632300,
+    "prompt_eval_count": 214,
+    "prompt_eval_duration_ns": 322896300,
+    "eval_count": 173,
+    "eval_duration_ns": 4136167000,
+    "tokens_per_second": 41.826
+  },
+  "gpu_summary": {
+    "sample_count": 7,
+    "valid_sample_count": 7,
+    "active_sample_count": 4,
+    "avg_gpu_utilization_percent": 77.5,
+    "max_gpu_utilization_percent": 95.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 56.25,
+    "max_temperature_c": 57.0,
+    "avg_power_draw_w": 62.24,
+    "max_power_draw_w": 62.89,
+    "estimated_gpu_energy_wh": 0.069156
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:56:09.716",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 53.0,
+      "power_draw_w": 5.12,
+      "raw_line": "2026/06/29 14:56:09.716, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 53, 5.12",
+      "collected_at_local": "2026-06-29T14:56:09"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:56:10.781",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 5.3,
+      "raw_line": "2026/06/29 14:56:10.781, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 52, 5.30",
+      "collected_at_local": "2026-06-29T14:56:10"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:56:11.840",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 5.08,
+      "raw_line": "2026/06/29 14:56:11.840, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 52, 5.08",
+      "collected_at_local": "2026-06-29T14:56:11"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:56:12.919",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 27.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 62.89,
+      "raw_line": "2026/06/29 14:56:12.919, NVIDIA GeForce RTX 2060 with Max-Q Design, 27, 5234, 6144, 55, 62.89",
+      "collected_at_local": "2026-06-29T14:56:12"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:56:13.984",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 61.79,
+      "raw_line": "2026/06/29 14:56:13.984, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5234, 6144, 56, 61.79",
+      "collected_at_local": "2026-06-29T14:56:13"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:56:15.059",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 61.77,
+      "raw_line": "2026/06/29 14:56:15.059, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 57, 61.77",
+      "collected_at_local": "2026-06-29T14:56:15"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:56:16.119",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 62.51,
+      "raw_line": "2026/06/29 14:56:16.119, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 57, 62.51",
+      "collected_at_local": "2026-06-29T14:56:16"
+    }
+  ],
+  "mode_id": "vocabulary_match",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_match.txt",
+  "timestamp": "2026-06-29T14:56:16"
+}

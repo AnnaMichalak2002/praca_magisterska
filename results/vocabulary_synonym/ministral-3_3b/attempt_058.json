@@ -1,0 +1,174 @@
+{
+  "attempt": 58,
+  "model": "ministral-3:3b",
+  "endpoint": "chat",
+  "time": 5.364,
+  "success": true,
+  "response": {
+    "exercise_type": "synonym",
+    "questions": [
+      {
+        "word": "affluent",
+        "options": [
+          "wealthy",
+          "industrious",
+          "tenacious"
+        ],
+        "answer": "wealthy"
+      },
+      {
+        "word": "exasperated",
+        "options": [
+          "delighted",
+          "frustrated",
+          "calm"
+        ],
+        "answer": "frustrated"
+      },
+      {
+        "word": "prevalent",
+        "options": [
+          "rare",
+          "common",
+          "exclusive"
+        ],
+        "answer": "common"
+      },
+      {
+        "word": "resolute",
+        "options": [
+          "hesitant",
+          "determined",
+          "indifferent"
+        ],
+        "answer": "determined"
+      },
+      {
+        "word": "prolific",
+        "options": [
+          "sparse",
+          "abundant",
+          "scattered"
+        ],
+        "answer": "abundant"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"synonym\",\n  \"questions\": [\n    {\n      \"word\": \"affluent\",\n      \"options\": [\"wealthy\", \"industrious\", \"tenacious\"],\n      \"answer\": \"wealthy\"\n    },\n    {\n      \"word\": \"exasperated\",\n      \"options\": [\"delighted\", \"frustrated\", \"calm\"],\n      \"answer\": \"frustrated\"\n    },\n    {\n      \"word\": \"prevalent\",\n      \"options\": [\"rare\", \"common\", \"exclusive\"],\n      \"answer\": \"common\"\n    },\n    {\n      \"word\": \"resolute\",\n      \"options\": [\"hesitant\", \"determined\", \"indifferent\"],\n      \"answer\": \"determined\"\n    },\n    {\n      \"word\": \"prolific\",\n      \"options\": [\"sparse\", \"abundant\", \"scattered\"],\n      \"answer\": \"abundant\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T06:37:40.9285829Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 3311541800,
+    "load_duration_ns": 140414300,
+    "prompt_eval_count": 195,
+    "prompt_eval_duration_ns": 176142300,
+    "eval_count": 206,
+    "eval_duration_ns": 2906651000,
+    "tokens_per_second": 70.872
+  },
+  "gpu_summary": {
+    "sample_count": 6,
+    "valid_sample_count": 6,
+    "active_sample_count": 3,
+    "avg_gpu_utilization_percent": 74.667,
+    "max_gpu_utilization_percent": 89.0,
+    "avg_memory_used_mib": 4338.0,
+    "max_memory_used_mib": 4338.0,
+    "avg_temperature_c": 53.0,
+    "max_temperature_c": 54.0,
+    "avg_power_draw_w": 63.33,
+    "max_power_draw_w": 63.56,
+    "estimated_gpu_energy_wh": 0.052775
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:37:35.601",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 5.28,
+      "raw_line": "2026/06/29 08:37:35.601, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 5.28",
+      "collected_at_local": "2026-06-29T08:37:35"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:37:36.670",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 5.16,
+      "raw_line": "2026/06/29 08:37:36.670, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 5.16",
+      "collected_at_local": "2026-06-29T08:37:36"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:37:37.742",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 4.99,
+      "raw_line": "2026/06/29 08:37:37.742, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 4.99",
+      "collected_at_local": "2026-06-29T08:37:37"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:37:38.805",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 46.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 63.56,
+      "raw_line": "2026/06/29 08:37:38.805, NVIDIA GeForce RTX 2060 with Max-Q Design, 46, 4338, 6144, 52, 63.56",
+      "collected_at_local": "2026-06-29T08:37:38"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:37:39.866",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 53.0,
+      "power_draw_w": 63.28,
+      "raw_line": "2026/06/29 08:37:39.866, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 53, 63.28",
+      "collected_at_local": "2026-06-29T08:37:39"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:37:40.927",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 54.0,
+      "power_draw_w": 63.15,
+      "raw_line": "2026/06/29 08:37:40.927, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 54, 63.15",
+      "collected_at_local": "2026-06-29T08:37:40"
+    }
+  ],
+  "mode_id": "vocabulary_synonym",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_synonym.txt",
+  "timestamp": "2026-06-29T08:37:40"
+}

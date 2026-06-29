@@ -1,0 +1,210 @@
+{
+  "attempt": 80,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 9.23,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "a person who creates music, especially popular music",
+        "options": [
+          "composer",
+          "musician",
+          "songwriter"
+        ],
+        "answer": "musician"
+      },
+      {
+        "definition": "a large, powerful, and dangerous fish that lives in the sea",
+        "options": [
+          "shark",
+          "whale",
+          "eel"
+        ],
+        "answer": "shark"
+      },
+      {
+        "definition": "a type of plant that grows in water and has thin, green leaves",
+        "options": [
+          "water lily",
+          "hydrilla",
+          "duckweed"
+        ],
+        "answer": "water lily"
+      },
+      {
+        "definition": "a large group of people or animals that are wild and dangerous",
+        "options": [
+          "mob",
+          "herd",
+          "swarm"
+        ],
+        "answer": "mob"
+      },
+      {
+        "definition": "a person who studies the stars and their influence on human affairs",
+        "options": [
+          "astrologer",
+          "astronomer",
+          "cosmologist"
+        ],
+        "answer": "astrologer"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"a person who creates music, especially popular music\",\n      \"options\": [\"composer\", \"musician\", \"songwriter\"],\n      \"answer\": \"musician\"\n    },\n    {\n      \"definition\": \"a large, powerful, and dangerous fish that lives in the sea\",\n      \"options\": [\"shark\", \"whale\", \"eel\"],\n      \"answer\": \"shark\"\n    },\n    {\n      \"definition\": \"a type of plant that grows in water and has thin, green leaves\",\n      \"options\": [\"water lily\", \"hydrilla\", \"duckweed\"],\n      \"answer\": \"water lily\"\n    },\n    {\n      \"definition\": \"a large group of people or animals that are wild and dangerous\",\n      \"options\": [\"mob\", \"herd\", \"swarm\"],\n      \"answer\": \"mob\"\n    },\n    {\n      \"definition\": \"a person who studies the stars and their influence on human affairs\",\n      \"options\": [\"astrologer\", \"astronomer\", \"cosmologist\"],\n      \"answer\": \"astrologer\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:35:09.4196069Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 7196462100,
+    "load_duration_ns": 101693200,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 262244100,
+    "eval_count": 252,
+    "eval_duration_ns": 5849112300,
+    "tokens_per_second": 43.083
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 87.833,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 58.833,
+    "max_temperature_c": 60.0,
+    "avg_power_draw_w": 61.88,
+    "max_power_draw_w": 62.29,
+    "estimated_gpu_energy_wh": 0.103133
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:35:00.229",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.55,
+      "raw_line": "2026/06/29 14:35:00.229, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.55",
+      "collected_at_local": "2026-06-29T14:35:00"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:35:01.291",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.3,
+      "raw_line": "2026/06/29 14:35:01.291, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.30",
+      "collected_at_local": "2026-06-29T14:35:01"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:35:02.361",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 54.0,
+      "power_draw_w": 5.13,
+      "raw_line": "2026/06/29 14:35:02.361, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 54, 5.13",
+      "collected_at_local": "2026-06-29T14:35:02"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:35:03.445",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 62.29,
+      "raw_line": "2026/06/29 14:35:03.445, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5234, 6144, 58, 62.29",
+      "collected_at_local": "2026-06-29T14:35:03"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:35:04.504",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 61.53,
+      "raw_line": "2026/06/29 14:35:04.504, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 58, 61.53",
+      "collected_at_local": "2026-06-29T14:35:04"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:35:05.569",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.9,
+      "raw_line": "2026/06/29 14:35:05.569, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.90",
+      "collected_at_local": "2026-06-29T14:35:05"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:35:06.625",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.95,
+      "raw_line": "2026/06/29 14:35:06.625, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.95",
+      "collected_at_local": "2026-06-29T14:35:06"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:35:07.685",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.75,
+      "raw_line": "2026/06/29 14:35:07.685, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.75",
+      "collected_at_local": "2026-06-29T14:35:07"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:35:08.728",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.86,
+      "raw_line": "2026/06/29 14:35:08.728, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.86",
+      "collected_at_local": "2026-06-29T14:35:08"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:35:09"
+}

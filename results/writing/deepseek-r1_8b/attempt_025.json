@@ -1,0 +1,331 @@
+{
+  "attempt": 25,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 22.185,
+  "success": true,
+  "response": {
+    "exercise_type": "Writing",
+    "learner_native_language": "Polish",
+    "task_content": "Write a letter to a friend from England.\nYou must include the following information:\n- how old your cousin is,\n- what you did at the birthday party,\n- what the cake tasted like.",
+    "original_text": "Last weekend I was on my cousin birthday party.\nShe have 18 years old.\nWe dancing and play games all night.\nThe cake is very sweet and taste chocolate.",
+    "corrected_text": "Last weekend I was at my cousin's birthday party.\nShe is 18 years old.\nWe danced and played games all night.\nThe cake was very sweet and tasted like chocolate.",
+    "learner_errors": [
+      {
+        "error": "Czcionka: 'Last weekend I was on my cousin birthday party.' - Nie ma apostrof przy 'cousin' i brak słowa 'at' przed 'birthday party'.",
+        "explanation": "W języku angielskim należy dodać apostrof po okresie, gdy mamy posesywną formę rzeczownika (cousin's) i użyć przymiotnika 'at' przed nazwą miejsca lub wydarzenia."
+      },
+      {
+        "error": "Zdanie: 'She have 18 years old.' - Niepoprawna forma przymiotnika 'old' (powinno być 'She is 18 years old').",
+        "explanation": "Przymiotnik 'old' używany jest w odmianie bazowej po słowie 'is' lub 'are'. Poprawna forma to 'She is 18 years old'."
+      },
+      {
+        "error": "Czcionka: 'We dancing and play games all night.' - Niepoprawna forma czasownika 'dancing' i 'play' (powinno być 'We danced and played games all night').",
+        "explanation": "Czasowniki należy używać w odpowiedniej formie osobowym. 'Dancing' jest gerundium lub partycipem, ale w tym kontekście chodzi o przeszłość, więc należy użyć przeszłej formy 'danced'. Podobnie 'play' powinno być 'played' w przeszłości."
+      },
+      {
+        "error": "Czcionka: 'The cake is very sweet and taste chocolate.' - Niepoprawna forma czasownika 'taste' (powinno być 'tastes' lub 'tasted').",
+        "explanation": "Czasownik 'taste' w liczbie jednej należy używać w formie 'tastes' w teraźniejszości lub 'tasted' w przeszłości. W oryginale brakuje 'd' w 'taste', co jest błędem w pisowni."
+      }
+    ],
+    "content_compliance": "partial",
+    "content_feedback": "W twojej wiadomości podałeś wiek swojej ciocerki i opisałeś tort, ale nie podałeś tego, co zrobiłeś na urodzinach. Pamiętaj, żeby wspomnieć o tym w twojej wiadomości."
+  },
+  "raw_output": "{\n  \"exercise_type\": \"Writing\",\n  \"learner_native_language\": \"Polish\",\n  \"task_content\": \"Write a letter to a friend from England.\\nYou must include the following information:\\n- how old your cousin is,\\n- what you did at the birthday party,\\n- what the cake tasted like.\",\n  \"original_text\": \"Last weekend I was on my cousin birthday party.\\nShe have 18 years old.\\nWe dancing and play games all night.\\nThe cake is very sweet and taste chocolate.\",\n  \"corrected_text\": \"Last weekend I was at my cousin's birthday party.\\nShe is 18 years old.\\nWe danced and played games all night.\\nThe cake was very sweet and tasted like chocolate.\",\n  \"learner_errors\": [\n    {\n      \"error\": \"Czcionka: 'Last weekend I was on my cousin birthday party.' - Nie ma apostrof przy 'cousin' i brak słowa 'at' przed 'birthday party'.\",\n      \"explanation\": \"W języku angielskim należy dodać apostrof po okresie, gdy mamy posesywną formę rzeczownika (cousin's) i użyć przymiotnika 'at' przed nazwą miejsca lub wydarzenia.\"\n    },\n    {\n      \"error\": \"Zdanie: 'She have 18 years old.' - Niepoprawna forma przymiotnika 'old' (powinno być 'She is 18 years old').\",\n      \"explanation\": \"Przymiotnik 'old' używany jest w odmianie bazowej po słowie 'is' lub 'are'. Poprawna forma to 'She is 18 years old'.\"\n    },\n    {\n      \"error\": \"Czcionka: 'We dancing and play games all night.' - Niepoprawna forma czasownika 'dancing' i 'play' (powinno być 'We danced and played games all night').\",\n      \"explanation\": \"Czasowniki należy używać w odpowiedniej formie osobowym. 'Dancing' jest gerundium lub partycipem, ale w tym kontekście chodzi o przeszłość, więc należy użyć przeszłej formy 'danced'. Podobnie 'play' powinno być 'played' w przeszłości.\"\n    },\n    {\n      \"error\": \"Czcionka: 'The cake is very sweet and taste chocolate.' - Niepoprawna forma czasownika 'taste' (powinno być 'tastes' lub 'tasted').\",\n      \"explanation\": \"Czasownik 'taste' w liczbie jednej należy używać w formie 'tastes' w teraźniejszości lub 'tasted' w przeszłości. W oryginale brakuje 'd' w 'taste', co jest błędem w pisowni.\"\n    }\n  ],\n  \"content_compliance\": \"partial\",\n  \"content_feedback\": \"W twojej wiadomości podałeś wiek swojej ciocerki i opisałeś tort, ale nie podałeś tego, co zrobiłeś na urodzinach. Pamiętaj, żeby wspomnieć o tym w twojej wiadomości.\"\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 1200,
+    "temperature": 0.0,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T16:49:18.5198725Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 20145551600,
+    "load_duration_ns": 93779900,
+    "prompt_eval_count": 549,
+    "prompt_eval_duration_ns": 273864300,
+    "eval_count": 717,
+    "eval_duration_ns": 17374515100,
+    "tokens_per_second": 41.267
+  },
+  "gpu_summary": {
+    "sample_count": 21,
+    "valid_sample_count": 21,
+    "active_sample_count": 18,
+    "avg_gpu_utilization_percent": 90.944,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 64.0,
+    "max_temperature_c": 65.0,
+    "avg_power_draw_w": 61.669,
+    "max_power_draw_w": 62.14,
+    "estimated_gpu_energy_wh": 0.308347
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:48:56.371",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 5.46,
+      "raw_line": "2026/06/29 18:48:56.371, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 60, 5.46",
+      "collected_at_local": "2026-06-29T18:48:56"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:48:57.427",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 5.35,
+      "raw_line": "2026/06/29 18:48:57.427, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 59, 5.35",
+      "collected_at_local": "2026-06-29T18:48:57"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:48:58.499",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 5.31,
+      "raw_line": "2026/06/29 18:48:58.499, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 59, 5.31",
+      "collected_at_local": "2026-06-29T18:48:58"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:48:59.583",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 39.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 61.95,
+      "raw_line": "2026/06/29 18:48:59.583, NVIDIA GeForce RTX 2060 with Max-Q Design, 39, 5234, 6144, 62, 61.95",
+      "collected_at_local": "2026-06-29T18:48:59"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:00.643",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 62.14,
+      "raw_line": "2026/06/29 18:49:00.643, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 63, 62.14",
+      "collected_at_local": "2026-06-29T18:49:00"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:01.704",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 61.41,
+      "raw_line": "2026/06/29 18:49:01.704, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 63, 61.41",
+      "collected_at_local": "2026-06-29T18:49:01"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:02.765",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 61.49,
+      "raw_line": "2026/06/29 18:49:02.765, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 63, 61.49",
+      "collected_at_local": "2026-06-29T18:49:02"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:03.826",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 61.64,
+      "raw_line": "2026/06/29 18:49:03.826, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 63, 61.64",
+      "collected_at_local": "2026-06-29T18:49:03"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:04.900",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 61.78,
+      "raw_line": "2026/06/29 18:49:04.900, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 63, 61.78",
+      "collected_at_local": "2026-06-29T18:49:04"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:05.964",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.34,
+      "raw_line": "2026/06/29 18:49:05.964, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 64, 61.34",
+      "collected_at_local": "2026-06-29T18:49:05"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:07.025",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.66,
+      "raw_line": "2026/06/29 18:49:07.025, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 64, 61.66",
+      "collected_at_local": "2026-06-29T18:49:07"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:08.087",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.6,
+      "raw_line": "2026/06/29 18:49:08.087, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 64, 61.60",
+      "collected_at_local": "2026-06-29T18:49:08"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:09.148",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.51,
+      "raw_line": "2026/06/29 18:49:09.148, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 64, 61.51",
+      "collected_at_local": "2026-06-29T18:49:09"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:10.209",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.94,
+      "raw_line": "2026/06/29 18:49:10.209, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 64, 61.94",
+      "collected_at_local": "2026-06-29T18:49:10"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:11.270",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.61,
+      "raw_line": "2026/06/29 18:49:11.270, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 65, 61.61",
+      "collected_at_local": "2026-06-29T18:49:11"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:12.327",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.35,
+      "raw_line": "2026/06/29 18:49:12.327, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 65, 61.35",
+      "collected_at_local": "2026-06-29T18:49:12"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:13.373",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.76,
+      "raw_line": "2026/06/29 18:49:13.373, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 65, 61.76",
+      "collected_at_local": "2026-06-29T18:49:13"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:14.430",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.59,
+      "raw_line": "2026/06/29 18:49:14.430, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 65, 61.59",
+      "collected_at_local": "2026-06-29T18:49:14"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:15.492",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.62,
+      "raw_line": "2026/06/29 18:49:15.492, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 65, 61.62",
+      "collected_at_local": "2026-06-29T18:49:15"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:16.551",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.73,
+      "raw_line": "2026/06/29 18:49:16.551, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 65, 61.73",
+      "collected_at_local": "2026-06-29T18:49:16"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 18:49:17.629",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.93,
+      "raw_line": "2026/06/29 18:49:17.629, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 65, 61.93",
+      "collected_at_local": "2026-06-29T18:49:17"
+    }
+  ],
+  "mode_id": "writing",
+  "system_prompt_path": "prompts/writing/system_writing.txt",
+  "user_prompt_path": "prompts/writing/user_writing.txt",
+  "timestamp": "2026-06-29T18:49:18"
+}

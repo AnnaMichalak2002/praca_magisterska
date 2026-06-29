@@ -1,0 +1,215 @@
+{
+  "attempt": 38,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 9.523,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "The feeling of being very worried or anxious about something.",
+        "options": [
+          "Panic",
+          "Anxiety",
+          "Fear",
+          "Stress"
+        ],
+        "answer": "Anxiety"
+      },
+      {
+        "definition": "A strong wish or determination to achieve something.",
+        "options": [
+          "Ambition",
+          "Desire",
+          "Need",
+          "Goal"
+        ],
+        "answer": "Ambition"
+      },
+      {
+        "definition": "A person who is very good at their job or skill.",
+        "options": [
+          "Expert",
+          "Master",
+          "Skilled",
+          "Genius"
+        ],
+        "answer": "Expert"
+      },
+      {
+        "definition": "A sudden bright flash of light, especially from an electrical source.",
+        "options": [
+          "Spark",
+          "Flash",
+          "Glow",
+          "Light"
+        ],
+        "answer": "Flash"
+      },
+      {
+        "definition": "The act of going to bed at the appropriate time, especially to ensure enough sleep.",
+        "options": [
+          "Sleeping",
+          "Bedtime",
+          "Resting",
+          "Slumber"
+        ],
+        "answer": "Bedtime"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"The feeling of being very worried or anxious about something.\",\n      \"options\": [\"Panic\", \"Anxiety\", \"Fear\", \"Stress\"],\n      \"answer\": \"Anxiety\"\n    },\n    {\n      \"definition\": \"A strong wish or determination to achieve something.\",\n      \"options\": [\"Ambition\", \"Desire\", \"Need\", \"Goal\"],\n      \"answer\": \"Ambition\"\n    },\n    {\n      \"definition\": \"A person who is very good at their job or skill.\",\n      \"options\": [\"Expert\", \"Master\", \"Skilled\", \"Genius\"],\n      \"answer\": \"Expert\"\n    },\n    {\n      \"definition\": \"A sudden bright flash of light, especially from an electrical source.\",\n      \"options\": [\"Spark\", \"Flash\", \"Glow\", \"Light\"],\n      \"answer\": \"Flash\"\n    },\n    {\n      \"definition\": \"The act of going to bed at the appropriate time, especially to ensure enough sleep.\",\n      \"options\": [\"Sleeping\", \"Bedtime\", \"Resting\", \"Slumber\"],\n      \"answer\": \"Bedtime\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:25:01.816033Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 7482874000,
+    "load_duration_ns": 104537100,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 334518300,
+    "eval_count": 257,
+    "eval_duration_ns": 6172500800,
+    "tokens_per_second": 41.636
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 90.5,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 59.167,
+    "max_temperature_c": 60.0,
+    "avg_power_draw_w": 61.958,
+    "max_power_draw_w": 62.45,
+    "estimated_gpu_energy_wh": 0.103264
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:24:52.330",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 5.47,
+      "raw_line": "2026/06/29 14:24:52.330, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 5.47",
+      "collected_at_local": "2026-06-29T14:24:52"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:24:53.391",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.18,
+      "raw_line": "2026/06/29 14:24:53.391, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.18",
+      "collected_at_local": "2026-06-29T14:24:53"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:24:54.457",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 6.5,
+      "raw_line": "2026/06/29 14:24:54.457, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 6.50",
+      "collected_at_local": "2026-06-29T14:24:54"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:24:55.527",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 74.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 62.45,
+      "raw_line": "2026/06/29 14:24:55.527, NVIDIA GeForce RTX 2060 with Max-Q Design, 74, 5234, 6144, 58, 62.45",
+      "collected_at_local": "2026-06-29T14:24:55"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:24:56.601",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.94,
+      "raw_line": "2026/06/29 14:24:56.601, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.94",
+      "collected_at_local": "2026-06-29T14:24:56"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:24:57.664",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.88,
+      "raw_line": "2026/06/29 14:24:57.664, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.88",
+      "collected_at_local": "2026-06-29T14:24:57"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:24:58.726",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.63,
+      "raw_line": "2026/06/29 14:24:58.726, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.63",
+      "collected_at_local": "2026-06-29T14:24:58"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:24:59.788",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 62.16,
+      "raw_line": "2026/06/29 14:24:59.788, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 60, 62.16",
+      "collected_at_local": "2026-06-29T14:24:59"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:25:00.845",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.69,
+      "raw_line": "2026/06/29 14:25:00.845, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.69",
+      "collected_at_local": "2026-06-29T14:25:00"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:25:01"
+}

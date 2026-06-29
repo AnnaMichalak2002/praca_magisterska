@@ -1,0 +1,243 @@
+{
+  "attempt": 69,
+  "model": "ministral-3:3b",
+  "endpoint": "chat",
+  "time": 13.521,
+  "success": true,
+  "response": {
+    "exercise_type": "Writing",
+    "learner_native_language": "Polski",
+    "task_content": "Write a letter to a friend from England. You must include the following information: - how old your cousin is, - what you did at the birthday party, - what the cake tasted like.",
+    "original_text": "Last weekend I was on my cousin birthday party. She have 18 years old. We dancing and play games all night. The cake is very sweet and taste chocolate.",
+    "corrected_text": "Dear [Friend's Name],\n\nLast weekend, I went to my cousin’s birthday party. She is 18 years old. We danced and played games all night long. The cake was very sweet and tasted like chocolate.\n\nBest wishes,\n[Your Name]",
+    "learner_errors": [
+      {
+        "error": "Nieprawidłowa forma czasownika – użyto 'have' zamiast 'is' w zdaniu podrzędnym (She **have** 18 years old).",
+        "explanation": "W zdaniach podrzędnych używa się czasownika *be* (am/is/are/was/were) do opisania wieku. Poprawna forma: *She is 18 years old*."
+      },
+      {
+        "error": "Brak czasownika *was* – powinien być użyty w zdaniu głównym (*I was on my cousin’s birthday party*).",
+        "explanation": "W zdaniach głównych używa się czasownika *was* (być) w przeszłości. Poprawna forma: *I went* (zamiast *was on*)."
+      },
+      {
+        "error": "Nieprawidłowe podziałanie czasownika – użyto *dancing and play* zamiast *danced and played*.",
+        "explanation": "W przeszłości używa się czasownika w formie *past simple* (*danced* zamiast *dancing*)."
+      },
+      {
+        "error": "Brak spójnika – powinien być użyty między czasownikami (*We **danced and played***).",
+        "explanation": "W zdaniach złożonych w przeszłości używa się spójników (*and*, *but*, *so*)."
+      },
+      {
+        "error": "Nieprawidłowa forma czasownika *taste* – powinien być użyty w formie *tasted* (past simple).",
+        "explanation": "W przeszłości używa się czasownika *tasted* (smakował)."
+      },
+      {
+        "error": "Brak przymiotnika w zdaniu o smaku – powinien być użyty (*The cake **was** very sweet and **tasted** chocolate*).",
+        "explanation": "Przymiotnik (*sweet*) powinien być użyty z czasownikiem *was* (być) w przeszłości."
+      }
+    ],
+    "content_compliance": "partial",
+    "content_feedback": "Twoja odpowiedź nie spełnia wszystkich wymagań zadania. Musisz napisać list do przyjaciela z Anglii i zawrzeć trzy wymienione informacje: wiek kuzynki, co zrobiłeś na urodzinach oraz smak ciasta. Pamiętaj, że w liście powinno być formalne *Dear [Name]*, a zakończenie powinno być *Best wishes* lub *Kind regards*."
+  },
+  "raw_output": "```json\n{\n  \"exercise_type\": \"Writing\",\n  \"learner_native_language\": \"Polski\",\n  \"task_content\": \"Write a letter to a friend from England. You must include the following information: - how old your cousin is, - what you did at the birthday party, - what the cake tasted like.\",\n  \"original_text\": \"Last weekend I was on my cousin birthday party. She have 18 years old. We dancing and play games all night. The cake is very sweet and taste chocolate.\",\n  \"corrected_text\": \"Dear [Friend's Name],\\n\\nLast weekend, I went to my cousin’s birthday party. She is 18 years old. We danced and played games all night long. The cake was very sweet and tasted like chocolate.\\n\\nBest wishes,\\n[Your Name]\",\n\n  \"learner_errors\": [\n    {\n      \"error\": \"Nieprawidłowa forma czasownika – użyto 'have' zamiast 'is' w zdaniu podrzędnym (She **have** 18 years old).\",\n      \"explanation\": \"W zdaniach podrzędnych używa się czasownika *be* (am/is/are/was/were) do opisania wieku. Poprawna forma: *She is 18 years old*.\"\n    },\n    {\n      \"error\": \"Brak czasownika *was* – powinien być użyty w zdaniu głównym (*I was on my cousin’s birthday party*).\",\n      \"explanation\": \"W zdaniach głównych używa się czasownika *was* (być) w przeszłości. Poprawna forma: *I went* (zamiast *was on*).\"\n    },\n    {\n      \"error\": \"Nieprawidłowe podziałanie czasownika – użyto *dancing and play* zamiast *danced and played*.\",\n      \"explanation\": \"W przeszłości używa się czasownika w formie *past simple* (*danced* zamiast *dancing*).\"\n    },\n    {\n      \"error\": \"Brak spójnika – powinien być użyty między czasownikami (*We **danced and played***).\",\n      \"explanation\": \"W zdaniach złożonych w przeszłości używa się spójników (*and*, *but*, *so*).\"\n    },\n    {\n      \"error\": \"Nieprawidłowa forma czasownika *taste* – powinien być użyty w formie *tasted* (past simple).\",\n      \"explanation\": \"W przeszłości używa się czasownika *tasted* (smakował).\"\n    },\n    {\n      \"error\": \"Brak przymiotnika w zdaniu o smaku – powinien być użyty (*The cake **was** very sweet and **tasted** chocolate*).\",\n      \"explanation\": \"Przymiotnik (*sweet*) powinien być użyty z czasownikiem *was* (być) w przeszłości.\"\n    }\n  ],\n  \"content_compliance\": \"partial\",\n  \"content_feedback\": \"Twoja odpowiedź nie spełnia wszystkich wymagań zadania. Musisz napisać list do przyjaciela z Anglii i zawrzeć trzy wymienione informacje: wiek kuzynki, co zrobiłeś na urodzinach oraz smak ciasta. Pamiętaj, że w liście powinno być formalne *Dear [Name]*, a zakończenie powinno być *Best wishes* lub *Kind regards*.\"\n}\n```",
+  "postprocessing_steps": [
+    "removed_markdown_code_fences"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 1200,
+    "temperature": 0.0,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T14:26:38.2571654Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 11490711500,
+    "load_duration_ns": 143535200,
+    "prompt_eval_count": 573,
+    "prompt_eval_duration_ns": 180728500,
+    "eval_count": 780,
+    "eval_duration_ns": 10833133700,
+    "tokens_per_second": 72.001
+  },
+  "gpu_summary": {
+    "sample_count": 13,
+    "valid_sample_count": 13,
+    "active_sample_count": 10,
+    "avg_gpu_utilization_percent": 87.3,
+    "max_gpu_utilization_percent": 91.0,
+    "avg_memory_used_mib": 4338.0,
+    "max_memory_used_mib": 4338.0,
+    "avg_temperature_c": 62.3,
+    "max_temperature_c": 63.0,
+    "avg_power_draw_w": 62.453,
+    "max_power_draw_w": 63.29,
+    "estimated_gpu_energy_wh": 0.173481
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:24.781",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 5.27,
+      "raw_line": "2026/06/29 16:26:24.781, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 58, 5.27",
+      "collected_at_local": "2026-06-29T16:26:24"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:25.847",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 5.47,
+      "raw_line": "2026/06/29 16:26:25.847, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 58, 5.47",
+      "collected_at_local": "2026-06-29T16:26:25"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:26.906",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 5.49,
+      "raw_line": "2026/06/29 16:26:26.906, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 57, 5.49",
+      "collected_at_local": "2026-06-29T16:26:26"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:27.977",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 61.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 62.65,
+      "raw_line": "2026/06/29 16:26:27.977, NVIDIA GeForce RTX 2060 with Max-Q Design, 61, 4338, 6144, 61, 62.65",
+      "collected_at_local": "2026-06-29T16:26:27"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:29.051",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 90.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 62.79,
+      "raw_line": "2026/06/29 16:26:29.051, NVIDIA GeForce RTX 2060 with Max-Q Design, 90, 4338, 6144, 61, 62.79",
+      "collected_at_local": "2026-06-29T16:26:29"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:30.111",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 90.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 61.86,
+      "raw_line": "2026/06/29 16:26:30.111, NVIDIA GeForce RTX 2060 with Max-Q Design, 90, 4338, 6144, 62, 61.86",
+      "collected_at_local": "2026-06-29T16:26:30"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:31.176",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 90.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 63.29,
+      "raw_line": "2026/06/29 16:26:31.176, NVIDIA GeForce RTX 2060 with Max-Q Design, 90, 4338, 6144, 62, 63.29",
+      "collected_at_local": "2026-06-29T16:26:31"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:32.241",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 90.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 62.75,
+      "raw_line": "2026/06/29 16:26:32.241, NVIDIA GeForce RTX 2060 with Max-Q Design, 90, 4338, 6144, 62, 62.75",
+      "collected_at_local": "2026-06-29T16:26:32"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:33.306",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 90.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 62.15,
+      "raw_line": "2026/06/29 16:26:33.306, NVIDIA GeForce RTX 2060 with Max-Q Design, 90, 4338, 6144, 63, 62.15",
+      "collected_at_local": "2026-06-29T16:26:33"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:34.367",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 90.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 62.19,
+      "raw_line": "2026/06/29 16:26:34.367, NVIDIA GeForce RTX 2060 with Max-Q Design, 90, 4338, 6144, 63, 62.19",
+      "collected_at_local": "2026-06-29T16:26:34"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:35.427",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 91.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 62.37,
+      "raw_line": "2026/06/29 16:26:35.427, NVIDIA GeForce RTX 2060 with Max-Q Design, 91, 4338, 6144, 63, 62.37",
+      "collected_at_local": "2026-06-29T16:26:35"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:36.491",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 91.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 62.5,
+      "raw_line": "2026/06/29 16:26:36.491, NVIDIA GeForce RTX 2060 with Max-Q Design, 91, 4338, 6144, 63, 62.50",
+      "collected_at_local": "2026-06-29T16:26:36"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 16:26:37.552",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 90.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 61.98,
+      "raw_line": "2026/06/29 16:26:37.552, NVIDIA GeForce RTX 2060 with Max-Q Design, 90, 4338, 6144, 63, 61.98",
+      "collected_at_local": "2026-06-29T16:26:37"
+    }
+  ],
+  "mode_id": "writing",
+  "system_prompt_path": "prompts/writing/system_writing.txt",
+  "user_prompt_path": "prompts/writing/user_writing.txt",
+  "timestamp": "2026-06-29T16:26:38"
+}

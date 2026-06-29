@@ -1,0 +1,215 @@
+{
+  "attempt": 100,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 9.364,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "The state of having a lot of money or valuable things.",
+        "options": [
+          "Wealth",
+          "Poverty",
+          "Destitution",
+          "Poorness"
+        ],
+        "answer": "Wealth"
+      },
+      {
+        "definition": "A person who is very famous for their acting skills.",
+        "options": [
+          "Director",
+          "Actor",
+          "Critic",
+          "Producer"
+        ],
+        "answer": "Actor"
+      },
+      {
+        "definition": "A large body of water surrounded by land.",
+        "options": [
+          "Ocean",
+          "Lake",
+          "River",
+          "Sea"
+        ],
+        "answer": "Sea"
+      },
+      {
+        "definition": "A situation where there is a complete lack of food.",
+        "options": [
+          "Famine",
+          "Hunger",
+          "Starvation",
+          "Scarcity"
+        ],
+        "answer": "Famine"
+      },
+      {
+        "definition": "A group of people living together in one building.",
+        "options": [
+          "Community",
+          "Family",
+          "Household",
+          "Colony"
+        ],
+        "answer": "Household"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"The state of having a lot of money or valuable things.\",\n      \"options\": [\"Wealth\", \"Poverty\", \"Destitution\", \"Poorness\"],\n      \"answer\": \"Wealth\"\n    },\n    {\n      \"definition\": \"A person who is very famous for their acting skills.\",\n      \"options\": [\"Director\", \"Actor\", \"Critic\", \"Producer\"],\n      \"answer\": \"Actor\"\n    },\n    {\n      \"definition\": \"A large body of water surrounded by land.\",\n      \"options\": [\"Ocean\", \"Lake\", \"River\", \"Sea\"],\n      \"answer\": \"Sea\"\n    },\n    {\n      \"definition\": \"A situation where there is a complete lack of food.\",\n      \"options\": [\"Famine\", \"Hunger\", \"Starvation\", \"Scarcity\"],\n      \"answer\": \"Famine\"\n    },\n    {\n      \"definition\": \"A group of people living together in one building.\",\n      \"options\": [\"Community\", \"Family\", \"Household\", \"Colony\"],\n      \"answer\": \"Household\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:39:59.5507901Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 7295551300,
+    "load_duration_ns": 96027200,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 360350400,
+    "eval_count": 249,
+    "eval_duration_ns": 6708013700,
+    "tokens_per_second": 37.12
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 84.167,
+    "max_gpu_utilization_percent": 95.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 58.5,
+    "max_temperature_c": 59.0,
+    "avg_power_draw_w": 61.96,
+    "max_power_draw_w": 63.06,
+    "estimated_gpu_energy_wh": 0.103267
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:39:50.231",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.37,
+      "raw_line": "2026/06/29 14:39:50.231, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.37",
+      "collected_at_local": "2026-06-29T14:39:50"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:39:51.304",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.18,
+      "raw_line": "2026/06/29 14:39:51.304, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.18",
+      "collected_at_local": "2026-06-29T14:39:51"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:39:52.364",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 54.0,
+      "power_draw_w": 5.36,
+      "raw_line": "2026/06/29 14:39:52.364, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 54, 5.36",
+      "collected_at_local": "2026-06-29T14:39:52"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:39:53.444",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 36.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 61.7,
+      "raw_line": "2026/06/29 14:39:53.444, NVIDIA GeForce RTX 2060 with Max-Q Design, 36, 5234, 6144, 57, 61.70",
+      "collected_at_local": "2026-06-29T14:39:53"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:39:54.499",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 61.59,
+      "raw_line": "2026/06/29 14:39:54.499, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5234, 6144, 58, 61.59",
+      "collected_at_local": "2026-06-29T14:39:54"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:39:55.569",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.94,
+      "raw_line": "2026/06/29 14:39:55.569, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 59, 61.94",
+      "collected_at_local": "2026-06-29T14:39:55"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:39:56.641",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.99,
+      "raw_line": "2026/06/29 14:39:56.641, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.99",
+      "collected_at_local": "2026-06-29T14:39:56"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:39:57.707",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 63.06,
+      "raw_line": "2026/06/29 14:39:57.707, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 63.06",
+      "collected_at_local": "2026-06-29T14:39:57"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:39:58.777",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.48,
+      "raw_line": "2026/06/29 14:39:58.777, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 59, 61.48",
+      "collected_at_local": "2026-06-29T14:39:58"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:39:59"
+}

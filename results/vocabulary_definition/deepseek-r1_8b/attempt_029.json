@@ -1,0 +1,210 @@
+{
+  "attempt": 29,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 8.741,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who creates music.",
+        "options": [
+          "composer",
+          "conductor",
+          "performer"
+        ],
+        "answer": "composer"
+      },
+      {
+        "definition": "A large building used for meetings or official business.",
+        "options": [
+          "palace",
+          "office",
+          "building"
+        ],
+        "answer": "palace"
+      },
+      {
+        "definition": "A person who studies the law and helps people with legal problems.",
+        "options": [
+          "lawyer",
+          "judge",
+          "magistrate"
+        ],
+        "answer": "lawyer"
+      },
+      {
+        "definition": "A large group of people living together in a town or city.",
+        "options": [
+          "colony",
+          "community",
+          "population"
+        ],
+        "answer": "community"
+      },
+      {
+        "definition": "A person who is trained to care for sick or injured people.",
+        "options": [
+          "nurse",
+          "doctor",
+          "physician"
+        ],
+        "answer": "nurse"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who creates music.\",\n      \"options\": [\"composer\", \"conductor\", \"performer\"],\n      \"answer\": \"composer\"\n    },\n    {\n      \"definition\": \"A large building used for meetings or official business.\",\n      \"options\": [\"palace\", \"office\", \"building\"],\n      \"answer\": \"palace\"\n    },\n    {\n      \"definition\": \"A person who studies the law and helps people with legal problems.\",\n      \"options\": [\"lawyer\", \"judge\", \"magistrate\"],\n      \"answer\": \"lawyer\"\n    },\n    {\n      \"definition\": \"A large group of people living together in a town or city.\",\n      \"options\": [\"colony\", \"community\", \"population\"],\n      \"answer\": \"community\"\n    },\n    {\n      \"definition\": \"A person who is trained to care for sick or injured people.\",\n      \"options\": [\"nurse\", \"doctor\", \"physician\"],\n      \"answer\": \"nurse\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:22:52.3317944Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 6694797200,
+    "load_duration_ns": 102895500,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 296257500,
+    "eval_count": 231,
+    "eval_duration_ns": 5352884400,
+    "tokens_per_second": 43.154
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 89.167,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 59.333,
+    "max_temperature_c": 60.0,
+    "avg_power_draw_w": 61.953,
+    "max_power_draw_w": 62.21,
+    "estimated_gpu_energy_wh": 0.103256
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:43.634",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 5.11,
+      "raw_line": "2026/06/29 14:22:43.634, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 5.11",
+      "collected_at_local": "2026-06-29T14:22:43"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:44.695",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.32,
+      "raw_line": "2026/06/29 14:22:44.695, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.32",
+      "collected_at_local": "2026-06-29T14:22:44"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:45.761",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 6.47,
+      "raw_line": "2026/06/29 14:22:45.761, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 6.47",
+      "collected_at_local": "2026-06-29T14:22:45"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:46.843",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 67.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 62.21,
+      "raw_line": "2026/06/29 14:22:46.843, NVIDIA GeForce RTX 2060 with Max-Q Design, 67, 5234, 6144, 58, 62.21",
+      "collected_at_local": "2026-06-29T14:22:46"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:47.905",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.73,
+      "raw_line": "2026/06/29 14:22:47.905, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 59, 61.73",
+      "collected_at_local": "2026-06-29T14:22:47"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:48.965",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.94,
+      "raw_line": "2026/06/29 14:22:48.965, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.94",
+      "collected_at_local": "2026-06-29T14:22:48"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:50.027",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.93,
+      "raw_line": "2026/06/29 14:22:50.027, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.93",
+      "collected_at_local": "2026-06-29T14:22:50"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:51.073",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.96,
+      "raw_line": "2026/06/29 14:22:51.073, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 60, 61.96",
+      "collected_at_local": "2026-06-29T14:22:51"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:52.135",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.95,
+      "raw_line": "2026/06/29 14:22:52.135, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.95",
+      "collected_at_local": "2026-06-29T14:22:52"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:22:52"
+}

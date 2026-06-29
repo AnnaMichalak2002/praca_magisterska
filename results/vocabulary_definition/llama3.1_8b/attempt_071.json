@@ -1,0 +1,234 @@
+{
+  "attempt": 71,
+  "model": "llama3.1:8b",
+  "endpoint": "chat",
+  "time": 11.682,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who travels to a place for pleasure, especially one who does not work while they are there.",
+        "options": [
+          "Tourist",
+          "Traveler",
+          "Holidaymaker"
+        ],
+        "answer": "Tourist"
+      },
+      {
+        "definition": "A large body of water that is usually surrounded by land and contains salt or seawater.",
+        "options": [
+          "River",
+          "Lake",
+          "Ocean"
+        ],
+        "answer": "Ocean"
+      },
+      {
+        "definition": "A person who is responsible for a child while the parents are not present.",
+        "options": [
+          "Nanny",
+          "Teacher",
+          "Governor"
+        ],
+        "answer": "Nanny"
+      },
+      {
+        "definition": "A feeling of great happiness and excitement, especially when you achieve something you have been working towards.",
+        "options": [
+          "Pride",
+          "Joy",
+          "Satisfaction"
+        ],
+        "answer": "Satisfaction"
+      },
+      {
+        "definition": "A person who is in charge of a country or state.",
+        "options": [
+          "President",
+          "Prime Minister",
+          "Governor"
+        ],
+        "answer": "Prime Minister"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who travels to a place for pleasure, especially one who does not work while they are there.\",\n      \"options\": [\"Tourist\", \"Traveler\", \"Holidaymaker\"],\n      \"answer\": \"Tourist\"\n    },\n    {\n      \"definition\": \"A large body of water that is usually surrounded by land and contains salt or seawater.\",\n      \"options\": [\"River\", \"Lake\", \"Ocean\"],\n      \"answer\": \"Ocean\"\n    },\n    {\n      \"definition\": \"A person who is responsible for a child while the parents are not present.\",\n      \"options\": [\"Nanny\", \"Teacher\", \"Governor\"],\n      \"answer\": \"Nanny\"\n    },\n    {\n      \"definition\": \"A feeling of great happiness and excitement, especially when you achieve something you have been working towards.\",\n      \"options\": [\"Pride\", \"Joy\", \"Satisfaction\"],\n      \"answer\": \"Satisfaction\"\n    },\n    {\n      \"definition\": \"A person who is in charge of a country or state.\",\n      \"options\": [\"President\", \"Prime Minister\", \"Governor\"],\n      \"answer\": \"Prime Minister\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T08:55:40.9241813Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 9601003600,
+    "load_duration_ns": 125335200,
+    "prompt_eval_count": 216,
+    "prompt_eval_duration_ns": 300965700,
+    "eval_count": 263,
+    "eval_duration_ns": 8262467600,
+    "tokens_per_second": 31.831
+  },
+  "gpu_summary": {
+    "sample_count": 11,
+    "valid_sample_count": 11,
+    "active_sample_count": 8,
+    "avg_gpu_utilization_percent": 53.25,
+    "max_gpu_utilization_percent": 70.0,
+    "avg_memory_used_mib": 5114.0,
+    "max_memory_used_mib": 5114.0,
+    "avg_temperature_c": 64.5,
+    "max_temperature_c": 66.0,
+    "avg_power_draw_w": 60.526,
+    "max_power_draw_w": 61.4,
+    "estimated_gpu_energy_wh": 0.134503
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:29.282",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 11.32,
+      "raw_line": "2026/06/29 10:55:29.282, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 60, 11.32",
+      "collected_at_local": "2026-06-29T10:55:29"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:30.344",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 11.5,
+      "raw_line": "2026/06/29 10:55:30.344, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 60, 11.50",
+      "collected_at_local": "2026-06-29T10:55:30"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:31.401",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 5.67,
+      "raw_line": "2026/06/29 10:55:31.401, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 59, 5.67",
+      "collected_at_local": "2026-06-29T10:55:31"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:32.486",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 9.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 59.82,
+      "raw_line": "2026/06/29 10:55:32.486, NVIDIA GeForce RTX 2060 with Max-Q Design, 9, 5114, 6144, 63, 59.82",
+      "collected_at_local": "2026-06-29T10:55:32"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:33.557",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 70.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.2,
+      "raw_line": "2026/06/29 10:55:33.557, NVIDIA GeForce RTX 2060 with Max-Q Design, 70, 5114, 6144, 64, 61.20",
+      "collected_at_local": "2026-06-29T10:55:33"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:34.625",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.7,
+      "raw_line": "2026/06/29 10:55:34.625, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 64, 60.70",
+      "collected_at_local": "2026-06-29T10:55:34"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:35.705",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 58.88,
+      "raw_line": "2026/06/29 10:55:35.705, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 58.88",
+      "collected_at_local": "2026-06-29T10:55:35"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:36.773",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.31,
+      "raw_line": "2026/06/29 10:55:36.773, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 61.31",
+      "collected_at_local": "2026-06-29T10:55:36"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:37.840",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 60.09,
+      "raw_line": "2026/06/29 10:55:37.840, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 65, 60.09",
+      "collected_at_local": "2026-06-29T10:55:37"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:38.906",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 59.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 60.81,
+      "raw_line": "2026/06/29 10:55:38.906, NVIDIA GeForce RTX 2060 with Max-Q Design, 59, 5114, 6144, 65, 60.81",
+      "collected_at_local": "2026-06-29T10:55:38"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:55:39.973",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 66.0,
+      "power_draw_w": 61.4,
+      "raw_line": "2026/06/29 10:55:39.973, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 66, 61.40",
+      "collected_at_local": "2026-06-29T10:55:39"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T10:55:40"
+}

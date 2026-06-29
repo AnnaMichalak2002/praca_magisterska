@@ -1,0 +1,210 @@
+{
+  "attempt": 55,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 8.564,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who creates or performs music.",
+        "options": [
+          "composer",
+          "musician",
+          "singer"
+        ],
+        "answer": "musician"
+      },
+      {
+        "definition": "A large body of water surrounded by land.",
+        "options": [
+          "lake",
+          "ocean",
+          "river"
+        ],
+        "answer": "lake"
+      },
+      {
+        "definition": "A sudden, strong, and unexpected event.",
+        "options": [
+          "accident",
+          "crisis",
+          "incident"
+        ],
+        "answer": "incident"
+      },
+      {
+        "definition": "A large, heavy, and somewhat rigid structure.",
+        "options": [
+          "building",
+          "structure",
+          "edifice"
+        ],
+        "answer": "building"
+      },
+      {
+        "definition": "A person who is trained to help sick or injured people.",
+        "options": [
+          "nurse",
+          "doctor",
+          "paramedic"
+        ],
+        "answer": "paramedic"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who creates or performs music.\",\n      \"options\": [\"composer\", \"musician\", \"singer\"],\n      \"answer\": \"musician\"\n    },\n    {\n      \"definition\": \"A large body of water surrounded by land.\",\n      \"options\": [\"lake\", \"ocean\", \"river\"],\n      \"answer\": \"lake\"\n    },\n    {\n      \"definition\": \"A sudden, strong, and unexpected event.\",\n      \"options\": [\"accident\", \"crisis\", \"incident\"],\n      \"answer\": \"incident\"\n    },\n    {\n      \"definition\": \"A large, heavy, and somewhat rigid structure.\",\n      \"options\": [\"building\", \"structure\", \"edifice\"],\n      \"answer\": \"building\"\n    },\n    {\n      \"definition\": \"A person who is trained to help sick or injured people.\",\n      \"options\": [\"nurse\", \"doctor\", \"paramedic\"],\n      \"answer\": \"paramedic\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:29:08.2292587Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 6484367500,
+    "load_duration_ns": 104301500,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 296715900,
+    "eval_count": 223,
+    "eval_duration_ns": 5274984200,
+    "tokens_per_second": 42.275
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 92.0,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 59.167,
+    "max_temperature_c": 60.0,
+    "avg_power_draw_w": 61.88,
+    "max_power_draw_w": 62.66,
+    "estimated_gpu_energy_wh": 0.103133
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:28:59.701",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 11.34,
+      "raw_line": "2026/06/29 14:28:59.701, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 11.34",
+      "collected_at_local": "2026-06-29T14:28:59"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:29:00.772",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 11.38,
+      "raw_line": "2026/06/29 14:29:00.772, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 11.38",
+      "collected_at_local": "2026-06-29T14:29:00"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:29:01.837",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.26,
+      "raw_line": "2026/06/29 14:29:01.837, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.26",
+      "collected_at_local": "2026-06-29T14:29:01"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:29:02.889",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 83.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 62.66,
+      "raw_line": "2026/06/29 14:29:02.889, NVIDIA GeForce RTX 2060 with Max-Q Design, 83, 5234, 6144, 58, 62.66",
+      "collected_at_local": "2026-06-29T14:29:02"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:29:03.948",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.99,
+      "raw_line": "2026/06/29 14:29:03.948, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.99",
+      "collected_at_local": "2026-06-29T14:29:03"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:29:05.007",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 62.09,
+      "raw_line": "2026/06/29 14:29:05.007, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 62.09",
+      "collected_at_local": "2026-06-29T14:29:05"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:29:06.062",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.58,
+      "raw_line": "2026/06/29 14:29:06.062, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.58",
+      "collected_at_local": "2026-06-29T14:29:06"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:29:07.121",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.62,
+      "raw_line": "2026/06/29 14:29:07.121, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.62",
+      "collected_at_local": "2026-06-29T14:29:07"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:29:08.181",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.34,
+      "raw_line": "2026/06/29 14:29:08.181, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 60, 61.34",
+      "collected_at_local": "2026-06-29T14:29:08"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:29:08"
+}

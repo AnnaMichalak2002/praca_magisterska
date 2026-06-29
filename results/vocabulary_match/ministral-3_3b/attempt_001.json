@@ -1,0 +1,158 @@
+{
+  "attempt": 1,
+  "model": "ministral-3:3b",
+  "endpoint": "chat",
+  "time": 6.249,
+  "success": true,
+  "response": {
+    "exercise_type": "matching",
+    "topic": "IT",
+    "words": [
+      "algorithm",
+      "router",
+      "gigabyte",
+      "firewall",
+      "API",
+      "cloud computing",
+      "bug",
+      "password"
+    ],
+    "translations": [
+      "komputerowa sieć routera",
+      "komputerowa sieć bezprzewodowa",
+      "obszar danych w komputerze",
+      "zaszyfrowany kod dostępu",
+      "program komputerowy do rozwiązywania problemów",
+      "kolekcja błędów w programie",
+      "interfejs programistyczny",
+      "komputerowe obliczenia w chmurze"
+    ],
+    "answer_key": {
+      "algorithm": "program komputerowy do rozwiązywania problemów",
+      "router": "komputerowa sieć routera",
+      "gigabyte": "obszar danych w komputerze",
+      "firewall": "interfejs programistyczny",
+      "API": "komputerowe obliczenia w chmurze",
+      "cloud computing": "komputerowa sieć bezprzewodowa",
+      "bug": "kolekcja błędów w programie",
+      "password": "zaszyfrowany kod dostępu"
+    }
+  },
+  "raw_output": "{\n  \"exercise_type\": \"matching\",\n  \"topic\": \"IT\",\n  \"words\": [\"algorithm\", \"router\", \"gigabyte\", \"firewall\", \"API\", \"cloud computing\", \"bug\", \"password\"],\n  \"translations\": [\"komputerowa sieć routera\", \"komputerowa sieć bezprzewodowa\", \"obszar danych w komputerze\", \"zaszyfrowany kod dostępu\", \"program komputerowy do rozwiązywania problemów\", \"kolekcja błędów w programie\", \"interfejs programistyczny\", \"komputerowe obliczenia w chmurze\"],\n  \"answer_key\": {\n    \"algorithm\": \"program komputerowy do rozwiązywania problemów\",\n    \"router\": \"komputerowa sieć routera\",\n    \"gigabyte\": \"obszar danych w komputerze\",\n    \"firewall\": \"interfejs programistyczny\",\n    \"API\": \"komputerowe obliczenia w chmurze\",\n    \"cloud computing\": \"komputerowa sieć bezprzewodowa\",\n    \"bug\": \"kolekcja błędów w programie\",\n    \"password\": \"zaszyfrowany kod dostępu\"\n  }\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T06:09:56.2145305Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 4201155300,
+    "load_duration_ns": 145341200,
+    "prompt_eval_count": 216,
+    "prompt_eval_duration_ns": 169780900,
+    "eval_count": 275,
+    "eval_duration_ns": 3773908500,
+    "tokens_per_second": 72.869
+  },
+  "gpu_summary": {
+    "sample_count": 6,
+    "valid_sample_count": 6,
+    "active_sample_count": 4,
+    "avg_gpu_utilization_percent": 67.25,
+    "max_gpu_utilization_percent": 89.0,
+    "avg_memory_used_mib": 4338.0,
+    "max_memory_used_mib": 4338.0,
+    "avg_temperature_c": 61.25,
+    "max_temperature_c": 62.0,
+    "avg_power_draw_w": 55.568,
+    "max_power_draw_w": 62.78,
+    "estimated_gpu_energy_wh": 0.061742
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:09:50.006",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 64.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 36.06,
+      "raw_line": "2026/06/29 08:09:50.006, NVIDIA GeForce RTX 2060 with Max-Q Design, 64, 4338, 6144, 60, 36.06",
+      "collected_at_local": "2026-06-29T08:09:50"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:09:51.064",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 22.95,
+      "raw_line": "2026/06/29 08:09:51.064, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 59, 22.95",
+      "collected_at_local": "2026-06-29T08:09:51"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:09:52.123",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 22.14,
+      "raw_line": "2026/06/29 08:09:52.123, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 58, 22.14",
+      "collected_at_local": "2026-06-29T08:09:52"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:09:53.184",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 27.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 62.78,
+      "raw_line": "2026/06/29 08:09:53.184, NVIDIA GeForce RTX 2060 with Max-Q Design, 27, 4338, 6144, 61, 62.78",
+      "collected_at_local": "2026-06-29T08:09:53"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:09:54.242",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 61.9,
+      "raw_line": "2026/06/29 08:09:54.242, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 62, 61.90",
+      "collected_at_local": "2026-06-29T08:09:54"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:09:55.300",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 61.53,
+      "raw_line": "2026/06/29 08:09:55.300, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 62, 61.53",
+      "collected_at_local": "2026-06-29T08:09:55"
+    }
+  ],
+  "mode_id": "vocabulary_match",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_match.txt",
+  "timestamp": "2026-06-29T08:09:56"
+}

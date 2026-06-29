@@ -1,0 +1,227 @@
+{
+  "attempt": 50,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 9.896,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who is responsible for the official records of a company or organization.",
+        "options": [
+          "archivist",
+          "administrator",
+          "accountant",
+          "clerk"
+        ],
+        "answer": "administrator"
+      },
+      {
+        "definition": "A formal statement of the nature and aims of an organization.",
+        "options": [
+          "mission statement",
+          "policy document",
+          "objectives list",
+          "goals statement"
+        ],
+        "answer": "mission statement"
+      },
+      {
+        "definition": "The act of creating a copy of something that does not exist in physical form, such as a digital version.",
+        "options": [
+          "digitization",
+          "virtualization",
+          "replication",
+          "simulation"
+        ],
+        "answer": "digitization"
+      },
+      {
+        "definition": "A person who is paid to perform services or work for someone else.",
+        "options": [
+          "employee",
+          "contractor",
+          "staff member",
+          "worker"
+        ],
+        "answer": "contractor"
+      },
+      {
+        "definition": "A detailed plan or description of a project or system.",
+        "options": [
+          "specification",
+          "blueprint",
+          "outline",
+          "description"
+        ],
+        "answer": "specification"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who is responsible for the official records of a company or organization.\",\n      \"options\": [\"archivist\", \"administrator\", \"accountant\", \"clerk\"],\n      \"answer\": \"administrator\"\n    },\n    {\n      \"definition\": \"A formal statement of the nature and aims of an organization.\",\n      \"options\": [\"mission statement\", \"policy document\", \"objectives list\", \"goals statement\"],\n      \"answer\": \"mission statement\"\n    },\n    {\n      \"definition\": \"The act of creating a copy of something that does not exist in physical form, such as a digital version.\",\n      \"options\": [\"digitization\", \"virtualization\", \"replication\", \"simulation\"],\n      \"answer\": \"digitization\"\n    },\n    {\n      \"definition\": \"A person who is paid to perform services or work for someone else.\",\n      \"options\": [\"employee\", \"contractor\", \"staff member\", \"worker\"],\n      \"answer\": \"contractor\"\n    },\n    {\n      \"definition\": \"A detailed plan or description of a project or system.\",\n      \"options\": [\"specification\", \"blueprint\", \"outline\", \"description\"],\n      \"answer\": \"specification\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:27:58.1318355Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 7837355000,
+    "load_duration_ns": 104406900,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 297122800,
+    "eval_count": 273,
+    "eval_duration_ns": 6586072700,
+    "tokens_per_second": 41.451
+  },
+  "gpu_summary": {
+    "sample_count": 10,
+    "valid_sample_count": 10,
+    "active_sample_count": 7,
+    "avg_gpu_utilization_percent": 92.143,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 59.571,
+    "max_temperature_c": 61.0,
+    "avg_power_draw_w": 62.13,
+    "max_power_draw_w": 63.63,
+    "estimated_gpu_energy_wh": 0.120808
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:27:48.274",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 11.31,
+      "raw_line": "2026/06/29 14:27:48.274, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 11.31",
+      "collected_at_local": "2026-06-29T14:27:48"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:27:49.333",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.29,
+      "raw_line": "2026/06/29 14:27:49.333, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.29",
+      "collected_at_local": "2026-06-29T14:27:49"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:27:50.404",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.18,
+      "raw_line": "2026/06/29 14:27:50.404, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.18",
+      "collected_at_local": "2026-06-29T14:27:50"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:27:51.484",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 63.63,
+      "raw_line": "2026/06/29 14:27:51.484, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5234, 6144, 58, 63.63",
+      "collected_at_local": "2026-06-29T14:27:51"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:27:52.542",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 62.16,
+      "raw_line": "2026/06/29 14:27:52.542, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 62.16",
+      "collected_at_local": "2026-06-29T14:27:52"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:27:53.612",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.83,
+      "raw_line": "2026/06/29 14:27:53.612, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.83",
+      "collected_at_local": "2026-06-29T14:27:53"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:27:54.674",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 62.12,
+      "raw_line": "2026/06/29 14:27:54.674, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 60, 62.12",
+      "collected_at_local": "2026-06-29T14:27:54"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:27:55.751",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 62.15,
+      "raw_line": "2026/06/29 14:27:55.751, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 62.15",
+      "collected_at_local": "2026-06-29T14:27:55"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:27:56.815",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.07,
+      "raw_line": "2026/06/29 14:27:56.815, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 60, 61.07",
+      "collected_at_local": "2026-06-29T14:27:56"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:27:57.875",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 61.95,
+      "raw_line": "2026/06/29 14:27:57.875, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 61, 61.95",
+      "collected_at_local": "2026-06-29T14:27:57"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:27:58"
+}

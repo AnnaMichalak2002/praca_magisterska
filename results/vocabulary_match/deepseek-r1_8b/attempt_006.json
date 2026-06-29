@@ -1,0 +1,170 @@
+{
+  "attempt": 6,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 6.814,
+  "success": true,
+  "response": {
+    "exercise_type": "matching",
+    "topic": "IT",
+    "words": [
+      "algorithm",
+      "bug",
+      "cloud",
+      "data",
+      "firewall",
+      "interface",
+      "kernel",
+      "network"
+    ],
+    "translations": [
+      "błąk",
+      "błąd",
+      "chmur",
+      "dane",
+      "interfejs",
+      "jądro",
+      "sieć",
+      "program"
+    ],
+    "answer_key": {
+      "algorithm": "program",
+      "bug": "błąd",
+      "cloud": "chmur",
+      "data": "dane",
+      "firewall": "barier",
+      "interface": "interfejs",
+      "kernel": "jądro",
+      "network": "sieć"
+    }
+  },
+  "raw_output": "{\n  \"exercise_type\": \"matching\",\n  \"topic\": \"IT\",\n  \"words\": [\"algorithm\", \"bug\", \"cloud\", \"data\", \"firewall\", \"interface\", \"kernel\", \"network\"],\n  \"translations\": [\"błąk\", \"błąd\", \"chmur\", \"dane\", \"interfejs\", \"jądro\", \"sieć\", \"program\"],\n  \"answer_key\": {\n    \"algorithm\": \"program\",\n    \"bug\": \"błąd\",\n    \"cloud\": \"chmur\",\n    \"data\": \"dane\",\n    \"firewall\": \"barier\",\n    \"interface\": \"interfejs\",\n    \"kernel\": \"jądro\",\n    \"network\": \"sieć\"\n  }\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:41:08.1306349Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 4755149400,
+    "load_duration_ns": 102579500,
+    "prompt_eval_count": 214,
+    "prompt_eval_duration_ns": 293087300,
+    "eval_count": 159,
+    "eval_duration_ns": 3841365100,
+    "tokens_per_second": 41.392
+  },
+  "gpu_summary": {
+    "sample_count": 7,
+    "valid_sample_count": 7,
+    "active_sample_count": 4,
+    "avg_gpu_utilization_percent": 86.5,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 57.25,
+    "max_temperature_c": 58.0,
+    "avg_power_draw_w": 61.593,
+    "max_power_draw_w": 61.94,
+    "estimated_gpu_energy_wh": 0.068436
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:41:01.363",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 54.0,
+      "power_draw_w": 5.5,
+      "raw_line": "2026/06/29 14:41:01.363, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 54, 5.50",
+      "collected_at_local": "2026-06-29T14:41:01"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:41:02.426",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 54.0,
+      "power_draw_w": 5.27,
+      "raw_line": "2026/06/29 14:41:02.426, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 54, 5.27",
+      "collected_at_local": "2026-06-29T14:41:02"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:41:03.485",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 53.0,
+      "power_draw_w": 5.11,
+      "raw_line": "2026/06/29 14:41:03.485, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 53, 5.11",
+      "collected_at_local": "2026-06-29T14:41:03"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:41:04.554",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 64.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 61.94,
+      "raw_line": "2026/06/29 14:41:04.554, NVIDIA GeForce RTX 2060 with Max-Q Design, 64, 5234, 6144, 56, 61.94",
+      "collected_at_local": "2026-06-29T14:41:04"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:41:05.614",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 61.71,
+      "raw_line": "2026/06/29 14:41:05.614, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 57, 61.71",
+      "collected_at_local": "2026-06-29T14:41:05"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:41:06.688",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 61.17,
+      "raw_line": "2026/06/29 14:41:06.688, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 58, 61.17",
+      "collected_at_local": "2026-06-29T14:41:06"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:41:07.763",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 61.55,
+      "raw_line": "2026/06/29 14:41:07.763, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 58, 61.55",
+      "collected_at_local": "2026-06-29T14:41:07"
+    }
+  ],
+  "mode_id": "vocabulary_match",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_match.txt",
+  "timestamp": "2026-06-29T14:41:08"
+}

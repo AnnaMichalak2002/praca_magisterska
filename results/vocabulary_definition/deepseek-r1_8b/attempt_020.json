@@ -1,0 +1,215 @@
+{
+  "attempt": 20,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 9.516,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who is responsible for designing and creating computer programs.",
+        "options": [
+          "programmer",
+          "engineer",
+          "developer",
+          "creator"
+        ],
+        "answer": "programmer"
+      },
+      {
+        "definition": "A large body of water that is surrounded by land.",
+        "options": [
+          "ocean",
+          "sea",
+          "lake",
+          "river"
+        ],
+        "answer": "lake"
+      },
+      {
+        "definition": "A type of fruit that is typically green, rough, and contains seeds.",
+        "options": [
+          "apple",
+          "banana",
+          "coconut",
+          "grape"
+        ],
+        "answer": "coconut"
+      },
+      {
+        "definition": "A person who studies the natural world, especially plants and animals.",
+        "options": [
+          "artist",
+          "scientist",
+          "naturalist",
+          "writer"
+        ],
+        "answer": "naturalist"
+      },
+      {
+        "definition": "A large, powerful, and dangerous wild animal that is typically striped.",
+        "options": [
+          "lion",
+          "tiger",
+          "bear",
+          "leopard"
+        ],
+        "answer": "leopard"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who is responsible for designing and creating computer programs.\",\n      \"options\": [\"programmer\", \"engineer\", \"developer\", \"creator\"],\n      \"answer\": \"programmer\"\n    },\n    {\n      \"definition\": \"A large body of water that is surrounded by land.\",\n      \"options\": [\"ocean\", \"sea\", \"lake\", \"river\"],\n      \"answer\": \"lake\"\n    },\n    {\n      \"definition\": \"A type of fruit that is typically green, rough, and contains seeds.\",\n      \"options\": [\"apple\", \"banana\", \"coconut\", \"grape\"],\n      \"answer\": \"coconut\"\n    },\n    {\n      \"definition\": \"A person who studies the natural world, especially plants and animals.\",\n      \"options\": [\"artist\", \"scientist\", \"naturalist\", \"writer\"],\n      \"answer\": \"naturalist\"\n    },\n    {\n      \"definition\": \"A large, powerful, and dangerous wild animal that is typically striped.\",\n      \"options\": [\"lion\", \"tiger\", \"bear\", \"leopard\"],\n      \"answer\": \"leopard\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:20:40.0598412Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 7466190500,
+    "load_duration_ns": 104250300,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 316633600,
+    "eval_count": 258,
+    "eval_duration_ns": 6006639300,
+    "tokens_per_second": 42.952
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 92.833,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 59.833,
+    "max_temperature_c": 61.0,
+    "avg_power_draw_w": 61.728,
+    "max_power_draw_w": 62.18,
+    "estimated_gpu_energy_wh": 0.102881
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:20:30.593",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 11.11,
+      "raw_line": "2026/06/29 14:20:30.593, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 11.11",
+      "collected_at_local": "2026-06-29T14:20:30"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:20:31.659",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 5.39,
+      "raw_line": "2026/06/29 14:20:31.659, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 5.39",
+      "collected_at_local": "2026-06-29T14:20:31"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:20:32.731",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 7.51,
+      "raw_line": "2026/06/29 14:20:32.731, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 7.51",
+      "collected_at_local": "2026-06-29T14:20:32"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:20:33.799",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 88.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.98,
+      "raw_line": "2026/06/29 14:20:33.799, NVIDIA GeForce RTX 2060 with Max-Q Design, 88, 5234, 6144, 59, 61.98",
+      "collected_at_local": "2026-06-29T14:20:33"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:20:34.876",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.34,
+      "raw_line": "2026/06/29 14:20:34.876, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.34",
+      "collected_at_local": "2026-06-29T14:20:34"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:20:35.936",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.26,
+      "raw_line": "2026/06/29 14:20:35.936, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.26",
+      "collected_at_local": "2026-06-29T14:20:35"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:20:36.997",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 62.18,
+      "raw_line": "2026/06/29 14:20:36.997, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 62.18",
+      "collected_at_local": "2026-06-29T14:20:37"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:20:38.059",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.67,
+      "raw_line": "2026/06/29 14:20:38.059, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.67",
+      "collected_at_local": "2026-06-29T14:20:38"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:20:39.120",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 61.94,
+      "raw_line": "2026/06/29 14:20:39.120, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 61, 61.94",
+      "collected_at_local": "2026-06-29T14:20:39"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:20:40"
+}

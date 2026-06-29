@@ -1,0 +1,210 @@
+{
+  "attempt": 15,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 8.775,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who is responsible for managing a company or organisation.",
+        "options": [
+          "Manager",
+          "Director",
+          "Boss"
+        ],
+        "answer": "Manager"
+      },
+      {
+        "definition": "A large public building containing books and other printed materials for reference and borrowing.",
+        "options": [
+          "Library",
+          "Museum",
+          "Archive"
+        ],
+        "answer": "Library"
+      },
+      {
+        "definition": "A formal agreement or contract between two or more parties.",
+        "options": [
+          "Contract",
+          "Agreement",
+          "Pact"
+        ],
+        "answer": "Contract"
+      },
+      {
+        "definition": "A person who creates or performs music.",
+        "options": [
+          "Composer",
+          "Musician",
+          "Artist"
+        ],
+        "answer": "Composer"
+      },
+      {
+        "definition": "A large building or complex of buildings where people live.",
+        "options": [
+          "Apartment",
+          "Residence",
+          "Housing"
+        ],
+        "answer": "Residence"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who is responsible for managing a company or organisation.\",\n      \"options\": [\"Manager\", \"Director\", \"Boss\"],\n      \"answer\": \"Manager\"\n    },\n    {\n      \"definition\": \"A large public building containing books and other printed materials for reference and borrowing.\",\n      \"options\": [\"Library\", \"Museum\", \"Archive\"],\n      \"answer\": \"Library\"\n    },\n    {\n      \"definition\": \"A formal agreement or contract between two or more parties.\",\n      \"options\": [\"Contract\", \"Agreement\", \"Pact\"],\n      \"answer\": \"Contract\"\n    },\n    {\n      \"definition\": \"A person who creates or performs music.\",\n      \"options\": [\"Composer\", \"Musician\", \"Artist\"],\n      \"answer\": \"Composer\"\n    },\n    {\n      \"definition\": \"A large building or complex of buildings where people live.\",\n      \"options\": [\"Apartment\", \"Residence\", \"Housing\"],\n      \"answer\": \"Residence\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:19:27.0631242Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 6749611100,
+    "load_duration_ns": 96729400,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 346998600,
+    "eval_count": 230,
+    "eval_duration_ns": 5432708300,
+    "tokens_per_second": 42.336
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 90.5,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 59.5,
+    "max_temperature_c": 60.0,
+    "avg_power_draw_w": 61.967,
+    "max_power_draw_w": 62.37,
+    "estimated_gpu_energy_wh": 0.103278
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:19:18.329",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 11.12,
+      "raw_line": "2026/06/29 14:19:18.329, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 11.12",
+      "collected_at_local": "2026-06-29T14:19:18"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:19:19.396",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 11.5,
+      "raw_line": "2026/06/29 14:19:19.396, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 11.50",
+      "collected_at_local": "2026-06-29T14:19:19"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:19:20.469",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 11.55,
+      "raw_line": "2026/06/29 14:19:20.469, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 11.55",
+      "collected_at_local": "2026-06-29T14:19:20"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:19:21.536",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 75.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 62.37,
+      "raw_line": "2026/06/29 14:19:21.536, NVIDIA GeForce RTX 2060 with Max-Q Design, 75, 5234, 6144, 58, 62.37",
+      "collected_at_local": "2026-06-29T14:19:21"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:19:22.593",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.37,
+      "raw_line": "2026/06/29 14:19:22.593, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 59, 61.37",
+      "collected_at_local": "2026-06-29T14:19:22"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:19:23.651",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.92,
+      "raw_line": "2026/06/29 14:19:23.651, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 60, 61.92",
+      "collected_at_local": "2026-06-29T14:19:23"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:19:24.714",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.77,
+      "raw_line": "2026/06/29 14:19:24.714, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.77",
+      "collected_at_local": "2026-06-29T14:19:24"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:19:25.776",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 62.16,
+      "raw_line": "2026/06/29 14:19:25.776, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 62.16",
+      "collected_at_local": "2026-06-29T14:19:25"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:19:26.837",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 62.21,
+      "raw_line": "2026/06/29 14:19:26.837, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 62.21",
+      "collected_at_local": "2026-06-29T14:19:26"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:19:27"
+}

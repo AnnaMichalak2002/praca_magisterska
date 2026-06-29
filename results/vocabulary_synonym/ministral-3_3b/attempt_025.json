@@ -1,0 +1,174 @@
+{
+  "attempt": 25,
+  "model": "ministral-3:3b",
+  "endpoint": "chat",
+  "time": 5.414,
+  "success": true,
+  "response": {
+    "exercise_type": "synonym",
+    "questions": [
+      {
+        "word": "eager",
+        "options": [
+          "enthusiastic",
+          "reluctant",
+          "indifferent"
+        ],
+        "answer": "enthusiastic"
+      },
+      {
+        "word": "reliable",
+        "options": [
+          "untrustworthy",
+          "dependable",
+          "erratic"
+        ],
+        "answer": "dependable"
+      },
+      {
+        "word": "comprehend",
+        "options": [
+          "misunderstand",
+          "observe",
+          "ignore"
+        ],
+        "answer": "observe"
+      },
+      {
+        "word": "accommodate",
+        "options": [
+          "ignore",
+          "refuse",
+          "adapt"
+        ],
+        "answer": "adapt"
+      },
+      {
+        "word": "subsequent",
+        "options": [
+          "previous",
+          "immediate",
+          "later"
+        ],
+        "answer": "later"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"synonym\",\n  \"questions\": [\n    {\n      \"word\": \"eager\",\n      \"options\": [\"enthusiastic\", \"reluctant\", \"indifferent\"],\n      \"answer\": \"enthusiastic\"\n    },\n    {\n      \"word\": \"reliable\",\n      \"options\": [\"untrustworthy\", \"dependable\", \"erratic\"],\n      \"answer\": \"dependable\"\n    },\n    {\n      \"word\": \"comprehend\",\n      \"options\": [\"misunderstand\", \"observe\", \"ignore\"],\n      \"answer\": \"observe\"\n    },\n    {\n      \"word\": \"accommodate\",\n      \"options\": [\"ignore\", \"refuse\", \"adapt\"],\n      \"answer\": \"adapt\"\n    },\n    {\n      \"word\": \"subsequent\",\n      \"options\": [\"previous\", \"immediate\", \"later\"],\n      \"answer\": \"later\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T06:31:56.0926147Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 3348819100,
+    "load_duration_ns": 139721500,
+    "prompt_eval_count": 195,
+    "prompt_eval_duration_ns": 175934900,
+    "eval_count": 204,
+    "eval_duration_ns": 2934110800,
+    "tokens_per_second": 69.527
+  },
+  "gpu_summary": {
+    "sample_count": 6,
+    "valid_sample_count": 6,
+    "active_sample_count": 3,
+    "avg_gpu_utilization_percent": 89.333,
+    "max_gpu_utilization_percent": 90.0,
+    "avg_memory_used_mib": 4338.0,
+    "max_memory_used_mib": 4338.0,
+    "avg_temperature_c": 53.0,
+    "max_temperature_c": 54.0,
+    "avg_power_draw_w": 62.38,
+    "max_power_draw_w": 62.43,
+    "estimated_gpu_energy_wh": 0.051983
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:31:50.724",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 50.0,
+      "power_draw_w": 10.97,
+      "raw_line": "2026/06/29 08:31:50.724, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 50, 10.97",
+      "collected_at_local": "2026-06-29T08:31:50"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:31:51.795",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 4.94,
+      "raw_line": "2026/06/29 08:31:51.795, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 4.94",
+      "collected_at_local": "2026-06-29T08:31:51"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:31:52.853",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 5.09,
+      "raw_line": "2026/06/29 08:31:52.853, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 5.09",
+      "collected_at_local": "2026-06-29T08:31:52"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:31:53.918",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 90.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 62.41,
+      "raw_line": "2026/06/29 08:31:53.918, NVIDIA GeForce RTX 2060 with Max-Q Design, 90, 4338, 6144, 52, 62.41",
+      "collected_at_local": "2026-06-29T08:31:53"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:31:54.981",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 53.0,
+      "power_draw_w": 62.43,
+      "raw_line": "2026/06/29 08:31:54.981, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 53, 62.43",
+      "collected_at_local": "2026-06-29T08:31:54"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:31:56.047",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 54.0,
+      "power_draw_w": 62.3,
+      "raw_line": "2026/06/29 08:31:56.047, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 54, 62.30",
+      "collected_at_local": "2026-06-29T08:31:56"
+    }
+  ],
+  "mode_id": "vocabulary_synonym",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_synonym.txt",
+  "timestamp": "2026-06-29T08:31:56"
+}

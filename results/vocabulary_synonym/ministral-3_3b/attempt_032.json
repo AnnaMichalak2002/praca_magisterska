@@ -1,0 +1,174 @@
+{
+  "attempt": 32,
+  "model": "ministral-3:3b",
+  "endpoint": "chat",
+  "time": 5.492,
+  "success": true,
+  "response": {
+    "exercise_type": "synonym",
+    "questions": [
+      {
+        "word": "disappointed",
+        "options": [
+          "satisfied",
+          "disillusioned",
+          "elated"
+        ],
+        "answer": "disillusioned"
+      },
+      {
+        "word": "efficient",
+        "options": [
+          "inefficient",
+          "slow",
+          "skillful"
+        ],
+        "answer": "skillful"
+      },
+      {
+        "word": "ambitious",
+        "options": [
+          "unambitious",
+          "dreamy",
+          "aspiring"
+        ],
+        "answer": "aspiring"
+      },
+      {
+        "word": "controversial",
+        "options": [
+          "uncontroversial",
+          "popular",
+          "debatable"
+        ],
+        "answer": "debatable"
+      },
+      {
+        "word": "reluctant",
+        "options": [
+          "enthusiastic",
+          "hesitant",
+          "obliged"
+        ],
+        "answer": "hesitant"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"synonym\",\n  \"questions\": [\n    {\n      \"word\": \"disappointed\",\n      \"options\": [\"satisfied\", \"disillusioned\", \"elated\"],\n      \"answer\": \"disillusioned\"\n    },\n    {\n      \"word\": \"efficient\",\n      \"options\": [\"inefficient\", \"slow\", \"skillful\"],\n      \"answer\": \"skillful\"\n    },\n    {\n      \"word\": \"ambitious\",\n      \"options\": [\"unambitious\", \"dreamy\", \"aspiring\"],\n      \"answer\": \"aspiring\"\n    },\n    {\n      \"word\": \"controversial\",\n      \"options\": [\"uncontroversial\", \"popular\", \"debatable\"],\n      \"answer\": \"debatable\"\n    },\n    {\n      \"word\": \"reluctant\",\n      \"options\": [\"enthusiastic\", \"hesitant\", \"obliged\"],\n      \"answer\": \"hesitant\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T06:33:09.1391319Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 3442795100,
+    "load_duration_ns": 141264700,
+    "prompt_eval_count": 195,
+    "prompt_eval_duration_ns": 176189700,
+    "eval_count": 215,
+    "eval_duration_ns": 3010770700,
+    "tokens_per_second": 71.41
+  },
+  "gpu_summary": {
+    "sample_count": 6,
+    "valid_sample_count": 6,
+    "active_sample_count": 3,
+    "avg_gpu_utilization_percent": 69.333,
+    "max_gpu_utilization_percent": 90.0,
+    "avg_memory_used_mib": 4338.0,
+    "max_memory_used_mib": 4338.0,
+    "avg_temperature_c": 53.0,
+    "max_temperature_c": 54.0,
+    "avg_power_draw_w": 62.057,
+    "max_power_draw_w": 62.56,
+    "estimated_gpu_energy_wh": 0.051714
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:33:03.683",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 10.84,
+      "raw_line": "2026/06/29 08:33:03.683, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 10.84",
+      "collected_at_local": "2026-06-29T08:33:03"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:33:04.741",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 4.95,
+      "raw_line": "2026/06/29 08:33:04.741, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 4.95",
+      "collected_at_local": "2026-06-29T08:33:04"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:33:05.805",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 4.9,
+      "raw_line": "2026/06/29 08:33:05.805, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 4.90",
+      "collected_at_local": "2026-06-29T08:33:05"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:33:06.871",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 29.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 61.81,
+      "raw_line": "2026/06/29 08:33:06.871, NVIDIA GeForce RTX 2060 with Max-Q Design, 29, 4338, 6144, 52, 61.81",
+      "collected_at_local": "2026-06-29T08:33:06"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:33:07.928",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 90.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 53.0,
+      "power_draw_w": 62.56,
+      "raw_line": "2026/06/29 08:33:07.928, NVIDIA GeForce RTX 2060 with Max-Q Design, 90, 4338, 6144, 53, 62.56",
+      "collected_at_local": "2026-06-29T08:33:07"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:33:09.002",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 54.0,
+      "power_draw_w": 61.8,
+      "raw_line": "2026/06/29 08:33:09.002, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 54, 61.80",
+      "collected_at_local": "2026-06-29T08:33:09"
+    }
+  ],
+  "mode_id": "vocabulary_synonym",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_synonym.txt",
+  "timestamp": "2026-06-29T08:33:09"
+}

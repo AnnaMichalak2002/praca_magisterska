@@ -1,0 +1,234 @@
+{
+  "attempt": 43,
+  "model": "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0",
+  "endpoint": "chat",
+  "time": 11.432,
+  "success": true,
+  "response": {
+    "exercis_type": "ant_onym",
+    "questions": [
+      {
+        "word": "happy",
+        "options": [
+          "sad",
+          "angry",
+          "content"
+        ],
+        "answer": "sad"
+      },
+      {
+        "word": "long",
+        "options": [
+          "short",
+          "tall",
+          "high"
+        ],
+        "answer": "short"
+      },
+      {
+        "word": "fast",
+        "options": [
+          "slow",
+          "quick",
+          "hurried"
+        ],
+        "answer": "slow"
+      },
+      {
+        "word": "hard",
+        "options": [
+          "easy",
+          "soft",
+          "light"
+        ],
+        "answer": "easy"
+      },
+      {
+        "word": "big",
+        "options": [
+          "small",
+          "tall",
+          "high"
+        ],
+        "answer": "small"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercis_type\": \"ant_onym\",\n  \"questions\": [\n    {\n      \"word\": \"happy\",\n      \"options\": [\"sad\", \"angry\", \"content\"],\n      \"answer\": \"sad\"\n    },\n    {\n      \"word\": \"long\",\n      \"options\": [\"short\", \"tall\", \"high\"],\n      \"answer\": \"short\"\n    },\n    {\n      \"word\": \"fast\",\n      \"options\": [\"slow\", \"quick\", \"hurried\"],\n      \"answer\": \"slow\"\n    },\n    {\n      \"word\": \"hard\",\n      \"options\": [\"easy\", \"soft\", \"light\"],\n      \"answer\": \"easy\"\n    },\n    {\n      \"word\": \"big\",\n      \"options\": [\"small\", \"tall\", \"high\"],\n      \"answer\": \"small\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:00:03.4415351Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 9383624600,
+    "load_duration_ns": 21395700,
+    "prompt_eval_count": 383,
+    "prompt_eval_duration_ns": 342078600,
+    "eval_count": 345,
+    "eval_duration_ns": 7661973000,
+    "tokens_per_second": 45.028
+  },
+  "gpu_summary": {
+    "sample_count": 11,
+    "valid_sample_count": 11,
+    "active_sample_count": 8,
+    "avg_gpu_utilization_percent": 90.375,
+    "max_gpu_utilization_percent": 96.0,
+    "avg_memory_used_mib": 5122.0,
+    "max_memory_used_mib": 5122.0,
+    "avg_temperature_c": 61.375,
+    "max_temperature_c": 62.0,
+    "avg_power_draw_w": 63.214,
+    "max_power_draw_w": 63.72,
+    "estimated_gpu_energy_wh": 0.140475
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 13:59:52.058",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 5.53,
+      "raw_line": "2026/06/29 13:59:52.058, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5122, 6144, 57, 5.53",
+      "collected_at_local": "2026-06-29T13:59:52"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 13:59:53.120",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 5.36,
+      "raw_line": "2026/06/29 13:59:53.120, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5122, 6144, 57, 5.36",
+      "collected_at_local": "2026-06-29T13:59:53"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 13:59:54.183",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 11.21,
+      "raw_line": "2026/06/29 13:59:54.183, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5122, 6144, 57, 11.21",
+      "collected_at_local": "2026-06-29T13:59:54"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 13:59:55.256",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 63.06,
+      "raw_line": "2026/06/29 13:59:55.256, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5122, 6144, 60, 63.06",
+      "collected_at_local": "2026-06-29T13:59:55"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 13:59:56.323",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 63.72,
+      "raw_line": "2026/06/29 13:59:56.323, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 61, 63.72",
+      "collected_at_local": "2026-06-29T13:59:56"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 13:59:57.386",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 63.12,
+      "raw_line": "2026/06/29 13:59:57.386, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 61, 63.12",
+      "collected_at_local": "2026-06-29T13:59:57"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 13:59:58.457",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 63.63,
+      "raw_line": "2026/06/29 13:59:58.457, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 61, 63.63",
+      "collected_at_local": "2026-06-29T13:59:58"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 13:59:59.527",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 62.84,
+      "raw_line": "2026/06/29 13:59:59.527, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 62, 62.84",
+      "collected_at_local": "2026-06-29T13:59:59"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:00:00.595",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 96.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 62.94,
+      "raw_line": "2026/06/29 14:00:00.595, NVIDIA GeForce RTX 2060 with Max-Q Design, 96, 5122, 6144, 62, 62.94",
+      "collected_at_local": "2026-06-29T14:00:00"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:00:01.664",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 63.59,
+      "raw_line": "2026/06/29 14:00:01.664, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 62, 63.59",
+      "collected_at_local": "2026-06-29T14:00:01"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:00:02.737",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 62.81,
+      "raw_line": "2026/06/29 14:00:02.737, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 62, 62.81",
+      "collected_at_local": "2026-06-29T14:00:02"
+    }
+  ],
+  "mode_id": "vocabulary_antonym",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_antonym.txt",
+  "timestamp": "2026-06-29T14:00:03"
+}

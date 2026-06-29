@@ -1,0 +1,246 @@
+{
+  "attempt": 97,
+  "model": "qwen3.5:4b",
+  "endpoint": "chat",
+  "time": 11.823,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who is skilled at playing a musical instrument, especially the piano.",
+        "options": [
+          "a composer",
+          "a pianist",
+          "a conductor"
+        ],
+        "answer": "a pianist"
+      },
+      {
+        "definition": "The act of making a plan or design for a building or piece of art.",
+        "options": [
+          "architecture",
+          "construction",
+          "engineering"
+        ],
+        "answer": "architecture"
+      },
+      {
+        "definition": "A written or printed work that is considered to be of great artistic or intellectual value.",
+        "options": [
+          "a novel",
+          "a magazine",
+          "a brochure"
+        ],
+        "answer": "a novel"
+      },
+      {
+        "definition": "The quality of being able to be understood or read by many people.",
+        "options": [
+          "accessibility",
+          "complexity",
+          "obscure"
+        ],
+        "answer": "accessibility"
+      },
+      {
+        "definition": "A group of people who work together to create a piece of art or a performance.",
+        "options": [
+          "an audience",
+          "a cast",
+          "a critic"
+        ],
+        "answer": "a cast"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who is skilled at playing a musical instrument, especially the piano.\",\n      \"options\": [\n      \"a composer\",\n      \"a pianist\",\n      \"a conductor\"\n      ],\n      \"answer\": \"a pianist\"\n    },\n    {\n      \"definition\": \"The act of making a plan or design for a building or piece of art.\",\n      \"options\": [\n      \"architecture\",\n      \"construction\",\n      \"engineering\"\n      ],\n      \"answer\": \"architecture\"\n    },\n    {\n      \"definition\": \"A written or printed work that is considered to be of great artistic or intellectual value.\",\n      \"options\": [\n      \"a novel\",\n      \"a magazine\",\n      \"a brochure\"\n      ],\n      \"answer\": \"a novel\"\n    },\n    {\n      \"definition\": \"The quality of being able to be understood or read by many people.\",\n      \"options\": [\n      \"accessibility\",\n      \"complexity\",\n      \"obscure\"\n      ],\n      \"answer\": \"accessibility\"\n    },\n    {\n      \"definition\": \"A group of people who work together to create a piece of art or a performance.\",\n      \"options\": [\n      \"an audience\",\n      \"a cast\",\n      \"a critic\"\n      ],\n      \"answer\": \"a cast\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T07:28:35.4946765Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 9776067000,
+    "load_duration_ns": 188941500,
+    "prompt_eval_count": 237,
+    "prompt_eval_duration_ns": 624388400,
+    "eval_count": 342,
+    "eval_duration_ns": 8662307200,
+    "tokens_per_second": 39.481
+  },
+  "gpu_summary": {
+    "sample_count": 12,
+    "valid_sample_count": 12,
+    "active_sample_count": 9,
+    "avg_gpu_utilization_percent": 82.778,
+    "max_gpu_utilization_percent": 84.0,
+    "avg_memory_used_mib": 5396.0,
+    "max_memory_used_mib": 5396.0,
+    "avg_temperature_c": 62.556,
+    "max_temperature_c": 64.0,
+    "avg_power_draw_w": 63.004,
+    "max_power_draw_w": 63.85,
+    "estimated_gpu_energy_wh": 0.157511
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:23.714",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 22.28,
+      "raw_line": "2026/06/29 09:28:23.714, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5396, 6144, 59, 22.28",
+      "collected_at_local": "2026-06-29T09:28:23"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:24.781",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 11.21,
+      "raw_line": "2026/06/29 09:28:24.781, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5396, 6144, 58, 11.21",
+      "collected_at_local": "2026-06-29T09:28:24"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:25.841",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 8.0,
+      "raw_line": "2026/06/29 09:28:25.841, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5396, 6144, 58, 8.00",
+      "collected_at_local": "2026-06-29T09:28:25"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:26.908",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 77.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 62.68,
+      "raw_line": "2026/06/29 09:28:26.908, NVIDIA GeForce RTX 2060 with Max-Q Design, 77, 5396, 6144, 61, 62.68",
+      "collected_at_local": "2026-06-29T09:28:26"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:27.966",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 62.2,
+      "raw_line": "2026/06/29 09:28:27.966, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5396, 6144, 62, 62.20",
+      "collected_at_local": "2026-06-29T09:28:27"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:29.040",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 62.1,
+      "raw_line": "2026/06/29 09:28:29.040, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5396, 6144, 62, 62.10",
+      "collected_at_local": "2026-06-29T09:28:29"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:30.100",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 83.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 63.85,
+      "raw_line": "2026/06/29 09:28:30.100, NVIDIA GeForce RTX 2060 with Max-Q Design, 83, 5396, 6144, 62, 63.85",
+      "collected_at_local": "2026-06-29T09:28:30"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:31.204",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 83.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 62.29,
+      "raw_line": "2026/06/29 09:28:31.204, NVIDIA GeForce RTX 2060 with Max-Q Design, 83, 5396, 6144, 63, 62.29",
+      "collected_at_local": "2026-06-29T09:28:31"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:32.274",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 62.79,
+      "raw_line": "2026/06/29 09:28:32.274, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5396, 6144, 63, 62.79",
+      "collected_at_local": "2026-06-29T09:28:32"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:33.334",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 83.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 63.63,
+      "raw_line": "2026/06/29 09:28:33.334, NVIDIA GeForce RTX 2060 with Max-Q Design, 83, 5396, 6144, 63, 63.63",
+      "collected_at_local": "2026-06-29T09:28:33"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:34.379",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 63.72,
+      "raw_line": "2026/06/29 09:28:34.379, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5396, 6144, 63, 63.72",
+      "collected_at_local": "2026-06-29T09:28:34"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:28:35.450",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 83.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 63.78,
+      "raw_line": "2026/06/29 09:28:35.450, NVIDIA GeForce RTX 2060 with Max-Q Design, 83, 5396, 6144, 64, 63.78",
+      "collected_at_local": "2026-06-29T09:28:35"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T09:28:35"
+}

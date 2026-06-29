@@ -1,0 +1,246 @@
+{
+  "attempt": 54,
+  "model": "llama3.1:8b",
+  "endpoint": "chat",
+  "time": 12.877,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who travels to a place for pleasure, especially one who stays in a hotel or other accommodation.",
+        "options": [
+          "Tourist",
+          "Pilgrim",
+          "Vagabond"
+        ],
+        "answer": "Tourist"
+      },
+      {
+        "definition": "The act of giving something, especially money, to help someone in need or to support a good cause.",
+        "options": [
+          "Donation",
+          "Charity",
+          "Alms"
+        ],
+        "answer": "Donation"
+      },
+      {
+        "definition": "A person who is not married and lives with a partner, often in a long-term relationship.",
+        "options": [
+          "Bachelorette",
+          "Partner",
+          "Co-habitee"
+        ],
+        "answer": "Co-habitee"
+      },
+      {
+        "definition": "The feeling of being very hungry or thirsty, especially after not eating or drinking for some time.",
+        "options": [
+          "Appetite",
+          "Thirst",
+          "Hunger"
+        ],
+        "answer": "Hunger"
+      },
+      {
+        "definition": "A person who is employed to take care of someone's home and family while they are away.",
+        "options": [
+          "Housekeeper",
+          "Nanny",
+          "Governess"
+        ],
+        "answer": "Housekeeper"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who travels to a place for pleasure, especially one who stays in a hotel or other accommodation.\",\n      \"options\": [\"Tourist\", \"Pilgrim\", \"Vagabond\"],\n      \"answer\": \"Tourist\"\n    },\n    {\n      \"definition\": \"The act of giving something, especially money, to help someone in need or to support a good cause.\",\n      \"options\": [\"Donation\", \"Charity\", \"Alms\"],\n      \"answer\": \"Donation\"\n    },\n    {\n      \"definition\": \"A person who is not married and lives with a partner, often in a long-term relationship.\",\n      \"options\": [\"Bachelorette\", \"Partner\", \"Co-habitee\"],\n      \"answer\": \"Co-habitee\"\n    },\n    {\n      \"definition\": \"The feeling of being very hungry or thirsty, especially after not eating or drinking for some time.\",\n      \"options\": [\"Appetite\", \"Thirst\", \"Hunger\"],\n      \"answer\": \"Hunger\"\n    },\n    {\n      \"definition\": \"A person who is employed to take care of someone's home and family while they are away.\",\n      \"options\": [\"Housekeeper\", \"Nanny\", \"Governess\"],\n      \"answer\": \"Housekeeper\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T08:50:55.6015676Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 10827742100,
+    "load_duration_ns": 134508800,
+    "prompt_eval_count": 216,
+    "prompt_eval_duration_ns": 336797800,
+    "eval_count": 296,
+    "eval_duration_ns": 8600690600,
+    "tokens_per_second": 34.416
+  },
+  "gpu_summary": {
+    "sample_count": 12,
+    "valid_sample_count": 12,
+    "active_sample_count": 9,
+    "avg_gpu_utilization_percent": 55.0,
+    "max_gpu_utilization_percent": 70.0,
+    "avg_memory_used_mib": 5114.0,
+    "max_memory_used_mib": 5114.0,
+    "avg_temperature_c": 64.556,
+    "max_temperature_c": 65.0,
+    "avg_power_draw_w": 61.734,
+    "max_power_draw_w": 66.19,
+    "estimated_gpu_energy_wh": 0.154336
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:42.763",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 22.51,
+      "raw_line": "2026/06/29 10:50:42.763, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 61, 22.51",
+      "collected_at_local": "2026-06-29T10:50:42"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:43.819",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 13.84,
+      "raw_line": "2026/06/29 10:50:43.819, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 60, 13.84",
+      "collected_at_local": "2026-06-29T10:50:43"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:44.883",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 5.35,
+      "raw_line": "2026/06/29 10:50:44.883, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 60, 5.35",
+      "collected_at_local": "2026-06-29T10:50:44"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:45.953",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 19.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 61.97,
+      "raw_line": "2026/06/29 10:50:45.953, NVIDIA GeForce RTX 2060 with Max-Q Design, 19, 5114, 6144, 63, 61.97",
+      "collected_at_local": "2026-06-29T10:50:45"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:47.022",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 70.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.9,
+      "raw_line": "2026/06/29 10:50:47.022, NVIDIA GeForce RTX 2060 with Max-Q Design, 70, 5114, 6144, 64, 60.90",
+      "collected_at_local": "2026-06-29T10:50:47"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:48.089",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.96,
+      "raw_line": "2026/06/29 10:50:48.089, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 60.96",
+      "collected_at_local": "2026-06-29T10:50:48"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:49.160",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 62.06,
+      "raw_line": "2026/06/29 10:50:49.160, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 62.06",
+      "collected_at_local": "2026-06-29T10:50:49"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:50.230",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.35,
+      "raw_line": "2026/06/29 10:50:50.230, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 61.35",
+      "collected_at_local": "2026-06-29T10:50:50"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:51.302",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 60.1,
+      "raw_line": "2026/06/29 10:50:51.302, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 60.10",
+      "collected_at_local": "2026-06-29T10:50:51"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:52.448",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 66.19,
+      "raw_line": "2026/06/29 10:50:52.448, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 66.19",
+      "collected_at_local": "2026-06-29T10:50:52"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:53.519",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.54,
+      "raw_line": "2026/06/29 10:50:53.519, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 61.54",
+      "collected_at_local": "2026-06-29T10:50:53"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:50:54.602",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 60.54,
+      "raw_line": "2026/06/29 10:50:54.602, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 60.54",
+      "collected_at_local": "2026-06-29T10:50:54"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T10:50:55"
+}

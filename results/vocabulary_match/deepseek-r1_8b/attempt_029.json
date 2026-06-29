@@ -1,0 +1,170 @@
+{
+  "attempt": 29,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 7.164,
+  "success": true,
+  "response": {
+    "exercise_type": "matching",
+    "topic": "IT",
+    "words": [
+      "algorithm",
+      "bug",
+      "cloud computing",
+      "data",
+      "firewall",
+      "hardware",
+      "interface",
+      "network"
+    ],
+    "translations": [
+      "błąk",
+      "błąd",
+      "obliczanie",
+      "sieć",
+      "oprogramowanie",
+      "oproczniki",
+      "oprogramowanie",
+      "sprzęt"
+    ],
+    "answer_key": {
+      "algorithm": "obliczanie",
+      "bug": "błąd",
+      "cloud computing": "oproczniki",
+      "data": "dane",
+      "firewall": "ogniwo",
+      "hardware": "sprzęt",
+      "interface": "interfejs",
+      "network": "sieć"
+    }
+  },
+  "raw_output": "{\n  \"exercise_type\": \"matching\",\n  \"topic\": \"IT\",\n  \"words\": [\"algorithm\", \"bug\", \"cloud computing\", \"data\", \"firewall\", \"hardware\", \"interface\", \"network\"],\n  \"translations\": [\"błąk\", \"błąd\", \"obliczanie\", \"sieć\", \"oprogramowanie\", \"oproczniki\", \"oprogramowanie\", \"sprzęt\"],\n  \"answer_key\": {\n    \"algorithm\": \"obliczanie\",\n    \"bug\": \"błąd\",\n    \"cloud computing\": \"oproczniki\",\n    \"data\": \"dane\",\n    \"firewall\": \"ogniwo\",\n    \"hardware\": \"sprzęt\",\n    \"interface\": \"interfejs\",\n    \"network\": \"sieć\"\n  }\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:45:50.0961013Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 5111661400,
+    "load_duration_ns": 105723100,
+    "prompt_eval_count": 214,
+    "prompt_eval_duration_ns": 252209400,
+    "eval_count": 175,
+    "eval_duration_ns": 4068485300,
+    "tokens_per_second": 43.014
+  },
+  "gpu_summary": {
+    "sample_count": 7,
+    "valid_sample_count": 7,
+    "active_sample_count": 4,
+    "avg_gpu_utilization_percent": 84.25,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 56.25,
+    "max_temperature_c": 57.0,
+    "avg_power_draw_w": 62.37,
+    "max_power_draw_w": 62.8,
+    "estimated_gpu_energy_wh": 0.0693
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:45:42.968",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 53.0,
+      "power_draw_w": 5.51,
+      "raw_line": "2026/06/29 14:45:42.968, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 53, 5.51",
+      "collected_at_local": "2026-06-29T14:45:42"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:45:44.036",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 5.51,
+      "raw_line": "2026/06/29 14:45:44.036, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 52, 5.51",
+      "collected_at_local": "2026-06-29T14:45:44"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:45:45.105",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 5.05,
+      "raw_line": "2026/06/29 14:45:45.105, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 52, 5.05",
+      "collected_at_local": "2026-06-29T14:45:45"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:45:46.184",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 62.35,
+      "raw_line": "2026/06/29 14:45:46.184, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5234, 6144, 55, 62.35",
+      "collected_at_local": "2026-06-29T14:45:46"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:45:47.254",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 62.8,
+      "raw_line": "2026/06/29 14:45:47.254, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 56, 62.80",
+      "collected_at_local": "2026-06-29T14:45:47"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:45:48.315",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 62.02,
+      "raw_line": "2026/06/29 14:45:48.315, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 57, 62.02",
+      "collected_at_local": "2026-06-29T14:45:48"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:45:49.374",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 62.31,
+      "raw_line": "2026/06/29 14:45:49.374, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 57, 62.31",
+      "collected_at_local": "2026-06-29T14:45:49"
+    }
+  ],
+  "mode_id": "vocabulary_match",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_match.txt",
+  "timestamp": "2026-06-29T14:45:50"
+}

@@ -1,0 +1,210 @@
+{
+  "attempt": 3,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 9.502,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who is responsible for the official records of a company or organization.",
+        "options": [
+          "Accountant",
+          "Administrator",
+          "Archivist"
+        ],
+        "answer": "Accountant"
+      },
+      {
+        "definition": "A written statement of complaints against someone, especially in a court of law.",
+        "options": [
+          "Accusation",
+          "Allegation",
+          "Affidavit"
+        ],
+        "answer": "Accusation"
+      },
+      {
+        "definition": "The act of doing something that is considered wrong or harmful.",
+        "options": [
+          "Action",
+          "Activity",
+          "Admission"
+        ],
+        "answer": "Action"
+      },
+      {
+        "definition": "A person who is trained to help people who are sick or injured.",
+        "options": [
+          "Ambulance",
+          "Attendant",
+          "Paramedic"
+        ],
+        "answer": "Paramedic"
+      },
+      {
+        "definition": "A person who is paid to look after children while their parents are busy.",
+        "options": [
+          "Caregiver",
+          "Childminder",
+          "Custodian"
+        ],
+        "answer": "Childminder"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who is responsible for the official records of a company or organization.\",\n      \"options\": [\"Accountant\", \"Administrator\", \"Archivist\"],\n      \"answer\": \"Accountant\"\n    },\n    {\n      \"definition\": \"A written statement of complaints against someone, especially in a court of law.\",\n      \"options\": [\"Accusation\", \"Allegation\", \"Affidavit\"],\n      \"answer\": \"Accusation\"\n    },\n    {\n      \"definition\": \"The act of doing something that is considered wrong or harmful.\",\n      \"options\": [\"Action\", \"Activity\", \"Admission\"],\n      \"answer\": \"Action\"\n    },\n    {\n      \"definition\": \"A person who is trained to help people who are sick or injured.\",\n      \"options\": [\"Ambulance\", \"Attendant\", \"Paramedic\"],\n      \"answer\": \"Paramedic\"\n    },\n    {\n      \"definition\": \"A person who is paid to look after children while their parents are busy.\",\n      \"options\": [\"Caregiver\", \"Childminder\", \"Custodian\"],\n      \"answer\": \"Childminder\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:16:32.3729226Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 7445743400,
+    "load_duration_ns": 95379300,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 287024000,
+    "eval_count": 259,
+    "eval_duration_ns": 6916784700,
+    "tokens_per_second": 37.445
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 94.167,
+    "max_gpu_utilization_percent": 96.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 59.833,
+    "max_temperature_c": 61.0,
+    "avg_power_draw_w": 61.57,
+    "max_power_draw_w": 62.04,
+    "estimated_gpu_energy_wh": 0.102617
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:16:22.914",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 5.24,
+      "raw_line": "2026/06/29 14:16:22.914, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 5.24",
+      "collected_at_local": "2026-06-29T14:16:22"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:16:23.977",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 5.16,
+      "raw_line": "2026/06/29 14:16:23.977, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 5.16",
+      "collected_at_local": "2026-06-29T14:16:23"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:16:25.036",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 5.08,
+      "raw_line": "2026/06/29 14:16:25.036, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 5.08",
+      "collected_at_local": "2026-06-29T14:16:25"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:16:26.113",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 96.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.66,
+      "raw_line": "2026/06/29 14:16:26.113, NVIDIA GeForce RTX 2060 with Max-Q Design, 96, 5234, 6144, 59, 61.66",
+      "collected_at_local": "2026-06-29T14:16:26"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:16:27.185",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.54,
+      "raw_line": "2026/06/29 14:16:27.185, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.54",
+      "collected_at_local": "2026-06-29T14:16:27"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:16:28.255",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 62.04,
+      "raw_line": "2026/06/29 14:16:28.255, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 62.04",
+      "collected_at_local": "2026-06-29T14:16:28"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:16:29.326",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.45,
+      "raw_line": "2026/06/29 14:16:29.326, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.45",
+      "collected_at_local": "2026-06-29T14:16:29"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:16:30.386",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.42,
+      "raw_line": "2026/06/29 14:16:30.386, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 60, 61.42",
+      "collected_at_local": "2026-06-29T14:16:30"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:16:31.457",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 61.31,
+      "raw_line": "2026/06/29 14:16:31.457, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 61, 61.31",
+      "collected_at_local": "2026-06-29T14:16:31"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:16:32"
+}

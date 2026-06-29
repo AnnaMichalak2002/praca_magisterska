@@ -1,0 +1,174 @@
+{
+  "attempt": 70,
+  "model": "ministral-3:3b",
+  "endpoint": "chat",
+  "time": 5.564,
+  "success": true,
+  "response": {
+    "exercise_type": "synonym",
+    "questions": [
+      {
+        "word": "extremely tired",
+        "options": [
+          "exhausted",
+          "energetic",
+          "restful"
+        ],
+        "answer": "exhausted"
+      },
+      {
+        "word": "to organise an event",
+        "options": [
+          "to plan",
+          "to neglect",
+          "to abandon"
+        ],
+        "answer": "to plan"
+      },
+      {
+        "word": "a quiet neighbourhood",
+        "options": [
+          "noisy",
+          "peaceful",
+          "loud"
+        ],
+        "answer": "peaceful"
+      },
+      {
+        "word": "to be very impressed",
+        "options": [
+          "disappointed",
+          "thrilled",
+          "confused"
+        ],
+        "answer": "thrilled"
+      },
+      {
+        "word": "a sudden change in weather",
+        "options": [
+          "steady",
+          "unpredictable",
+          "dry"
+        ],
+        "answer": "unpredictable"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"synonym\",\n  \"questions\": [\n    {\n      \"word\": \"extremely tired\",\n      \"options\": [\"exhausted\", \"energetic\", \"restful\"],\n      \"answer\": \"exhausted\"\n    },\n    {\n      \"word\": \"to organise an event\",\n      \"options\": [\"to plan\", \"to neglect\", \"to abandon\"],\n      \"answer\": \"to plan\"\n    },\n    {\n      \"word\": \"a quiet neighbourhood\",\n      \"options\": [\"noisy\", \"peaceful\", \"loud\"],\n      \"answer\": \"peaceful\"\n    },\n    {\n      \"word\": \"to be very impressed\",\n      \"options\": [\"disappointed\", \"thrilled\", \"confused\"],\n      \"answer\": \"thrilled\"\n    },\n    {\n      \"word\": \"a sudden change in weather\",\n      \"options\": [\"steady\", \"unpredictable\", \"dry\"],\n      \"answer\": \"unpredictable\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T06:39:46.568547Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 3488976800,
+    "load_duration_ns": 142306400,
+    "prompt_eval_count": 195,
+    "prompt_eval_duration_ns": 176442400,
+    "eval_count": 217,
+    "eval_duration_ns": 3085039700,
+    "tokens_per_second": 70.339
+  },
+  "gpu_summary": {
+    "sample_count": 6,
+    "valid_sample_count": 6,
+    "active_sample_count": 3,
+    "avg_gpu_utilization_percent": 75.0,
+    "max_gpu_utilization_percent": 89.0,
+    "avg_memory_used_mib": 4338.0,
+    "max_memory_used_mib": 4338.0,
+    "avg_temperature_c": 52.667,
+    "max_temperature_c": 53.0,
+    "avg_power_draw_w": 61.653,
+    "max_power_draw_w": 61.89,
+    "estimated_gpu_energy_wh": 0.051378
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:39:41.051",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 4.88,
+      "raw_line": "2026/06/29 08:39:41.051, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 4.88",
+      "collected_at_local": "2026-06-29T08:39:41"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:39:42.110",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 4.89,
+      "raw_line": "2026/06/29 08:39:42.110, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 4.89",
+      "collected_at_local": "2026-06-29T08:39:42"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:39:43.173",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 49.0,
+      "power_draw_w": 5.0,
+      "raw_line": "2026/06/29 08:39:43.173, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 49, 5.00",
+      "collected_at_local": "2026-06-29T08:39:43"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:39:44.244",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 48.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 61.58,
+      "raw_line": "2026/06/29 08:39:44.244, NVIDIA GeForce RTX 2060 with Max-Q Design, 48, 4338, 6144, 52, 61.58",
+      "collected_at_local": "2026-06-29T08:39:44"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:39:45.306",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 88.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 53.0,
+      "power_draw_w": 61.49,
+      "raw_line": "2026/06/29 08:39:45.306, NVIDIA GeForce RTX 2060 with Max-Q Design, 88, 4338, 6144, 53, 61.49",
+      "collected_at_local": "2026-06-29T08:39:45"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:39:46.366",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 53.0,
+      "power_draw_w": 61.89,
+      "raw_line": "2026/06/29 08:39:46.366, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 53, 61.89",
+      "collected_at_local": "2026-06-29T08:39:46"
+    }
+  ],
+  "mode_id": "vocabulary_synonym",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_synonym.txt",
+  "timestamp": "2026-06-29T08:39:46"
+}

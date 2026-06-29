@@ -1,0 +1,210 @@
+{
+  "attempt": 30,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 9.049,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "a person who is responsible for taking care of a baby or young child",
+        "options": [
+          "babysitter",
+          "nanny",
+          "guardian"
+        ],
+        "answer": "babysitter"
+      },
+      {
+        "definition": "a person who is trained to provide medical care, especially outside a hospital",
+        "options": [
+          "nurse",
+          "doctor",
+          "paramedic"
+        ],
+        "answer": "paramedic"
+      },
+      {
+        "definition": "a person who is responsible for managing a company or organisation",
+        "options": [
+          "director",
+          "manager",
+          "executive"
+        ],
+        "answer": "director"
+      },
+      {
+        "definition": "a person who creates or performs music for a living",
+        "options": [
+          "musician",
+          "composer",
+          "performer"
+        ],
+        "answer": "musician"
+      },
+      {
+        "definition": "a person who studies or deals with the law",
+        "options": [
+          "lawyer",
+          "judge",
+          "advocate"
+        ],
+        "answer": "lawyer"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"a person who is responsible for taking care of a baby or young child\",\n      \"options\": [\"babysitter\", \"nanny\", \"guardian\"],\n      \"answer\": \"babysitter\"\n    },\n    {\n      \"definition\": \"a person who is trained to provide medical care, especially outside a hospital\",\n      \"options\": [\"nurse\", \"doctor\", \"paramedic\"],\n      \"answer\": \"paramedic\"\n    },\n    {\n      \"definition\": \"a person who is responsible for managing a company or organisation\",\n      \"options\": [\"director\", \"manager\", \"executive\"],\n      \"answer\": \"director\"\n    },\n    {\n      \"definition\": \"a person who creates or performs music for a living\",\n      \"options\": [\"musician\", \"composer\", \"performer\"],\n      \"answer\": \"musician\"\n    },\n    {\n      \"definition\": \"a person who studies or deals with the law\",\n      \"options\": [\"lawyer\", \"judge\", \"advocate\"],\n      \"answer\": \"lawyer\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:23:06.3839646Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 7003120600,
+    "load_duration_ns": 106071600,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 269554500,
+    "eval_count": 244,
+    "eval_duration_ns": 6496749700,
+    "tokens_per_second": 37.557
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 94.0,
+    "max_gpu_utilization_percent": 95.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 59.333,
+    "max_temperature_c": 60.0,
+    "avg_power_draw_w": 61.88,
+    "max_power_draw_w": 62.58,
+    "estimated_gpu_energy_wh": 0.103133
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:57.376",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 11.78,
+      "raw_line": "2026/06/29 14:22:57.376, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 11.78",
+      "collected_at_local": "2026-06-29T14:22:57"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:58.442",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.22,
+      "raw_line": "2026/06/29 14:22:58.442, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.22",
+      "collected_at_local": "2026-06-29T14:22:58"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:22:59.502",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.09,
+      "raw_line": "2026/06/29 14:22:59.502, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.09",
+      "collected_at_local": "2026-06-29T14:22:59"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:23:00.567",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 61.27,
+      "raw_line": "2026/06/29 14:23:00.567, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5234, 6144, 58, 61.27",
+      "collected_at_local": "2026-06-29T14:23:00"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:23:01.626",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 62.58,
+      "raw_line": "2026/06/29 14:23:01.626, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 62.58",
+      "collected_at_local": "2026-06-29T14:23:01"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:23:02.684",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.75,
+      "raw_line": "2026/06/29 14:23:02.684, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.75",
+      "collected_at_local": "2026-06-29T14:23:02"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:23:03.756",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.94,
+      "raw_line": "2026/06/29 14:23:03.756, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.94",
+      "collected_at_local": "2026-06-29T14:23:03"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:23:04.816",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.82,
+      "raw_line": "2026/06/29 14:23:04.816, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 60, 61.82",
+      "collected_at_local": "2026-06-29T14:23:04"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:23:05.887",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.92,
+      "raw_line": "2026/06/29 14:23:05.887, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.92",
+      "collected_at_local": "2026-06-29T14:23:05"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:23:06"
+}

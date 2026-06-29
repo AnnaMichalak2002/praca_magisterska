@@ -1,0 +1,170 @@
+{
+  "attempt": 86,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 7.252,
+  "success": true,
+  "response": {
+    "exercise_type": "matching",
+    "topic": "IT",
+    "words": [
+      "algorithm",
+      "cloud",
+      "database",
+      "firewall",
+      "interface",
+      "network",
+      "server",
+      "software"
+    ],
+    "translations": [
+      "baza danych",
+      "interfejs",
+      "sieć",
+      "oprogramowanie",
+      "serwer",
+      "system operacyjny",
+      "sieć bezprzewodowa",
+      "algorytm"
+    ],
+    "answer_key": {
+      "algorithm": "algorytm",
+      "cloud": "system operacyjny",
+      "database": "baza danych",
+      "firewall": "sieć bezprzewodowa",
+      "interface": "interfejs",
+      "network": "sieć",
+      "server": "serwer",
+      "software": "oprogramowanie"
+    }
+  },
+  "raw_output": "{\n  \"exercise_type\": \"matching\",\n  \"topic\": \"IT\",\n  \"words\": [\"algorithm\", \"cloud\", \"database\", \"firewall\", \"interface\", \"network\", \"server\", \"software\"],\n  \"translations\": [\"baza danych\", \"interfejs\", \"sieć\", \"oprogramowanie\", \"serwer\", \"system operacyjny\", \"sieć bezprzewodowa\", \"algorytm\"],\n  \"answer_key\": {\n    \"algorithm\": \"algorytm\",\n    \"cloud\": \"system operacyjny\",\n    \"database\": \"baza danych\",\n    \"firewall\": \"sieć bezprzewodowa\",\n    \"interface\": \"interfejs\",\n    \"network\": \"sieć\",\n    \"server\": \"serwer\",\n    \"software\": \"oprogramowanie\"\n  }\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:57:30.0050321Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 5202103100,
+    "load_duration_ns": 104579000,
+    "prompt_eval_count": 214,
+    "prompt_eval_duration_ns": 275465700,
+    "eval_count": 178,
+    "eval_duration_ns": 4249464000,
+    "tokens_per_second": 41.888
+  },
+  "gpu_summary": {
+    "sample_count": 7,
+    "valid_sample_count": 7,
+    "active_sample_count": 4,
+    "avg_gpu_utilization_percent": 84.25,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 56.25,
+    "max_temperature_c": 57.0,
+    "avg_power_draw_w": 61.985,
+    "max_power_draw_w": 62.26,
+    "estimated_gpu_energy_wh": 0.068872
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:57:22.787",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 53.0,
+      "power_draw_w": 5.17,
+      "raw_line": "2026/06/29 14:57:22.787, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 53, 5.17",
+      "collected_at_local": "2026-06-29T14:57:22"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:57:23.851",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 5.13,
+      "raw_line": "2026/06/29 14:57:23.851, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 52, 5.13",
+      "collected_at_local": "2026-06-29T14:57:23"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:57:24.911",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 5.01,
+      "raw_line": "2026/06/29 14:57:24.911, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 52, 5.01",
+      "collected_at_local": "2026-06-29T14:57:24"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:57:25.990",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 56.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 61.7,
+      "raw_line": "2026/06/29 14:57:25.990, NVIDIA GeForce RTX 2060 with Max-Q Design, 56, 5234, 6144, 55, 61.70",
+      "collected_at_local": "2026-06-29T14:57:25"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:57:27.050",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 62.26,
+      "raw_line": "2026/06/29 14:57:27.050, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 56, 62.26",
+      "collected_at_local": "2026-06-29T14:57:27"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:57:28.123",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 62.12,
+      "raw_line": "2026/06/29 14:57:28.123, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 57, 62.12",
+      "collected_at_local": "2026-06-29T14:57:28"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:57:29.183",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 61.86,
+      "raw_line": "2026/06/29 14:57:29.183, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 57, 61.86",
+      "collected_at_local": "2026-06-29T14:57:29"
+    }
+  ],
+  "mode_id": "vocabulary_match",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_match.txt",
+  "timestamp": "2026-06-29T14:57:30"
+}

@@ -1,0 +1,234 @@
+{
+  "attempt": 96,
+  "model": "llama3.1:8b",
+  "endpoint": "chat",
+  "time": 11.652,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who travels to a place for pleasure, typically for a short time.",
+        "options": [
+          "Tourist",
+          "Pilgrim",
+          "Vagabond"
+        ],
+        "answer": "Tourist"
+      },
+      {
+        "definition": "A feeling of deep regret or guilt for a wrong committed.",
+        "options": [
+          "Shame",
+          "Guilt",
+          "Remorse"
+        ],
+        "answer": "Remorse"
+      },
+      {
+        "definition": "A person who is in charge of a country, state, or other area, and has the power to make laws and decisions.",
+        "options": [
+          "Leader",
+          "Governor",
+          "President"
+        ],
+        "answer": "President"
+      },
+      {
+        "definition": "To leave a place because you are no longer allowed to stay there.",
+        "options": [
+          "Evict",
+          "Expel",
+          "Dismiss"
+        ],
+        "answer": "Expel"
+      },
+      {
+        "definition": "A person who is not yet married, especially a woman.",
+        "options": [
+          "Bachelor",
+          "Spinster",
+          "Virgin"
+        ],
+        "answer": "Spinster"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who travels to a place for pleasure, typically for a short time.\",\n      \"options\": [\"Tourist\", \"Pilgrim\", \"Vagabond\"],\n      \"answer\": \"Tourist\"\n    },\n    {\n      \"definition\": \"A feeling of deep regret or guilt for a wrong committed.\",\n      \"options\": [\"Shame\", \"Guilt\", \"Remorse\"],\n      \"answer\": \"Remorse\"\n    },\n    {\n      \"definition\": \"A person who is in charge of a country, state, or other area, and has the power to make laws and decisions.\",\n      \"options\": [\"Leader\", \"Governor\", \"President\"],\n      \"answer\": \"President\"\n    },\n    {\n      \"definition\": \"To leave a place because you are no longer allowed to stay there.\",\n      \"options\": [\"Evict\", \"Expel\", \"Dismiss\"],\n      \"answer\": \"Expel\"\n    },\n    {\n      \"definition\": \"A person who is not yet married, especially a woman.\",\n      \"options\": [\"Bachelor\", \"Spinster\", \"Virgin\"],\n      \"answer\": \"Spinster\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T09:02:40.849781Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 9609697800,
+    "load_duration_ns": 130354400,
+    "prompt_eval_count": 216,
+    "prompt_eval_duration_ns": 337678200,
+    "eval_count": 262,
+    "eval_duration_ns": 8277033700,
+    "tokens_per_second": 31.654
+  },
+  "gpu_summary": {
+    "sample_count": 11,
+    "valid_sample_count": 11,
+    "active_sample_count": 8,
+    "avg_gpu_utilization_percent": 58.375,
+    "max_gpu_utilization_percent": 63.0,
+    "avg_memory_used_mib": 5114.0,
+    "max_memory_used_mib": 5114.0,
+    "avg_temperature_c": 63.75,
+    "max_temperature_c": 65.0,
+    "avg_power_draw_w": 60.924,
+    "max_power_draw_w": 61.87,
+    "estimated_gpu_energy_wh": 0.135386
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:29.233",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 12.62,
+      "raw_line": "2026/06/29 11:02:29.233, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 60, 12.62",
+      "collected_at_local": "2026-06-29T11:02:29"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:30.303",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 11.34,
+      "raw_line": "2026/06/29 11:02:30.303, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 59, 11.34",
+      "collected_at_local": "2026-06-29T11:02:30"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:31.363",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 5.35,
+      "raw_line": "2026/06/29 11:02:31.363, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 59, 5.35",
+      "collected_at_local": "2026-06-29T11:02:31"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:32.435",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 63.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 60.82,
+      "raw_line": "2026/06/29 11:02:32.435, NVIDIA GeForce RTX 2060 with Max-Q Design, 63, 5114, 6144, 62, 60.82",
+      "collected_at_local": "2026-06-29T11:02:32"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:33.501",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 60.45,
+      "raw_line": "2026/06/29 11:02:33.501, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 63, 60.45",
+      "collected_at_local": "2026-06-29T11:02:33"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:34.568",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.75,
+      "raw_line": "2026/06/29 11:02:34.568, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 60.75",
+      "collected_at_local": "2026-06-29T11:02:34"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:35.639",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.19,
+      "raw_line": "2026/06/29 11:02:35.639, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 61.19",
+      "collected_at_local": "2026-06-29T11:02:35"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:36.708",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.81,
+      "raw_line": "2026/06/29 11:02:36.708, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 64, 60.81",
+      "collected_at_local": "2026-06-29T11:02:36"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:37.777",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 59.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.69,
+      "raw_line": "2026/06/29 11:02:37.777, NVIDIA GeForce RTX 2060 with Max-Q Design, 59, 5114, 6144, 64, 61.69",
+      "collected_at_local": "2026-06-29T11:02:37"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:38.846",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.87,
+      "raw_line": "2026/06/29 11:02:38.846, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 64, 61.87",
+      "collected_at_local": "2026-06-29T11:02:38"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 11:02:39.912",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 59.81,
+      "raw_line": "2026/06/29 11:02:39.912, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 59.81",
+      "collected_at_local": "2026-06-29T11:02:39"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T11:02:40"
+}

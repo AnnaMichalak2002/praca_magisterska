@@ -1,0 +1,246 @@
+{
+  "attempt": 76,
+  "model": "llama3.1:8b",
+  "endpoint": "chat",
+  "time": 11.881,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who travels to a foreign country to teach their own language.",
+        "options": [
+          "Tourist",
+          "Expatriate",
+          "Language Teacher"
+        ],
+        "answer": "Language Teacher"
+      },
+      {
+        "definition": "A type of fruit that is often eaten for breakfast, especially in the UK.",
+        "options": [
+          "Apple",
+          "Banana",
+          "Bacon Sandwich"
+        ],
+        "answer": "Bacon Sandwich"
+      },
+      {
+        "definition": "A person who travels to a foreign country to work as an engineer or technician.",
+        "options": [
+          "Businessman",
+          "Engineer",
+          "Tourist"
+        ],
+        "answer": "Engineer"
+      },
+      {
+        "definition": "A type of weather where the air is filled with tiny water droplets, making it difficult to see.",
+        "options": [
+          "Sunshine",
+          "Rain",
+          "Mist"
+        ],
+        "answer": "Mist"
+      },
+      {
+        "definition": "A person who has a high social status and is often invited to important events.",
+        "options": [
+          "Socialite",
+          "Celebrity",
+          "Politician"
+        ],
+        "answer": "Socialite"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who travels to a foreign country to teach their own language.\",\n      \"options\": [\"Tourist\", \"Expatriate\", \"Language Teacher\"],\n      \"answer\": \"Language Teacher\"\n    },\n    {\n      \"definition\": \"A type of fruit that is often eaten for breakfast, especially in the UK.\",\n      \"options\": [\"Apple\", \"Banana\", \"Bacon Sandwich\"],\n      \"answer\": \"Bacon Sandwich\"\n    },\n    {\n      \"definition\": \"A person who travels to a foreign country to work as an engineer or technician.\",\n      \"options\": [\"Businessman\", \"Engineer\", \"Tourist\"],\n      \"answer\": \"Engineer\"\n    },\n    {\n      \"definition\": \"A type of weather where the air is filled with tiny water droplets, making it difficult to see.\",\n      \"options\": [\"Sunshine\", \"Rain\", \"Mist\"],\n      \"answer\": \"Mist\"\n    },\n    {\n      \"definition\": \"A person who has a high social status and is often invited to important events.\",\n      \"options\": [\"Socialite\", \"Celebrity\", \"Politician\"],\n      \"answer\": \"Socialite\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T08:57:06.2499646Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 9823348400,
+    "load_duration_ns": 132690500,
+    "prompt_eval_count": 216,
+    "prompt_eval_duration_ns": 320358900,
+    "eval_count": 269,
+    "eval_duration_ns": 8404458300,
+    "tokens_per_second": 32.007
+  },
+  "gpu_summary": {
+    "sample_count": 12,
+    "valid_sample_count": 12,
+    "active_sample_count": 9,
+    "avg_gpu_utilization_percent": 57.889,
+    "max_gpu_utilization_percent": 59.0,
+    "avg_memory_used_mib": 5114.0,
+    "max_memory_used_mib": 5114.0,
+    "avg_temperature_c": 64.0,
+    "max_temperature_c": 65.0,
+    "avg_power_draw_w": 60.793,
+    "max_power_draw_w": 62.1,
+    "estimated_gpu_energy_wh": 0.151983
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:56:54.413",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 22.48,
+      "raw_line": "2026/06/29 10:56:54.413, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 61, 22.48",
+      "collected_at_local": "2026-06-29T10:56:54"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:56:55.474",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 11.29,
+      "raw_line": "2026/06/29 10:56:55.474, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 60, 11.29",
+      "collected_at_local": "2026-06-29T10:56:55"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:56:56.535",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 5.54,
+      "raw_line": "2026/06/29 10:56:56.535, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 59, 5.54",
+      "collected_at_local": "2026-06-29T10:56:56"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:56:57.606",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 59.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 61.56,
+      "raw_line": "2026/06/29 10:56:57.606, NVIDIA GeForce RTX 2060 with Max-Q Design, 59, 5114, 6144, 62, 61.56",
+      "collected_at_local": "2026-06-29T10:56:57"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:56:58.675",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 59.7,
+      "raw_line": "2026/06/29 10:56:58.675, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 63, 59.70",
+      "collected_at_local": "2026-06-29T10:56:58"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:56:59.741",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.85,
+      "raw_line": "2026/06/29 10:56:59.741, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 60.85",
+      "collected_at_local": "2026-06-29T10:56:59"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:57:00.812",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.09,
+      "raw_line": "2026/06/29 10:57:00.812, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 64, 60.09",
+      "collected_at_local": "2026-06-29T10:57:00"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:57:01.910",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.3,
+      "raw_line": "2026/06/29 10:57:01.910, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 60.30",
+      "collected_at_local": "2026-06-29T10:57:01"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:57:02.979",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.9,
+      "raw_line": "2026/06/29 10:57:02.979, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 61.90",
+      "collected_at_local": "2026-06-29T10:57:02"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:57:04.045",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 62.1,
+      "raw_line": "2026/06/29 10:57:04.045, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 65, 62.10",
+      "collected_at_local": "2026-06-29T10:57:04"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:57:05.115",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 60.15,
+      "raw_line": "2026/06/29 10:57:05.115, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 60.15",
+      "collected_at_local": "2026-06-29T10:57:05"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:57:06.181",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 60.49,
+      "raw_line": "2026/06/29 10:57:06.181, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 60.49",
+      "collected_at_local": "2026-06-29T10:57:06"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T10:57:06"
+}

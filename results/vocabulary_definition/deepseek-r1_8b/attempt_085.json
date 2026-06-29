@@ -1,0 +1,210 @@
+{
+  "attempt": 85,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 8.769,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "a person who is paid to perform in a show or film",
+        "options": [
+          "director",
+          "star",
+          "actor"
+        ],
+        "answer": "actor"
+      },
+      {
+        "definition": "the person or organization that provides money for a project or activity",
+        "options": [
+          "investor",
+          "audience",
+          "sponsor"
+        ],
+        "answer": "sponsor"
+      },
+      {
+        "definition": "a large public gathering where people watch a performance or event",
+        "options": [
+          "gathering",
+          "celebration",
+          "audience"
+        ],
+        "answer": "audience"
+      },
+      {
+        "definition": "a person who directs a film or play",
+        "options": [
+          "performer",
+          "critic",
+          "director"
+        ],
+        "answer": "director"
+      },
+      {
+        "definition": "a person who is famous for their acting ability",
+        "options": [
+          "performer",
+          "star",
+          "critic"
+        ],
+        "answer": "star"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"a person who is paid to perform in a show or film\",\n      \"options\": [\"director\", \"star\", \"actor\"],\n      \"answer\": \"actor\"\n    },\n    {\n      \"definition\": \"the person or organization that provides money for a project or activity\",\n      \"options\": [\"investor\", \"audience\", \"sponsor\"],\n      \"answer\": \"sponsor\"\n    },\n    {\n      \"definition\": \"a large public gathering where people watch a performance or event\",\n      \"options\": [\"gathering\", \"celebration\", \"audience\"],\n      \"answer\": \"audience\"\n    },\n    {\n      \"definition\": \"a person who directs a film or play\",\n      \"options\": [\"performer\", \"critic\", \"director\"],\n      \"answer\": \"director\"\n    },\n    {\n      \"definition\": \"a person who is famous for their acting ability\",\n      \"options\": [\"performer\", \"star\", \"critic\"],\n      \"answer\": \"star\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:36:21.5589896Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 6718468600,
+    "load_duration_ns": 100029400,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 280685200,
+    "eval_count": 233,
+    "eval_duration_ns": 5418003300,
+    "tokens_per_second": 43.005
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 85.167,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 58.833,
+    "max_temperature_c": 60.0,
+    "avg_power_draw_w": 61.993,
+    "max_power_draw_w": 62.76,
+    "estimated_gpu_energy_wh": 0.103322
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:36:12.839",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.37,
+      "raw_line": "2026/06/29 14:36:12.839, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.37",
+      "collected_at_local": "2026-06-29T14:36:12"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:36:13.885",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.28,
+      "raw_line": "2026/06/29 14:36:13.885, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.28",
+      "collected_at_local": "2026-06-29T14:36:13"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:36:14.948",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 54.0,
+      "power_draw_w": 5.45,
+      "raw_line": "2026/06/29 14:36:14.948, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 54, 5.45",
+      "collected_at_local": "2026-06-29T14:36:14"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:36:16.013",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 42.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 61.95,
+      "raw_line": "2026/06/29 14:36:16.013, NVIDIA GeForce RTX 2060 with Max-Q Design, 42, 5234, 6144, 58, 61.95",
+      "collected_at_local": "2026-06-29T14:36:16"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:36:17.089",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 61.88,
+      "raw_line": "2026/06/29 14:36:17.089, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 58, 61.88",
+      "collected_at_local": "2026-06-29T14:36:17"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:36:18.164",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 62.76,
+      "raw_line": "2026/06/29 14:36:18.164, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 62.76",
+      "collected_at_local": "2026-06-29T14:36:18"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:36:19.223",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.75,
+      "raw_line": "2026/06/29 14:36:19.223, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.75",
+      "collected_at_local": "2026-06-29T14:36:19"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:36:20.282",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 61.68,
+      "raw_line": "2026/06/29 14:36:20.282, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 61.68",
+      "collected_at_local": "2026-06-29T14:36:20"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:36:21.342",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.94,
+      "raw_line": "2026/06/29 14:36:21.342, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.94",
+      "collected_at_local": "2026-06-29T14:36:21"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:36:21"
+}

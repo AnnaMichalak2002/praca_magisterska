@@ -1,0 +1,246 @@
+{
+  "attempt": 15,
+  "model": "llama3.1:8b",
+  "endpoint": "chat",
+  "time": 12.354,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who travels to a place for pleasure, often staying in hotels or resorts.",
+        "options": [
+          "Tourist",
+          "Pilgrim",
+          "Nomad"
+        ],
+        "answer": "Tourist"
+      },
+      {
+        "definition": "A type of traditional British food made from mashed potatoes and often served with meat or vegetables.",
+        "options": [
+          "Shepherd's Pie",
+          "Fish and Chips",
+          "Bangers and Mash"
+        ],
+        "answer": "Shepherd's Pie"
+      },
+      {
+        "definition": "A person who is responsible for a ship or boat, in charge of its navigation and safety.",
+        "options": [
+          "Captain",
+          "Sailor",
+          "Engineer"
+        ],
+        "answer": "Captain"
+      },
+      {
+        "definition": "A feeling of deep regret or guilt for something that has happened.",
+        "options": [
+          "Remorse",
+          "Regret",
+          "Sorrow"
+        ],
+        "answer": "Remorse"
+      },
+      {
+        "definition": "A type of traditional British pub food, usually consisting of sausages and mashed potatoes.",
+        "options": [
+          "Bangers and Mash",
+          "Fish and Chips",
+          "Toad in the Hole"
+        ],
+        "answer": "Bangers and Mash"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who travels to a place for pleasure, often staying in hotels or resorts.\",\n      \"options\": [\"Tourist\", \"Pilgrim\", \"Nomad\"],\n      \"answer\": \"Tourist\"\n    },\n    {\n      \"definition\": \"A type of traditional British food made from mashed potatoes and often served with meat or vegetables.\",\n      \"options\": [\"Shepherd's Pie\", \"Fish and Chips\", \"Bangers and Mash\"],\n      \"answer\": \"Shepherd's Pie\"\n    },\n    {\n      \"definition\": \"A person who is responsible for a ship or boat, in charge of its navigation and safety.\",\n      \"options\": [\"Captain\", \"Sailor\", \"Engineer\"],\n      \"answer\": \"Captain\"\n    },\n    {\n      \"definition\": \"A feeling of deep regret or guilt for something that has happened.\",\n      \"options\": [\"Remorse\", \"Regret\", \"Sorrow\"],\n      \"answer\": \"Remorse\"\n    },\n    {\n      \"definition\": \"A type of traditional British pub food, usually consisting of sausages and mashed potatoes.\",\n      \"options\": [\"Bangers and Mash\", \"Fish and Chips\", \"Toad in the Hole\"],\n      \"answer\": \"Bangers and Mash\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T08:39:59.6375992Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 10299566400,
+    "load_duration_ns": 129982600,
+    "prompt_eval_count": 216,
+    "prompt_eval_duration_ns": 276066900,
+    "eval_count": 285,
+    "eval_duration_ns": 9050663600,
+    "tokens_per_second": 31.489
+  },
+  "gpu_summary": {
+    "sample_count": 12,
+    "valid_sample_count": 12,
+    "active_sample_count": 9,
+    "avg_gpu_utilization_percent": 52.0,
+    "max_gpu_utilization_percent": 59.0,
+    "avg_memory_used_mib": 5114.0,
+    "max_memory_used_mib": 5114.0,
+    "avg_temperature_c": 63.889,
+    "max_temperature_c": 65.0,
+    "avg_power_draw_w": 60.671,
+    "max_power_draw_w": 61.21,
+    "estimated_gpu_energy_wh": 0.151678
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:47.318",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 22.4,
+      "raw_line": "2026/06/29 10:39:47.318, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 60, 22.40",
+      "collected_at_local": "2026-06-29T10:39:47"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:48.376",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 11.32,
+      "raw_line": "2026/06/29 10:39:48.376, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 59, 11.32",
+      "collected_at_local": "2026-06-29T10:39:48"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:49.446",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 6.85,
+      "raw_line": "2026/06/29 10:39:49.446, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 59, 6.85",
+      "collected_at_local": "2026-06-29T10:39:49"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:50.516",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 5.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 60.93,
+      "raw_line": "2026/06/29 10:39:50.516, NVIDIA GeForce RTX 2060 with Max-Q Design, 5, 5114, 6144, 62, 60.93",
+      "collected_at_local": "2026-06-29T10:39:50"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:51.582",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 59.46,
+      "raw_line": "2026/06/29 10:39:51.582, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 63, 59.46",
+      "collected_at_local": "2026-06-29T10:39:51"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:52.662",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 61.05,
+      "raw_line": "2026/06/29 10:39:52.662, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 63, 61.05",
+      "collected_at_local": "2026-06-29T10:39:52"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:53.729",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.97,
+      "raw_line": "2026/06/29 10:39:53.729, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 64, 60.97",
+      "collected_at_local": "2026-06-29T10:39:53"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:54.807",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.35,
+      "raw_line": "2026/06/29 10:39:54.807, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 60.35",
+      "collected_at_local": "2026-06-29T10:39:54"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:55.876",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.13,
+      "raw_line": "2026/06/29 10:39:55.876, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 61.13",
+      "collected_at_local": "2026-06-29T10:39:55"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:56.962",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.03,
+      "raw_line": "2026/06/29 10:39:56.962, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 65, 61.03",
+      "collected_at_local": "2026-06-29T10:39:56"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:58.029",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 59.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 59.91,
+      "raw_line": "2026/06/29 10:39:58.029, NVIDIA GeForce RTX 2060 with Max-Q Design, 59, 5114, 6144, 65, 59.91",
+      "collected_at_local": "2026-06-29T10:39:58"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:39:59.097",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.21,
+      "raw_line": "2026/06/29 10:39:59.097, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 61.21",
+      "collected_at_local": "2026-06-29T10:39:59"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T10:39:59"
+}

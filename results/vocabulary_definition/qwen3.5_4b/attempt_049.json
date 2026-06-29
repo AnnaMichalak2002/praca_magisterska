@@ -1,0 +1,246 @@
+{
+  "attempt": 49,
+  "model": "qwen3.5:4b",
+  "endpoint": "chat",
+  "time": 12.012,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who is skilled in a particular art or subject, especially one who has a high level of knowledge or experience.",
+        "options": [
+          "expert",
+          "novice",
+          "amateur"
+        ],
+        "answer": "expert"
+      },
+      {
+        "definition": "The quality of being fair and just, especially in the way in which a law or decision is applied.",
+        "options": [
+          "justice",
+          "injustice",
+          "equality"
+        ],
+        "answer": "justice"
+      },
+      {
+        "definition": "A written statement or document that is given as a formal record of an agreement, decision, or fact.",
+        "options": [
+          "certificate",
+          "bill",
+          "receipt"
+        ],
+        "answer": "certificate"
+      },
+      {
+        "definition": "The ability to do or understand something well, especially in a way that is not expected.",
+        "options": [
+          "talent",
+          "skill",
+          "ability"
+        ],
+        "answer": "talent"
+      },
+      {
+        "definition": "A person who is not skilled or experienced in a particular activity.",
+        "options": [
+          "beginner",
+          "pro",
+          "master"
+        ],
+        "answer": "beginner"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who is skilled in a particular art or subject, especially one who has a high level of knowledge or experience.\",\n      \"options\": [\n      \"expert\",\n      \"novice\",\n      \"amateur\"\n    ],\n    \"answer\": \"expert\"\n    },\n    {\n      \"definition\": \"The quality of being fair and just, especially in the way in which a law or decision is applied.\",\n      \"options\": [\n      \"justice\",\n      \"injustice\",\n      \"equality\"\n    ],\n    \"answer\": \"justice\"\n    },\n    {\n      \"definition\": \"A written statement or document that is given as a formal record of an agreement, decision, or fact.\",\n      \"options\": [\n      \"certificate\",\n      \"bill\",\n      \"receipt\"\n    ],\n    \"answer\": \"certificate\"\n    },\n    {\n      \"definition\": \"The ability to do or understand something well, especially in a way that is not expected.\",\n      \"options\": [\n      \"talent\",\n      \"skill\",\n      \"ability\"\n    ],\n    \"answer\": \"talent\"\n    },\n    {\n      \"definition\": \"A person who is not skilled or experienced in a particular activity.\",\n      \"options\": [\n      \"beginner\",\n      \"pro\",\n      \"master\"\n    ],\n    \"answer\": \"beginner\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T07:15:31.81332Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 9942184100,
+    "load_duration_ns": 195820800,
+    "prompt_eval_count": 237,
+    "prompt_eval_duration_ns": 629694400,
+    "eval_count": 348,
+    "eval_duration_ns": 8883273200,
+    "tokens_per_second": 39.175
+  },
+  "gpu_summary": {
+    "sample_count": 12,
+    "valid_sample_count": 12,
+    "active_sample_count": 9,
+    "avg_gpu_utilization_percent": 83.111,
+    "max_gpu_utilization_percent": 84.0,
+    "avg_memory_used_mib": 5396.0,
+    "max_memory_used_mib": 5396.0,
+    "avg_temperature_c": 61.889,
+    "max_temperature_c": 63.0,
+    "avg_power_draw_w": 63.113,
+    "max_power_draw_w": 64.09,
+    "estimated_gpu_energy_wh": 0.157783
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:19.841",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 18.53,
+      "raw_line": "2026/06/29 09:15:19.841, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5396, 6144, 58, 18.53",
+      "collected_at_local": "2026-06-29T09:15:19"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:20.902",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 11.46,
+      "raw_line": "2026/06/29 09:15:20.902, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5396, 6144, 57, 11.46",
+      "collected_at_local": "2026-06-29T09:15:20"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:21.965",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 5.61,
+      "raw_line": "2026/06/29 09:15:21.965, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5396, 6144, 57, 5.61",
+      "collected_at_local": "2026-06-29T09:15:21"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:23.035",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 80.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 63.55,
+      "raw_line": "2026/06/29 09:15:23.035, NVIDIA GeForce RTX 2060 with Max-Q Design, 80, 5396, 6144, 60, 63.55",
+      "collected_at_local": "2026-06-29T09:15:23"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:24.106",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 61.91,
+      "raw_line": "2026/06/29 09:15:24.106, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5396, 6144, 61, 61.91",
+      "collected_at_local": "2026-06-29T09:15:24"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:25.168",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 63.04,
+      "raw_line": "2026/06/29 09:15:25.168, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5396, 6144, 61, 63.04",
+      "collected_at_local": "2026-06-29T09:15:25"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:26.240",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 62.91,
+      "raw_line": "2026/06/29 09:15:26.240, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5396, 6144, 62, 62.91",
+      "collected_at_local": "2026-06-29T09:15:26"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:27.306",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 62.48,
+      "raw_line": "2026/06/29 09:15:27.306, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5396, 6144, 62, 62.48",
+      "collected_at_local": "2026-06-29T09:15:27"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:28.369",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 83.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 64.09,
+      "raw_line": "2026/06/29 09:15:28.369, NVIDIA GeForce RTX 2060 with Max-Q Design, 83, 5396, 6144, 62, 64.09",
+      "collected_at_local": "2026-06-29T09:15:28"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:29.456",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 82.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 62.84,
+      "raw_line": "2026/06/29 09:15:29.456, NVIDIA GeForce RTX 2060 with Max-Q Design, 82, 5396, 6144, 63, 62.84",
+      "collected_at_local": "2026-06-29T09:15:29"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:30.513",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 63.49,
+      "raw_line": "2026/06/29 09:15:30.513, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5396, 6144, 63, 63.49",
+      "collected_at_local": "2026-06-29T09:15:30"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 09:15:31.571",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 83.0,
+      "memory_used_mib": 5396.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 63.71,
+      "raw_line": "2026/06/29 09:15:31.571, NVIDIA GeForce RTX 2060 with Max-Q Design, 83, 5396, 6144, 63, 63.71",
+      "collected_at_local": "2026-06-29T09:15:31"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T09:15:31"
+}

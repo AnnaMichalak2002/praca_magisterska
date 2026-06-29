@@ -1,0 +1,210 @@
+{
+  "attempt": 79,
+  "model": "ministral-3:3b",
+  "endpoint": "chat",
+  "time": 9.425,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A **snooker** game is played with a white ball and a set of **coloured** balls, where the player aims to pocket them in specific sequences.",
+        "options": [
+          "a) a sport where players aim to knock a ball into a set of numbered pockets",
+          "b) a traditional British game of table tennis using a specific set of balls",
+          "c) a competitive sport involving a white ball and a variety of coloured balls in a specific scoring system"
+        ],
+        "answer": "c"
+      },
+      {
+        "definition": "**Brixton** is a district in London known for its vibrant multicultural community and historic pubs.",
+        "options": [
+          "a) a famous market in central London where traders sell fresh produce",
+          "b) a multicultural area in South London famous for its cultural diversity and pubs",
+          "c) a historic quarter in London where old buildings are preserved for tourists"
+        ],
+        "answer": "b"
+      },
+      {
+        "definition": "**To take something down** means to write or record it in detail, often for reference or analysis.",
+        "options": [
+          "a) to destroy or remove something completely",
+          "b) to make a careful written or recorded account of something",
+          "c) to ignore or dismiss an idea or suggestion"
+        ],
+        "answer": "b"
+      },
+      {
+        "definition": "**A teetotaler** is someone who avoids alcohol completely, often for health or moral reasons.",
+        "options": [
+          "a) a person who drinks tea but avoids coffee",
+          "b) someone who abstains from alcohol entirely, often as a lifestyle choice",
+          "c) a person who enjoys a small amount of alcohol occasionally"
+        ],
+        "answer": "b"
+      },
+      {
+        "definition": "**To be on the verge of** something means to be about to happen or occur, often very soon.",
+        "options": [
+          "a) to be far away from something",
+          "b) to be very close to an event or situation that is about to take place",
+          "c) to be preparing for an upcoming celebration"
+        ],
+        "answer": "b"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A **snooker** game is played with a white ball and a set of **coloured** balls, where the player aims to pocket them in specific sequences.\",\n      \"options\": [\n        \"a) a sport where players aim to knock a ball into a set of numbered pockets\",\n        \"b) a traditional British game of table tennis using a specific set of balls\",\n        \"c) a competitive sport involving a white ball and a variety of coloured balls in a specific scoring system\"\n      ],\n      \"answer\": \"c\"\n    },\n    {\n      \"definition\": \"**Brixton** is a district in London known for its vibrant multicultural community and historic pubs.\",\n      \"options\": [\n        \"a) a famous market in central London where traders sell fresh produce\",\n        \"b) a multicultural area in South London famous for its cultural diversity and pubs\",\n        \"c) a historic quarter in London where old buildings are preserved for tourists\"\n      ],\n      \"answer\": \"b\"\n    },\n    {\n      \"definition\": \"**To take something down** means to write or record it in detail, often for reference or analysis.\",\n      \"options\": [\n        \"a) to destroy or remove something completely\",\n        \"b) to make a careful written or recorded account of something\",\n        \"c) to ignore or dismiss an idea or suggestion\"\n      ],\n      \"answer\": \"b\"\n    },\n    {\n      \"definition\": \"**A teetotaler** is someone who avoids alcohol completely, often for health or moral reasons.\",\n      \"options\": [\n        \"a) a person who drinks tea but avoids coffee\",\n        \"b) someone who abstains from alcohol entirely, often as a lifestyle choice\",\n        \"c) a person who enjoys a small amount of alcohol occasionally\"\n      ],\n      \"answer\": \"b\"\n    },\n    {\n      \"definition\": \"**To be on the verge of** something means to be about to happen or occur, often very soon.\",\n      \"options\": [\n        \"a) to be far away from something\",\n        \"b) to be very close to an event or situation that is about to take place\",\n        \"c) to be preparing for an upcoming celebration\"\n      ],\n      \"answer\": \"b\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T06:05:24.3830241Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 7363147100,
+    "load_duration_ns": 141658900,
+    "prompt_eval_count": 212,
+    "prompt_eval_duration_ns": 171680000,
+    "eval_count": 493,
+    "eval_duration_ns": 6885632700,
+    "tokens_per_second": 71.598
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 88.333,
+    "max_gpu_utilization_percent": 89.0,
+    "avg_memory_used_mib": 4338.0,
+    "max_memory_used_mib": 4338.0,
+    "avg_temperature_c": 62.0,
+    "max_temperature_c": 63.0,
+    "avg_power_draw_w": 61.668,
+    "max_power_draw_w": 62.05,
+    "estimated_gpu_energy_wh": 0.102781
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:05:15.006",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 5.43,
+      "raw_line": "2026/06/29 08:05:15.006, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 58, 5.43",
+      "collected_at_local": "2026-06-29T08:05:15"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:05:16.069",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 5.59,
+      "raw_line": "2026/06/29 08:05:16.069, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 58, 5.59",
+      "collected_at_local": "2026-06-29T08:05:16"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:05:17.130",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 5.33,
+      "raw_line": "2026/06/29 08:05:17.130, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 4338, 6144, 57, 5.33",
+      "collected_at_local": "2026-06-29T08:05:17"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:05:18.194",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 85.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 61.36,
+      "raw_line": "2026/06/29 08:05:18.194, NVIDIA GeForce RTX 2060 with Max-Q Design, 85, 4338, 6144, 61, 61.36",
+      "collected_at_local": "2026-06-29T08:05:18"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:05:19.257",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 61.75,
+      "raw_line": "2026/06/29 08:05:19.257, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 61, 61.75",
+      "collected_at_local": "2026-06-29T08:05:19"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:05:20.333",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 61.01,
+      "raw_line": "2026/06/29 08:05:20.333, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 62, 61.01",
+      "collected_at_local": "2026-06-29T08:05:20"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:05:21.393",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 62.05,
+      "raw_line": "2026/06/29 08:05:21.393, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 62, 62.05",
+      "collected_at_local": "2026-06-29T08:05:21"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:05:22.457",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 61.94,
+      "raw_line": "2026/06/29 08:05:22.457, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 63, 61.94",
+      "collected_at_local": "2026-06-29T08:05:22"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 08:05:23.520",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 89.0,
+      "memory_used_mib": 4338.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 61.9,
+      "raw_line": "2026/06/29 08:05:23.520, NVIDIA GeForce RTX 2060 with Max-Q Design, 89, 4338, 6144, 63, 61.90",
+      "collected_at_local": "2026-06-29T08:05:23"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T08:05:24"
+}

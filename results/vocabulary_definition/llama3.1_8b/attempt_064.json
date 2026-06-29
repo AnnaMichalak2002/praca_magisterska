@@ -1,0 +1,246 @@
+{
+  "attempt": 64,
+  "model": "llama3.1:8b",
+  "endpoint": "chat",
+  "time": 11.979,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who travels to a place for pleasure and relaxation.",
+        "options": [
+          "Tourist",
+          "Pilgrim",
+          "Migrant"
+        ],
+        "answer": "Tourist"
+      },
+      {
+        "definition": "The act of moving from one country to another with the intention of settling there permanently.",
+        "options": [
+          "Immigration",
+          "Emigration",
+          "Relocation"
+        ],
+        "answer": "Emigration"
+      },
+      {
+        "definition": "A person who travels to a holy place for spiritual or religious reasons.",
+        "options": [
+          "Pilgrim",
+          "Tourist",
+          "Haji"
+        ],
+        "answer": "Pilgrim"
+      },
+      {
+        "definition": "The process of changing one's job or home to another place, often for better opportunities.",
+        "options": [
+          "Migration",
+          "Relocation",
+          "Exodus"
+        ],
+        "answer": "Relocation"
+      },
+      {
+        "definition": "A person who leaves their country to settle in another, often due to war, persecution, or economic reasons.",
+        "options": [
+          "Refugee",
+          "Migrant",
+          "Displaced Person"
+        ],
+        "answer": "Migrant"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who travels to a place for pleasure and relaxation.\",\n      \"options\": [\"Tourist\", \"Pilgrim\", \"Migrant\"],\n      \"answer\": \"Tourist\"\n    },\n    {\n      \"definition\": \"The act of moving from one country to another with the intention of settling there permanently.\",\n      \"options\": [\"Immigration\", \"Emigration\", \"Relocation\"],\n      \"answer\": \"Emigration\"\n    },\n    {\n      \"definition\": \"A person who travels to a holy place for spiritual or religious reasons.\",\n      \"options\": [\"Pilgrim\", \"Tourist\", \"Haji\"],\n      \"answer\": \"Pilgrim\"\n    },\n    {\n      \"definition\": \"The process of changing one's job or home to another place, often for better opportunities.\",\n      \"options\": [\"Migration\", \"Relocation\", \"Exodus\"],\n      \"answer\": \"Relocation\"\n    },\n    {\n      \"definition\": \"A person who leaves their country to settle in another, often due to war, persecution, or economic reasons.\",\n      \"options\": [\"Refugee\", \"Migrant\", \"Displaced Person\"],\n      \"answer\": \"Migrant\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T08:53:43.0006046Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 9935999900,
+    "load_duration_ns": 128458500,
+    "prompt_eval_count": 216,
+    "prompt_eval_duration_ns": 323126100,
+    "eval_count": 272,
+    "eval_duration_ns": 8536942500,
+    "tokens_per_second": 31.862
+  },
+  "gpu_summary": {
+    "sample_count": 12,
+    "valid_sample_count": 12,
+    "active_sample_count": 9,
+    "avg_gpu_utilization_percent": 55.667,
+    "max_gpu_utilization_percent": 64.0,
+    "avg_memory_used_mib": 5114.0,
+    "max_memory_used_mib": 5114.0,
+    "avg_temperature_c": 64.444,
+    "max_temperature_c": 65.0,
+    "avg_power_draw_w": 60.767,
+    "max_power_draw_w": 62.01,
+    "estimated_gpu_energy_wh": 0.151917
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:31.060",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 61.0,
+      "power_draw_w": 22.68,
+      "raw_line": "2026/06/29 10:53:31.060, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 61, 22.68",
+      "collected_at_local": "2026-06-29T10:53:31"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:32.113",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 11.6,
+      "raw_line": "2026/06/29 10:53:32.113, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 60, 11.60",
+      "collected_at_local": "2026-06-29T10:53:32"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:33.172",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 5.49,
+      "raw_line": "2026/06/29 10:53:33.172, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 59, 5.49",
+      "collected_at_local": "2026-06-29T10:53:33"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:34.231",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 32.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 59.96,
+      "raw_line": "2026/06/29 10:53:34.231, NVIDIA GeForce RTX 2060 with Max-Q Design, 32, 5114, 6144, 63, 59.96",
+      "collected_at_local": "2026-06-29T10:53:34"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:35.307",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 64.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.81,
+      "raw_line": "2026/06/29 10:53:35.307, NVIDIA GeForce RTX 2060 with Max-Q Design, 64, 5114, 6144, 64, 61.81",
+      "collected_at_local": "2026-06-29T10:53:35"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:36.369",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.79,
+      "raw_line": "2026/06/29 10:53:36.369, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 64, 60.79",
+      "collected_at_local": "2026-06-29T10:53:36"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:37.437",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 59.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.33,
+      "raw_line": "2026/06/29 10:53:37.437, NVIDIA GeForce RTX 2060 with Max-Q Design, 59, 5114, 6144, 64, 60.33",
+      "collected_at_local": "2026-06-29T10:53:37"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:38.503",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.39,
+      "raw_line": "2026/06/29 10:53:38.503, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 61.39",
+      "collected_at_local": "2026-06-29T10:53:38"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:39.569",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 59.85,
+      "raw_line": "2026/06/29 10:53:39.569, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 65, 59.85",
+      "collected_at_local": "2026-06-29T10:53:39"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:40.650",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 60.45,
+      "raw_line": "2026/06/29 10:53:40.650, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 65, 60.45",
+      "collected_at_local": "2026-06-29T10:53:40"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:41.716",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 59.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 62.01,
+      "raw_line": "2026/06/29 10:53:41.716, NVIDIA GeForce RTX 2060 with Max-Q Design, 59, 5114, 6144, 65, 62.01",
+      "collected_at_local": "2026-06-29T10:53:41"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:53:42.787",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 60.31,
+      "raw_line": "2026/06/29 10:53:42.787, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 60.31",
+      "collected_at_local": "2026-06-29T10:53:42"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T10:53:43"
+}

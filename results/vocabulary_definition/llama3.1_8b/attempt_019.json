@@ -1,0 +1,234 @@
+{
+  "attempt": 19,
+  "model": "llama3.1:8b",
+  "endpoint": "chat",
+  "time": 11.654,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who travels to a place for pleasure, especially one who does not work there.",
+        "options": [
+          "Tourist",
+          "Pilot",
+          "Explorer"
+        ],
+        "answer": "Tourist"
+      },
+      {
+        "definition": "A feeling of deep regret or guilt for a wrong committed.",
+        "options": [
+          "Sorrow",
+          "Remorse",
+          "Anger"
+        ],
+        "answer": "Remorse"
+      },
+      {
+        "definition": "A person who is in charge of organizing and supervising the work of others, especially in a factory or office.",
+        "options": [
+          "Manager",
+          "Director",
+          "Supervisor"
+        ],
+        "answer": "Manager"
+      },
+      {
+        "definition": "A feeling of being happy and proud because you have achieved something.",
+        "options": [
+          "Pride",
+          "Joy",
+          "Satisfaction"
+        ],
+        "answer": "Satisfaction"
+      },
+      {
+        "definition": "To move quickly and suddenly in a particular direction, often in order to catch or avoid someone or something.",
+        "options": [
+          "Run",
+          "Jump",
+          "Dash"
+        ],
+        "answer": "Dash"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who travels to a place for pleasure, especially one who does not work there.\",\n      \"options\": [\"Tourist\", \"Pilot\", \"Explorer\"],\n      \"answer\": \"Tourist\"\n    },\n    {\n      \"definition\": \"A feeling of deep regret or guilt for a wrong committed.\",\n      \"options\": [\"Sorrow\", \"Remorse\", \"Anger\"],\n      \"answer\": \"Remorse\"\n    },\n    {\n      \"definition\": \"A person who is in charge of organizing and supervising the work of others, especially in a factory or office.\",\n      \"options\": [\"Manager\", \"Director\", \"Supervisor\"],\n      \"answer\": \"Manager\"\n    },\n    {\n      \"definition\": \"A feeling of being happy and proud because you have achieved something.\",\n      \"options\": [\"Pride\", \"Joy\", \"Satisfaction\"],\n      \"answer\": \"Satisfaction\"\n    },\n    {\n      \"definition\": \"To move quickly and suddenly in a particular direction, often in order to catch or avoid someone or something.\",\n      \"options\": [\"Run\", \"Jump\", \"Dash\"],\n      \"answer\": \"Dash\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T08:41:07.8782428Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 9623753100,
+    "load_duration_ns": 131563900,
+    "prompt_eval_count": 216,
+    "prompt_eval_duration_ns": 317330500,
+    "eval_count": 263,
+    "eval_duration_ns": 8367527900,
+    "tokens_per_second": 31.431
+  },
+  "gpu_summary": {
+    "sample_count": 11,
+    "valid_sample_count": 11,
+    "active_sample_count": 8,
+    "avg_gpu_utilization_percent": 57.875,
+    "max_gpu_utilization_percent": 59.0,
+    "avg_memory_used_mib": 5114.0,
+    "max_memory_used_mib": 5114.0,
+    "avg_temperature_c": 63.875,
+    "max_temperature_c": 65.0,
+    "avg_power_draw_w": 60.501,
+    "max_power_draw_w": 61.35,
+    "estimated_gpu_energy_wh": 0.134447
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:40:56.260",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 22.5,
+      "raw_line": "2026/06/29 10:40:56.260, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 60, 22.50",
+      "collected_at_local": "2026-06-29T10:40:56"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:40:57.306",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 11.47,
+      "raw_line": "2026/06/29 10:40:57.306, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 60, 11.47",
+      "collected_at_local": "2026-06-29T10:40:57"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:40:58.378",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 5.5,
+      "raw_line": "2026/06/29 10:40:58.378, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5114, 6144, 59, 5.50",
+      "collected_at_local": "2026-06-29T10:40:58"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:40:59.447",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 59.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 60.76,
+      "raw_line": "2026/06/29 10:40:59.447, NVIDIA GeForce RTX 2060 with Max-Q Design, 59, 5114, 6144, 62, 60.76",
+      "collected_at_local": "2026-06-29T10:40:59"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:41:00.512",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 60.86,
+      "raw_line": "2026/06/29 10:41:00.512, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 63, 60.86",
+      "collected_at_local": "2026-06-29T10:41:00"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:41:01.578",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.05,
+      "raw_line": "2026/06/29 10:41:01.578, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 64, 60.05",
+      "collected_at_local": "2026-06-29T10:41:01"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:41:02.645",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.35,
+      "raw_line": "2026/06/29 10:41:02.645, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 61.35",
+      "collected_at_local": "2026-06-29T10:41:02"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:41:03.709",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 60.98,
+      "raw_line": "2026/06/29 10:41:03.709, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 60.98",
+      "collected_at_local": "2026-06-29T10:41:03"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:41:04.789",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 59.36,
+      "raw_line": "2026/06/29 10:41:04.789, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 64, 59.36",
+      "collected_at_local": "2026-06-29T10:41:04"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:41:05.859",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 58.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 59.4,
+      "raw_line": "2026/06/29 10:41:05.859, NVIDIA GeForce RTX 2060 with Max-Q Design, 58, 5114, 6144, 65, 59.40",
+      "collected_at_local": "2026-06-29T10:41:05"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 10:41:06.930",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 57.0,
+      "memory_used_mib": 5114.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 61.25,
+      "raw_line": "2026/06/29 10:41:06.930, NVIDIA GeForce RTX 2060 with Max-Q Design, 57, 5114, 6144, 65, 61.25",
+      "collected_at_local": "2026-06-29T10:41:06"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T10:41:07"
+}

@@ -1,0 +1,170 @@
+{
+  "attempt": 39,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 7.32,
+  "success": true,
+  "response": {
+    "exercise_type": "matching",
+    "topic": "IT",
+    "words": [
+      "algorithm",
+      "bug",
+      "cloud",
+      "data",
+      "firewall",
+      "interface",
+      "network",
+      "server"
+    ],
+    "translations": [
+      "serwer",
+      "sieć",
+      "interfejs",
+      "błąk",
+      "algorytm",
+      "data",
+      "sieć bezprzewodowa",
+      "bariera ognia"
+    ],
+    "answer_key": {
+      "algorithm": "algorytm",
+      "bug": "błąk",
+      "cloud": "sieć bezprzewodowa",
+      "data": "data",
+      "firewall": "bariera ognia",
+      "interface": "interfejs",
+      "network": "sieć",
+      "server": "serwer"
+    }
+  },
+  "raw_output": "{\n  \"exercise_type\": \"matching\",\n  \"topic\": \"IT\",\n  \"words\": [\"algorithm\", \"bug\", \"cloud\", \"data\", \"firewall\", \"interface\", \"network\", \"server\"],\n  \"translations\": [\"serwer\", \"sieć\", \"interfejs\", \"błąk\", \"algorytm\", \"data\", \"sieć bezprzewodowa\", \"bariera ognia\"],\n  \"answer_key\": {\n    \"algorithm\": \"algorytm\",\n    \"bug\": \"błąk\",\n    \"cloud\": \"sieć bezprzewodowa\",\n    \"data\": \"data\",\n    \"firewall\": \"bariera ognia\",\n    \"interface\": \"interfejs\",\n    \"network\": \"sieć\",\n    \"server\": \"serwer\"\n  }\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:47:52.3745923Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 5293940700,
+    "load_duration_ns": 103136700,
+    "prompt_eval_count": 214,
+    "prompt_eval_duration_ns": 365978000,
+    "eval_count": 176,
+    "eval_duration_ns": 4424609000,
+    "tokens_per_second": 39.778
+  },
+  "gpu_summary": {
+    "sample_count": 7,
+    "valid_sample_count": 7,
+    "active_sample_count": 4,
+    "avg_gpu_utilization_percent": 74.5,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 56.25,
+    "max_temperature_c": 57.0,
+    "avg_power_draw_w": 62.582,
+    "max_power_draw_w": 63.24,
+    "estimated_gpu_energy_wh": 0.069536
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:47:45.105",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 53.0,
+      "power_draw_w": 5.15,
+      "raw_line": "2026/06/29 14:47:45.105, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 53, 5.15",
+      "collected_at_local": "2026-06-29T14:47:45"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:47:46.165",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 5.05,
+      "raw_line": "2026/06/29 14:47:46.165, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 52, 5.05",
+      "collected_at_local": "2026-06-29T14:47:46"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:47:47.235",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 52.0,
+      "power_draw_w": 10.78,
+      "raw_line": "2026/06/29 14:47:47.235, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 52, 10.78",
+      "collected_at_local": "2026-06-29T14:47:47"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:47:48.298",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 16.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 62.78,
+      "raw_line": "2026/06/29 14:47:48.298, NVIDIA GeForce RTX 2060 with Max-Q Design, 16, 5234, 6144, 55, 62.78",
+      "collected_at_local": "2026-06-29T14:47:48"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:47:49.371",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 62.37,
+      "raw_line": "2026/06/29 14:47:49.371, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 56, 62.37",
+      "collected_at_local": "2026-06-29T14:47:49"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:47:50.444",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 63.24,
+      "raw_line": "2026/06/29 14:47:50.444, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 57, 63.24",
+      "collected_at_local": "2026-06-29T14:47:50"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:47:51.516",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 57.0,
+      "power_draw_w": 61.94,
+      "raw_line": "2026/06/29 14:47:51.516, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 57, 61.94",
+      "collected_at_local": "2026-06-29T14:47:51"
+    }
+  ],
+  "mode_id": "vocabulary_match",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_match.txt",
+  "timestamp": "2026-06-29T14:47:52"
+}

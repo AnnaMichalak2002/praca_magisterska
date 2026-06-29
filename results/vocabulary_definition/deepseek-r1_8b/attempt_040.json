@@ -1,0 +1,210 @@
+{
+  "attempt": 40,
+  "model": "deepseek-r1:8b",
+  "endpoint": "chat",
+  "time": 9.453,
+  "success": true,
+  "response": {
+    "exercise_type": "definition_multiple_choice",
+    "questions": [
+      {
+        "definition": "A person who is paid to write articles or stories for newspapers or magazines.",
+        "options": [
+          "reporter",
+          "editor",
+          "journalist"
+        ],
+        "answer": "journalist"
+      },
+      {
+        "definition": "A large building where people go to see films shown on a screen.",
+        "options": [
+          "cinema",
+          "theatre",
+          "auditorium"
+        ],
+        "answer": "cinema"
+      },
+      {
+        "definition": "A person who is responsible for managing and supervising a company or organization.",
+        "options": [
+          "director",
+          "manager",
+          "supervisor"
+        ],
+        "answer": "director"
+      },
+      {
+        "definition": "A person who studies the past by examining old objects, documents, or places.",
+        "options": [
+          "archaeologist",
+          "historian",
+          "antiquarian"
+        ],
+        "answer": "historian"
+      },
+      {
+        "definition": "A person who is trained to give medical care and help in emergencies.",
+        "options": [
+          "nurse",
+          "paramedic",
+          "doctor"
+        ],
+        "answer": "paramedic"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercise_type\": \"definition_multiple_choice\",\n  \"questions\": [\n    {\n      \"definition\": \"A person who is paid to write articles or stories for newspapers or magazines.\",\n      \"options\": [\"reporter\", \"editor\", \"journalist\"],\n      \"answer\": \"journalist\"\n    },\n    {\n      \"definition\": \"A large building where people go to see films shown on a screen.\",\n      \"options\": [\"cinema\", \"theatre\", \"auditorium\"],\n      \"answer\": \"cinema\"\n    },\n    {\n      \"definition\": \"A person who is responsible for managing and supervising a company or organization.\",\n      \"options\": [\"director\", \"manager\", \"supervisor\"],\n      \"answer\": \"director\"\n    },\n    {\n      \"definition\": \"A person who studies the past by examining old objects, documents, or places.\",\n      \"options\": [\"archaeologist\", \"historian\", \"antiquarian\"],\n      \"answer\": \"historian\"\n    },\n    {\n      \"definition\": \"A person who is trained to give medical care and help in emergencies.\",\n      \"options\": [\"nurse\", \"paramedic\", \"doctor\"],\n      \"answer\": \"paramedic\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 800,
+    "temperature": 0.5,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-06-29T12:25:31.8084197Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 7392907000,
+    "load_duration_ns": 97895900,
+    "prompt_eval_count": 211,
+    "prompt_eval_duration_ns": 290802900,
+    "eval_count": 257,
+    "eval_duration_ns": 6601425300,
+    "tokens_per_second": 38.931
+  },
+  "gpu_summary": {
+    "sample_count": 9,
+    "valid_sample_count": 9,
+    "active_sample_count": 6,
+    "avg_gpu_utilization_percent": 92.167,
+    "max_gpu_utilization_percent": 94.0,
+    "avg_memory_used_mib": 5234.0,
+    "max_memory_used_mib": 5234.0,
+    "avg_temperature_c": 59.333,
+    "max_temperature_c": 60.0,
+    "avg_power_draw_w": 61.982,
+    "max_power_draw_w": 62.21,
+    "estimated_gpu_energy_wh": 0.103303
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:25:22.399",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 56.0,
+      "power_draw_w": 5.31,
+      "raw_line": "2026/06/29 14:25:22.399, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 56, 5.31",
+      "collected_at_local": "2026-06-29T14:25:22"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:25:23.466",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 5.14,
+      "raw_line": "2026/06/29 14:25:23.466, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 5.14",
+      "collected_at_local": "2026-06-29T14:25:23"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:25:24.524",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 55.0,
+      "power_draw_w": 9.18,
+      "raw_line": "2026/06/29 14:25:24.524, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5234, 6144, 55, 9.18",
+      "collected_at_local": "2026-06-29T14:25:24"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:25:25.619",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 58.0,
+      "power_draw_w": 62.21,
+      "raw_line": "2026/06/29 14:25:25.619, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5234, 6144, 58, 62.21",
+      "collected_at_local": "2026-06-29T14:25:25"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:25:26.689",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 62.13,
+      "raw_line": "2026/06/29 14:25:26.689, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 59, 62.13",
+      "collected_at_local": "2026-06-29T14:25:26"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:25:27.747",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 93.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 62.03,
+      "raw_line": "2026/06/29 14:25:27.747, NVIDIA GeForce RTX 2060 with Max-Q Design, 93, 5234, 6144, 59, 62.03",
+      "collected_at_local": "2026-06-29T14:25:27"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:25:28.818",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 62.12,
+      "raw_line": "2026/06/29 14:25:28.818, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 62.12",
+      "collected_at_local": "2026-06-29T14:25:28"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:25:29.895",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.82,
+      "raw_line": "2026/06/29 14:25:29.895, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.82",
+      "collected_at_local": "2026-06-29T14:25:29"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/06/29 14:25:30.966",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5234.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 61.58,
+      "raw_line": "2026/06/29 14:25:30.966, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5234, 6144, 60, 61.58",
+      "collected_at_local": "2026-06-29T14:25:30"
+    }
+  ],
+  "mode_id": "vocabulary_definition",
+  "system_prompt_path": "prompts/vocabulary/system_vocabulary.txt",
+  "user_prompt_path": "prompts/vocabulary/user_vocabulary_definition.txt",
+  "timestamp": "2026-06-29T14:25:31"
+}
