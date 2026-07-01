@@ -1,0 +1,476 @@
+{
+  "attempt": 79,
+  "model": "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0",
+  "endpoint": "chat",
+  "time": 31.199,
+  "success": true,
+  "response": {
+    "exercis_typ": "CEFR Englis_English Placement Test",
+    "section_id": 5,
+    "section_title": "Reading Comprehension",
+    "cefr_range": "B2-C1",
+    "reading_text": "The rise of artificial intelligence (AI) has led to numerous implications for society, economy, and everyday life. AI is now being used in various industries such as healthcare, finance, transportation, and entertainment. While many see the potential benefits of AI, there are also concerns about its impact on jobs, privacy, and security.",
+    "questions": [
+      {
+        "question_number": 36,
+        "question": "What is the main topic of this passage?",
+        "options": [
+          "The history of AI",
+          "The impact of AI on jobs and privacy",
+          "The different types of AI systems",
+          "The ethical considerations surrounding AI"
+        ],
+        "answer": "The impact of AI on jobs and privacy"
+      },
+      {
+        "question_number": 37,
+        "question": "Which industry is NOT mentioned as using AI?",
+        "options": [
+          "healthcare",
+          "finance",
+          "transportation",
+          "agriculture"
+        ],
+        "answer": "agriculture"
+      },
+      {
+        "question_number": 38,
+        "question": "What is the author's tone towards AI?",
+        "options": [
+          "Optimistic",
+          "Neutral",
+          "Pessimistic",
+          "Unexpressed"
+        ],
+        "answer": "Neutral"
+      },
+      {
+        "question_number": 39,
+        "question": "Which of the following best describes the potential benefits of AI mentioned in the passage?",
+        "options": [
+          "Improved healthcare and financial services",
+          "Enhanced transportation and entertainment options",
+          "Increased job creation in all industries",
+          "Improved security across various domains"
+        ],
+        "answer": "Improved healthcare and financial services"
+      },
+      {
+        "question_number": 40,
+        "question": "What concern is NOT mentioned in the passage?",
+        "options": [
+          "Impact on jobs",
+          "Privacy risks",
+          "Security threats",
+          "Environmental impact"
+        ],
+        "answer": "Environmental impact"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercis_typ\": \"CEFR Englis_English Placement Test\",\n  \"section_id\": 5,\n  \"section_title\": \"Reading Comprehension\",\n  \"cefr_range\": \"B2-C1\",\n  \"reading_text\": \"The rise of artificial intelligence (AI) has led to numerous implications for society, economy, and everyday life. AI is now being used in various industries such as healthcare, finance, transportation, and entertainment. While many see the potential benefits of AI, there are also concerns about its impact on jobs, privacy, and security.\",\n  \"questions\": [\n    {\n      \"question_number\": 36,\n      \"question\": \"What is the main topic of this passage?\",\n      \"options\": [\n        \"The history of AI\",\n        \"The impact of AI on jobs and privacy\",\n        \"The different types of AI systems\",\n        \"The ethical considerations surrounding AI\"\n      ],\n      \"answer\": \"The impact of AI on jobs and privacy\"\n    },\n    {\n      \"question_number\": 37,\n      \"question\": \"Which industry is NOT mentioned as using AI?\",\n      \"options\": [\n        \"healthcare\",\n        \"finance\",\n        \"transportation\",\n        \"agriculture\"\n      ],\n      \"answer\": \"agriculture\"\n    },\n    {\n      \"question_number\": 38,\n      \"question\": \"What is the author's tone towards AI?\",\n      \"options\": [\n        \"Optimistic\",\n        \"Neutral\",\n        \"Pessimistic\",\n        \"Unexpressed\"\n      ],\n      \"answer\": \"Neutral\"\n    },\n    {\n      \"question_number\": 39,\n      \"question\": \"Which of the following best describes the potential benefits of AI mentioned in the passage?\",\n      \"options\": [\n        \"Improved healthcare and financial services\",\n        \"Enhanced transportation and entertainment options\",\n        \"Increased job creation in all industries\",\n        \"Improved security across various domains\"\n      ],\n      \"answer\": \"Improved healthcare and financial services\"\n    },\n    {\n      \"question_number\": 40,\n      \"question\": \"What concern is NOT mentioned in the passage?\",\n      \"options\": [\n        \"Impact on jobs\",\n        \"Privacy risks\",\n        \"Security threats\",\n        \"Environmental impact\"\n      ],\n      \"answer\": \"Environmental impact\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 2000,
+    "temperature": 0.4,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-07-01T01:37:15.9329684Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 29126325200,
+    "load_duration_ns": 23183100,
+    "prompt_eval_count": 1351,
+    "prompt_eval_duration_ns": 1491542900,
+    "eval_count": 1044,
+    "eval_duration_ns": 20943946800,
+    "tokens_per_second": 49.847
+  },
+  "gpu_summary": {
+    "sample_count": 30,
+    "valid_sample_count": 30,
+    "active_sample_count": 27,
+    "avg_gpu_utilization_percent": 94.741,
+    "max_gpu_utilization_percent": 98.0,
+    "avg_memory_used_mib": 5122.0,
+    "max_memory_used_mib": 5122.0,
+    "avg_temperature_c": 67.481,
+    "max_temperature_c": 69.0,
+    "avg_power_draw_w": 62.707,
+    "max_power_draw_w": 63.8,
+    "estimated_gpu_energy_wh": 0.470303
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:44.770",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 5.7,
+      "raw_line": "2026/07/01 03:36:44.770, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5122, 6144, 63, 5.70",
+      "collected_at_local": "2026-07-01T03:36:44"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:45.837",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 5.95,
+      "raw_line": "2026/07/01 03:36:45.837, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5122, 6144, 62, 5.95",
+      "collected_at_local": "2026-07-01T03:36:45"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:46.900",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 12.5,
+      "raw_line": "2026/07/01 03:36:46.900, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5122, 6144, 62, 12.50",
+      "collected_at_local": "2026-07-01T03:36:46"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:47.968",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 84.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 62.46,
+      "raw_line": "2026/07/01 03:36:47.968, NVIDIA GeForce RTX 2060 with Max-Q Design, 84, 5122, 6144, 65, 62.46",
+      "collected_at_local": "2026-07-01T03:36:47"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:49.039",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 98.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 66.0,
+      "power_draw_w": 63.16,
+      "raw_line": "2026/07/01 03:36:49.039, NVIDIA GeForce RTX 2060 with Max-Q Design, 98, 5122, 6144, 66, 63.16",
+      "collected_at_local": "2026-07-01T03:36:49"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:50.096",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 66.0,
+      "power_draw_w": 63.53,
+      "raw_line": "2026/07/01 03:36:50.096, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 66, 63.53",
+      "collected_at_local": "2026-07-01T03:36:50"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:51.168",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 66.0,
+      "power_draw_w": 62.69,
+      "raw_line": "2026/07/01 03:36:51.168, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 66, 62.69",
+      "collected_at_local": "2026-07-01T03:36:51"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:52.228",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 66.0,
+      "power_draw_w": 63.04,
+      "raw_line": "2026/07/01 03:36:52.228, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 66, 63.04",
+      "collected_at_local": "2026-07-01T03:36:52"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:53.306",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 67.0,
+      "power_draw_w": 62.65,
+      "raw_line": "2026/07/01 03:36:53.306, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 67, 62.65",
+      "collected_at_local": "2026-07-01T03:36:53"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:54.366",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 67.0,
+      "power_draw_w": 62.74,
+      "raw_line": "2026/07/01 03:36:54.366, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 67, 62.74",
+      "collected_at_local": "2026-07-01T03:36:54"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:55.439",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 67.0,
+      "power_draw_w": 63.08,
+      "raw_line": "2026/07/01 03:36:55.439, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 67, 63.08",
+      "collected_at_local": "2026-07-01T03:36:55"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:56.502",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 67.0,
+      "power_draw_w": 62.53,
+      "raw_line": "2026/07/01 03:36:56.502, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 67, 62.53",
+      "collected_at_local": "2026-07-01T03:36:56"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:57.577",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 67.0,
+      "power_draw_w": 62.75,
+      "raw_line": "2026/07/01 03:36:57.577, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 67, 62.75",
+      "collected_at_local": "2026-07-01T03:36:57"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:58.636",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 67.0,
+      "power_draw_w": 62.58,
+      "raw_line": "2026/07/01 03:36:58.636, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 67, 62.58",
+      "collected_at_local": "2026-07-01T03:36:58"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:36:59.708",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 96.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 67.0,
+      "power_draw_w": 62.75,
+      "raw_line": "2026/07/01 03:36:59.708, NVIDIA GeForce RTX 2060 with Max-Q Design, 96, 5122, 6144, 67, 62.75",
+      "collected_at_local": "2026-07-01T03:36:59"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:00.786",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 67.0,
+      "power_draw_w": 63.36,
+      "raw_line": "2026/07/01 03:37:00.786, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 67, 63.36",
+      "collected_at_local": "2026-07-01T03:37:00"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:01.848",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 68.0,
+      "power_draw_w": 62.76,
+      "raw_line": "2026/07/01 03:37:01.848, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 68, 62.76",
+      "collected_at_local": "2026-07-01T03:37:01"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:02.927",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 68.0,
+      "power_draw_w": 62.67,
+      "raw_line": "2026/07/01 03:37:02.927, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 68, 62.67",
+      "collected_at_local": "2026-07-01T03:37:02"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:03.986",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 68.0,
+      "power_draw_w": 62.09,
+      "raw_line": "2026/07/01 03:37:03.986, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 68, 62.09",
+      "collected_at_local": "2026-07-01T03:37:03"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:05.050",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 68.0,
+      "power_draw_w": 62.55,
+      "raw_line": "2026/07/01 03:37:05.050, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 68, 62.55",
+      "collected_at_local": "2026-07-01T03:37:05"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:06.109",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 96.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 68.0,
+      "power_draw_w": 62.35,
+      "raw_line": "2026/07/01 03:37:06.109, NVIDIA GeForce RTX 2060 with Max-Q Design, 96, 5122, 6144, 68, 62.35",
+      "collected_at_local": "2026-07-01T03:37:06"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:07.186",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 94.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 68.0,
+      "power_draw_w": 63.8,
+      "raw_line": "2026/07/01 03:37:07.186, NVIDIA GeForce RTX 2060 with Max-Q Design, 94, 5122, 6144, 68, 63.80",
+      "collected_at_local": "2026-07-01T03:37:07"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:08.244",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 68.0,
+      "power_draw_w": 62.57,
+      "raw_line": "2026/07/01 03:37:08.244, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 68, 62.57",
+      "collected_at_local": "2026-07-01T03:37:08"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:09.316",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 68.0,
+      "power_draw_w": 62.27,
+      "raw_line": "2026/07/01 03:37:09.316, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 68, 62.27",
+      "collected_at_local": "2026-07-01T03:37:09"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:10.378",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 68.0,
+      "power_draw_w": 62.26,
+      "raw_line": "2026/07/01 03:37:10.378, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 68, 62.26",
+      "collected_at_local": "2026-07-01T03:37:10"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:11.452",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 69.0,
+      "power_draw_w": 62.43,
+      "raw_line": "2026/07/01 03:37:11.452, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 69, 62.43",
+      "collected_at_local": "2026-07-01T03:37:11"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:12.514",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 69.0,
+      "power_draw_w": 62.39,
+      "raw_line": "2026/07/01 03:37:12.514, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 69, 62.39",
+      "collected_at_local": "2026-07-01T03:37:12"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:13.602",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 69.0,
+      "power_draw_w": 63.78,
+      "raw_line": "2026/07/01 03:37:13.602, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 69, 63.78",
+      "collected_at_local": "2026-07-01T03:37:13"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:14.666",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 69.0,
+      "power_draw_w": 62.15,
+      "raw_line": "2026/07/01 03:37:14.666, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 69, 62.15",
+      "collected_at_local": "2026-07-01T03:37:14"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 03:37:15.741",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 69.0,
+      "power_draw_w": 61.7,
+      "raw_line": "2026/07/01 03:37:15.741, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 69, 61.70",
+      "collected_at_local": "2026-07-01T03:37:15"
+    }
+  ],
+  "mode_id": "test_section_5",
+  "system_prompt_path": "prompts/test/system_test.txt",
+  "user_prompt_path": "prompts/test/user_test_section_5.txt",
+  "timestamp": "2026-07-01T03:37:15"
+}

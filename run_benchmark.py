@@ -984,10 +984,10 @@ def run_vocabulary():
 
 
 def main():
-    run_writing()
+    #run_writing()
     #run_vocabulary()
     #run_grammar()
-    #run_test_cefr()
+    run_test_cefr()
     #run_grammar()
     #run_vocabulary()
 

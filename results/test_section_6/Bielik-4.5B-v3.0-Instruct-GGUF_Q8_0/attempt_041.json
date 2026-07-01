@@ -1,0 +1,439 @@
+{
+  "attempt": 41,
+  "model": "Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0",
+  "endpoint": "chat",
+  "time": 28.055,
+  "success": true,
+  "response": {
+    "exercis_typ": "CEFR Englis_Placement Test",
+    "section_id": 6,
+    "section_title": "Language Functions",
+    "cefr_range": "B1-B2",
+    "questions": [
+      {
+        "question_number": 41,
+        "question": "You're late. What should you say?",
+        "options": [
+          "I am sorry.",
+          "That's okay, I won't be long.",
+          "No problem, let's go now.",
+          "I apologize for the delay."
+        ],
+        "answer": "I am sorry."
+      },
+      {
+        "question_number": 42,
+        "question": "You want to suggest a restaurant. What's the best way?",
+        "options": [
+          "I think you should try this place.",
+          "Let me know if I can help.",
+          "Sure, let's go there together.",
+          "Do you want to come with?"
+        ],
+        "answer": "I think you should try this place."
+      },
+      {
+        "question_number": 43,
+        "question": "You agree with someone's opinion. Which response is appropriate?",
+        "options": [
+          "I don't think so.",
+          "That's a good point.",
+          "You are wrong, I have different opinion.",
+          "No comment."
+        ],
+        "answer": "That's a good point."
+      },
+      {
+        "question_number": 44,
+        "question": "You want to discuss something but don't agree. What should you say?",
+        "options": [
+          "I disagree with you.",
+          "Let me tell you my viewpoint.",
+          "You're right, I should listen to you.",
+          "No comment."
+        ],
+        "answer": "I disagree with you."
+      },
+      {
+        "question_number": 45,
+        "question": "You want to request someone's help. Which phrase is suitable?",
+        "options": [
+          "I need your assistance.",
+          "Can I have a coffee please?",
+          "Would you mind helping me?",
+          "Let's do it together."
+        ],
+        "answer": "Can I have a coffee please?"
+      }
+    ]
+  },
+  "raw_output": "{\n  \"exercis_typ\": \"CEFR Englis_Placement Test\",\n  \"section_id\": 6,\n  \"section_title\": \"Language Functions\",\n  \"cefr_range\": \"B1-B2\",\n  \"questions\": [\n    {\n      \"question_number\": 41,\n      \"question\": \"You're late. What should you say?\",\n      \"options\": [\n        \"I am sorry.\",\n        \"That's okay, I won't be long.\",\n        \"No problem, let's go now.\",\n        \"I apologize for the delay.\"\n      ],\n      \"answer\": \"I am sorry.\"\n    },\n    {\n      \"question_number\": 42,\n      \"question\": \"You want to suggest a restaurant. What's the best way?\",\n      \"options\": [\n        \"I think you should try this place.\",\n        \"Let me know if I can help.\",\n        \"Sure, let's go there together.\",\n        \"Do you want to come with?\"\n      ],\n      \"answer\": \"I think you should try this place.\"\n    },\n    {\n      \"question_number\": 43,\n      \"question\": \"You agree with someone's opinion. Which response is appropriate?\",\n      \"options\": [\n        \"I don't think so.\",\n        \"That's a good point.\",\n        \"You are wrong, I have different opinion.\",\n        \"No comment.\"\n      ],\n      \"answer\": \"That's a good point.\"\n    },\n    {\n      \"question_number\": 44,\n      \"question\": \"You want to discuss something but don't agree. What should you say?\",\n      \"options\": [\n        \"I disagree with you.\",\n        \"Let me tell you my viewpoint.\",\n        \"You're right, I should listen to you.\",\n        \"No comment.\"\n      ],\n      \"answer\": \"I disagree with you.\"\n    },\n    {\n      \"question_number\": 45,\n      \"question\": \"You want to request someone's help. Which phrase is suitable?\",\n      \"options\": [\n        \"I need your assistance.\",\n        \"Can I have a coffee please?\",\n        \"Would you mind helping me?\",\n        \"Let's do it together.\"\n      ],\n      \"answer\": \"Can I have a coffee please?\"\n    }\n  ]\n}",
+  "postprocessing_steps": [
+    "json_parsed_without_cleanup"
+  ],
+  "error": null,
+  "request_options": {
+    "num_ctx": 2048,
+    "num_predict": 2000,
+    "temperature": 0.4,
+    "top_p": 0.9
+  },
+  "request_timeout_seconds": 120,
+  "http_status_code": 200,
+  "ollama_metrics": {
+    "created_at": "2026-07-01T02:14:45.1785523Z",
+    "done": true,
+    "done_reason": "stop",
+    "total_duration_ns": 26008315000,
+    "load_duration_ns": 23463400,
+    "prompt_eval_count": 1360,
+    "prompt_eval_duration_ns": 1473955200,
+    "eval_count": 931,
+    "eval_duration_ns": 18575137200,
+    "tokens_per_second": 50.121
+  },
+  "gpu_summary": {
+    "sample_count": 27,
+    "valid_sample_count": 27,
+    "active_sample_count": 24,
+    "avg_gpu_utilization_percent": 93.75,
+    "max_gpu_utilization_percent": 99.0,
+    "avg_memory_used_mib": 5122.0,
+    "max_memory_used_mib": 5122.0,
+    "avg_temperature_c": 64.042,
+    "max_temperature_c": 65.0,
+    "avg_power_draw_w": 62.935,
+    "max_power_draw_w": 64.3,
+    "estimated_gpu_energy_wh": 0.419569
+  },
+  "gpu_samples": [
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:17.166",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 11.24,
+      "raw_line": "2026/07/01 04:14:17.166, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5122, 6144, 60, 11.24",
+      "collected_at_local": "2026-07-01T04:14:17"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:18.237",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 60.0,
+      "power_draw_w": 5.26,
+      "raw_line": "2026/07/01 04:14:18.237, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5122, 6144, 60, 5.26",
+      "collected_at_local": "2026-07-01T04:14:18"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:19.296",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 0.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 59.0,
+      "power_draw_w": 13.58,
+      "raw_line": "2026/07/01 04:14:19.296, NVIDIA GeForce RTX 2060 with Max-Q Design, 0, 5122, 6144, 59, 13.58",
+      "collected_at_local": "2026-07-01T04:14:19"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:20.372",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 55.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 62.0,
+      "power_draw_w": 62.15,
+      "raw_line": "2026/07/01 04:14:20.372, NVIDIA GeForce RTX 2060 with Max-Q Design, 55, 5122, 6144, 62, 62.15",
+      "collected_at_local": "2026-07-01T04:14:20"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:21.443",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 99.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 63.12,
+      "raw_line": "2026/07/01 04:14:21.443, NVIDIA GeForce RTX 2060 with Max-Q Design, 99, 5122, 6144, 63, 63.12",
+      "collected_at_local": "2026-07-01T04:14:21"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:22.509",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 63.21,
+      "raw_line": "2026/07/01 04:14:22.509, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 63, 63.21",
+      "collected_at_local": "2026-07-01T04:14:22"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:23.580",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 64.3,
+      "raw_line": "2026/07/01 04:14:23.580, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 63, 64.30",
+      "collected_at_local": "2026-07-01T04:14:23"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:24.641",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 63.0,
+      "power_draw_w": 62.9,
+      "raw_line": "2026/07/01 04:14:24.641, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 63, 62.90",
+      "collected_at_local": "2026-07-01T04:14:24"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:25.710",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 63.45,
+      "raw_line": "2026/07/01 04:14:25.710, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 64, 63.45",
+      "collected_at_local": "2026-07-01T04:14:25"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:26.777",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 62.95,
+      "raw_line": "2026/07/01 04:14:26.777, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 64, 62.95",
+      "collected_at_local": "2026-07-01T04:14:26"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:27.849",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 62.83,
+      "raw_line": "2026/07/01 04:14:27.849, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 64, 62.83",
+      "collected_at_local": "2026-07-01T04:14:27"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:28.935",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 62.94,
+      "raw_line": "2026/07/01 04:14:28.935, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 64, 62.94",
+      "collected_at_local": "2026-07-01T04:14:28"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:30.005",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 62.47,
+      "raw_line": "2026/07/01 04:14:30.005, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 64, 62.47",
+      "collected_at_local": "2026-07-01T04:14:30"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:31.074",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 96.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 63.19,
+      "raw_line": "2026/07/01 04:14:31.074, NVIDIA GeForce RTX 2060 with Max-Q Design, 96, 5122, 6144, 64, 63.19",
+      "collected_at_local": "2026-07-01T04:14:31"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:32.142",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 62.44,
+      "raw_line": "2026/07/01 04:14:32.142, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 64, 62.44",
+      "collected_at_local": "2026-07-01T04:14:32"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:33.211",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 96.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 63.07,
+      "raw_line": "2026/07/01 04:14:33.211, NVIDIA GeForce RTX 2060 with Max-Q Design, 96, 5122, 6144, 64, 63.07",
+      "collected_at_local": "2026-07-01T04:14:33"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:34.268",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 62.33,
+      "raw_line": "2026/07/01 04:14:34.268, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 64, 62.33",
+      "collected_at_local": "2026-07-01T04:14:34"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:35.342",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 96.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 61.89,
+      "raw_line": "2026/07/01 04:14:35.342, NVIDIA GeForce RTX 2060 with Max-Q Design, 96, 5122, 6144, 64, 61.89",
+      "collected_at_local": "2026-07-01T04:14:35"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:36.410",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 63.29,
+      "raw_line": "2026/07/01 04:14:36.410, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 64, 63.29",
+      "collected_at_local": "2026-07-01T04:14:36"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:37.480",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 96.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 64.0,
+      "power_draw_w": 63.37,
+      "raw_line": "2026/07/01 04:14:37.480, NVIDIA GeForce RTX 2060 with Max-Q Design, 96, 5122, 6144, 64, 63.37",
+      "collected_at_local": "2026-07-01T04:14:37"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:38.549",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 63.96,
+      "raw_line": "2026/07/01 04:14:38.549, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 65, 63.96",
+      "collected_at_local": "2026-07-01T04:14:38"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:39.619",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 63.12,
+      "raw_line": "2026/07/01 04:14:39.619, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 65, 63.12",
+      "collected_at_local": "2026-07-01T04:14:39"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:40.688",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 62.8,
+      "raw_line": "2026/07/01 04:14:40.688, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 65, 62.80",
+      "collected_at_local": "2026-07-01T04:14:40"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:41.763",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 96.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 62.6,
+      "raw_line": "2026/07/01 04:14:41.763, NVIDIA GeForce RTX 2060 with Max-Q Design, 96, 5122, 6144, 65, 62.60",
+      "collected_at_local": "2026-07-01T04:14:41"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:42.829",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 62.58,
+      "raw_line": "2026/07/01 04:14:42.829, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 65, 62.58",
+      "collected_at_local": "2026-07-01T04:14:42"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:43.905",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 95.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 62.62,
+      "raw_line": "2026/07/01 04:14:43.905, NVIDIA GeForce RTX 2060 with Max-Q Design, 95, 5122, 6144, 65, 62.62",
+      "collected_at_local": "2026-07-01T04:14:43"
+    },
+    {
+      "available": true,
+      "timestamp": "2026/07/01 04:14:44.974",
+      "gpu_name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "gpu_utilization_percent": 96.0,
+      "memory_used_mib": 5122.0,
+      "memory_total_mib": 6144.0,
+      "temperature_c": 65.0,
+      "power_draw_w": 62.87,
+      "raw_line": "2026/07/01 04:14:44.974, NVIDIA GeForce RTX 2060 with Max-Q Design, 96, 5122, 6144, 65, 62.87",
+      "collected_at_local": "2026-07-01T04:14:44"
+    }
+  ],
+  "mode_id": "test_section_6",
+  "system_prompt_path": "prompts/test/system_test.txt",
+  "user_prompt_path": "prompts/test/user_test_section_6.txt",
+  "timestamp": "2026-07-01T04:14:45"
+}
