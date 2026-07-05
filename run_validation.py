@@ -205,6 +205,7 @@ def build_tolerant_summary(validation_results: list[dict]) -> dict:
 
         "strictly_valid_count": strictly_valid_count,
         "strictly_valid_rate": round(strictly_valid_count / validated_attempts, 4) if validated_attempts else 0.0,
+        "strictly_valid_rate_over_all_attempts": round(strictly_valid_count / all_attempts, 4) if all_attempts else 0.0,
 
         "recovered_by_tolerant_count": recovered_by_tolerant_count,
         "recovered_by_tolerant_rate_over_validated": round(recovered_by_tolerant_count / validated_attempts, 4) if validated_attempts else 0.0,
@@ -212,20 +213,21 @@ def build_tolerant_summary(validation_results: list[dict]) -> dict:
             round(recovered_by_tolerant_count / non_strict_count, 4)
             if non_strict_count else 0.0
         ),
+        "recovered_by_tolerant_rate_over_all_attempts": (
+            round(recovered_by_tolerant_count / all_attempts, 4)
+            if all_attempts else 0.0
+        ),
 
         "final_valid_count": final_valid_count,
         "final_valid_rate": round(final_valid_count / validated_attempts, 4) if validated_attempts else 0.0,
+        "final_valid_rate_over_all_attempts": round(final_valid_count / all_attempts, 4) if all_attempts else 0.0,
 
         "final_invalid_count": final_invalid_count,
         "final_invalid_rate": round(final_invalid_count / validated_attempts, 4) if validated_attempts else 0.0,
-
+        "final_invalid_rate_over_all_attempts": round(final_invalid_count / all_attempts, 4) if all_attempts else 0.0,
         
         "fatal_error_counts_normalized": dict(fatal_normalized_error_counter),
         "non_fatal_error_counts_normalized": dict(non_fatal_normalized_error_counter),
-        #"validation_error_counts_normalized": dict(normalized_error_counter),
-        #"fatal_error_counts_raw": dict(fatal_raw_error_counter),
-        #"non_fatal_error_counts_raw": dict(non_fatal_raw_error_counter),
-        #"validation_error_counts_raw": dict(raw_error_counter),
     }
 
 
