@@ -57,6 +57,8 @@ def normalize_validation_error(error: str) -> str:
         "empty_option",
         "empty_answer",
 
+        "options_is_not_list",
+
         "duplicate_options",
         "duplicate_question_text",
         "duplicate_word",
