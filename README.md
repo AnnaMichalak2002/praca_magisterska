@@ -36,7 +36,7 @@ Modele uruchamiano lokalnie przy wykorzystaniu środowiska **Ollama**.
 
 ## Scenariusze badawcze
 
-Modele testowane są w kilku rodzajach zadań związanych z nauką języka angielskiego.
+Modele testowano pod kątem generowania różnych rodzajów materiałów dydaktycznych wspomagających naukę języka angielskiego.
 
 ### Gramatyka
 
@@ -76,7 +76,7 @@ Repozytorium zostało podzielone na katalogi odpowiadające kolejnym etapom eksp
 - **`results/`** – zawiera wyniki poszczególnych prób generowania odpowiedzi przez badane modele wraz z zapisanymi metrykami i wynikami automatycznej walidacji strukturalnej.
 - **`validation/`** – zawiera skrypty i pliki związane z automatyczną walidacją strukturalną odpowiedzi.
 
-#Dodatkowe informacje
+## Dodatkowe informacje
 
 - Eksperymenty podstawowe przeprowadzono lokalnie z wykorzystaniem osobistej karty graficznej **NVIDIA GeForce RTX 2060 Max-Q 6 GB VRAM**.
 
