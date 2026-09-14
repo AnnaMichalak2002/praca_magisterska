@@ -6,7 +6,7 @@ Repozytorium zawiera kod, prompty oraz narzędzia wykorzystane podczas realizacj
 
 ## Cel projektu
 
-Celem projektu jest porównanie wybranych dużych modeli językowych pod względem ich przydatności do automatycznego przygotowywania materiałów wspomagających naukę języka obcego.
+Celem projektu jest porównanie wybranych dużych modeli językowych pod względem ich przydatności do automatycznego przygotowywania materiałów dydaktycznych wspomagających naukę języka obcego.
 
 Analiza obejmuje zarówno techniczną poprawność generowanych odpowiedzi, jak i ich jakość merytoryczną oraz dydaktyczną.
 
