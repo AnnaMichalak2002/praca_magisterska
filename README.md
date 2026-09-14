@@ -58,7 +58,7 @@ Generowanie ćwiczeń obejmujących m.in.:
 
 ### Wypowiedź pisemna
 
-Analiza oraz korekta przykładowych wypowiedzi pisemnych ucznia wraz z przygotowaniem informacji zwrotnej.
+Analiza oraz korekta przykładowej wypowiedzi pisemnej ucznia wraz z przygotowaniem informacji zwrotnej.
 
 ### Test poziomujący
 
