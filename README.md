@@ -91,6 +91,8 @@ Repozytorium stanowi część pracy magisterskiej i zostało przygotowane przede
 ---
 
 **Autor:** Anna Michalak
+
 **Rodzaj projektu:** praca magisterska
+
 **Tematyka:** duże modele językowe, przetwarzanie języka naturalnego, wspomaganie nauki języków, inżynieria promptów
 
